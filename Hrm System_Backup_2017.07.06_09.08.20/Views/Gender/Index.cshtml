@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Hrm_System.Models.tblGender>
+
+@{
+    ViewBag.Title = "Gender";
+}
+
+<h2>Gender</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            Gender
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.emp_sex)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.emp_sx_id}) |
+            @Html.ActionLink("Details", "Details", new { id = item.emp_sx_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.emp_sx_id })
+        </td>
+    </tr>
+}
+
+</table>

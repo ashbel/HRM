@@ -1,0 +1,571 @@
+﻿@model Hrm_System.Models.EmployeeModelView
+
+@{
+    ViewBag.Title = "Employee Details";
+}
+<h3> @Html.DisplayFor(model => model.emp_name) @Html.DisplayFor(model => model.emp_lname) </h3> <hr />
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#home">Employee Details</a></li>
+  <li><a data-toggle="tab" href="#menu1">Contract Information</a></li>
+  <li><a data-toggle="tab" href="#menu2">Leave Days</a></li>
+  <li><a data-toggle="tab" href="#menu3">Payroll</a></li>
+  <li><a data-toggle="tab" href="#menu4">Trainings</a></li>
+  <li><a data-toggle="tab" href="#menu5">Achievements</a></li>
+  <li><a data-toggle="tab" href="#menu6">Performance Evaluation</a></li>
+  <li><a data-toggle="tab" href="#menu8">CV</a></li>
+  <li><a data-toggle="tab" href="#menu9">Documents</a></li>
+  <li><a data-toggle="tab" href="#menu10">Other Information</a></li>
+</ul>
+
+<div class="tab-content">
+  <div id="home" class="tab-pane fade in active">
+   <fieldset>
+<div class="row">
+  <div class="col-xs-12 col-md-1">
+   <div class="btn-group btn-group-xs">
+       <br />
+      <a class="btn btn-default" data-toggle="modal" data-target="#uploadModal">
+          @{if (@ViewBag.url != null) {
+          <img src="data:image;base64,@System.Convert.ToBase64String(ViewBag.url)" width ="140" height="140" />
+              }
+              else {
+          <img src="" width="140" height="140" />
+                  }
+              }
+      </a>
+   </div>    
+  </div>
+  <div class="col-xs-12 col-md-4">
+    <h3>Basic Information</h3>
+    <hr />
+        <div class="row">
+            <div class="col-xs-6 col-md-6"><b> Employee Id:</b></div>
+            <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.emp_id)</div>
+        </div>
+        <div class="row">
+           <div class="col-xs-6 col-md-6"><b>Employee Name:</b></div> 
+           <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.emp_name) @Html.DisplayFor(model => model.emp_lname)</div>
+         </div>
+        <div class="row">
+            <div class="col-xs-6 col-md-6"><b>ID Number:</b></div>
+            <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.emp_id_num)</div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6 col-md-6"><b>Nationality:</b></div>
+           <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.emp_nation)</div>
+         </div>
+        <div class="row">
+          <div class="col-xs-6 col-md-6"><b>Date of Birth:</b></div>
+           <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.emp_bDate)</div>
+         </div>
+    <hr />
+    <h3>Employment Information</h3>
+        <div class="row">
+            <div class="col-xs-6 col-md-6"><b> EC Number:</b></div>
+            <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.emp_ec_num)</div>
+        </div>
+        <div class="row">
+           <div class="col-xs-6 col-md-6"><b>Branch:</b></div> 
+           <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.tblBranch.br_name)</div>
+         </div>
+        <div class="row">
+            <div class="col-xs-6 col-md-6"><b>Department:</b></div>
+            <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.tblDepartment.dpt_name)</div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6 col-md-6"><b>Employment Type</b></div>
+           <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.tblEmployeeStatu.empst_title)</div>
+         </div>
+        <div class="row">
+            <div class="col-xs-6 col-md-6"><b>Position:</b></div>
+            <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.tblPosition.pos_title)</div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6 col-md-6"><b>Employee Start Date:</b></div>
+          <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.emp_jDate)</div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6 col-md-6"><b>Employee Status:</b></div>
+          <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.tblEmplStatu.stat_name)</div>
+        </div>
+    <hr />
+    <h3>Contact Information</h3>
+        <div class="row">
+            <div class="col-xs-6 col-md-6"><b> Email Address:</b></div>
+            <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.emp_email)</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6 col-md-6"><b>Street Address:</b></div> 
+            <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.emp_strt)</div>
+            </div>
+        <div class="row">
+            <div class="col-xs-6 col-md-6"><b>Surburb:</b></div>
+            <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.emp_nghbhd)</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6 col-md-6"><b>City:</b></div>
+            <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.emp_city)</div>
+            </div>
+        <div class="row">
+            <div class="col-xs-6 col-md-6"><b>Province:</b></div>
+            <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.emp_province)</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6 col-md-6"><b>Phone Number:</b></div>
+            <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.emp_phone)</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6 col-md-6"><b>Mobile Phone:</b></div>
+            <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.emp_mobile)</div>
+        </div>
+    <hr />
+    <h3>Other Information</h3>
+        <div class="row">
+            <div class="col-xs-6 col-md-6"><b>Next Of Kin:</b></div>
+            <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.emp_kin)</div>
+            </div>
+        <div class="row">
+            <div class="col-xs-6 col-md-6"><b>Next Of Kin Address:</b></div>
+            <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.emp_kin_add)</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6 col-md-6"><b>Nex of Kin Phone Number:</b></div>
+            <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.emp_kin_ph)</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6 col-md-6"><b>Relationship:</b></div>
+            <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.emp_kin_rel)</div>
+        </div>
+    <hr />
+    <h3>Additional Information</h3>
+    <div class="row">
+        <div class="col-xs-6 col-md-6"><b>Create Date:</b></div>
+        <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.emp_cDate)</div>
+    </div>
+    <hr />
+  </div>
+  <div class="col-xs-12 col-md-7">
+  <h3>User Activity</h3>
+    <hr />
+ <div class="row">
+  <div class="col-sm-12 col-md-3">
+    <div class="thumbnail thumbnail-info">
+        <h5 class="text-center">Duration of Employment</h5>
+        <h2 class="text-center">@ViewBag.Duration</h2>
+    </div>
+  </div>
+  <div class="col-sm-12 col-md-3">
+    <div class="thumbnail">
+        <h5 class="text-center">Loans Balance</h5>
+        <h2 class="text-center">$1200.50</h2>
+    </div>
+    </div>
+  <div class="col-sm-12 col-md-3">
+    <div class="thumbnail">
+        <h5 class="text-center">YTD Earnings</h5>
+        <h2 class="text-center">$8546.50</h2>
+    </div>
+    </div>
+  <div class="col-sm-12 col-md-3">
+    <div class="thumbnail thumbnail-info">
+        <h5 class="text-center">Leave Days Balance</h5>
+        <h2 class="text-center">12 Days</h2>
+    </div>
+  </div>
+ </div>
+</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.emp_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>   
+</fieldset>
+  </div>
+  <div id="menu1" class="tab-pane fade">
+      <br />
+       <div class="row">
+        @{ if(ViewBag.Contracts==null){
+       <div class="col-sm-12 col-md-3">
+
+       </div>
+       <div class="col-sm-12 col-md-2">
+          <div class="thumbnail thumbnail-info">
+        <h5 class="text-center">Contract Start Date</h5>
+        <h2 class="text-center">@ViewBag.Duration</h2>
+    </div>
+       </div>
+       <div class="col-sm-12 col-md-2">
+    <div class="thumbnail">
+        <h5 class="text-center">Contract End Date</h5>
+        <h2 class="text-center">$1200.50</h2>
+    </div>
+    </div>
+       <div class="col-sm-12 col-md-2">
+    <div class="thumbnail">
+        <h5 class="text-center">Contract Title</h5>
+        <h2 class="text-center">$8546.50</h2>
+    </div>
+    </div>
+       <div class="col-sm-12 col-md-3">
+
+       </div>
+        } else 
+        {
+         <div class="col-sm-12 col-md-2">
+         </div>
+         foreach(var lv in ViewBag.Leave)
+         { 
+         <div class="col-sm-12 col-md-2">
+           <div class="thumbnail thumbnail-info">
+             <h5 class="text-center">@lv.tblLvType.lvtyp_title</h5>
+             <h2 class="text-center">@lv.lv_bal Days</h2>
+           </div>
+        </div>
+         }
+         <div class="col-sm-12 col-md-2">
+         </div>               
+        }
+        }
+ </div>
+     <legend>Contracts</legend>
+      <table class="table table-striped table-hover table-bordered table-condensed" id="table2" >
+        <thead>
+          <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Title
+        </th>
+        <th>
+           Start Date
+        </th>
+        <th>
+           End Date
+        </th>
+        <th>
+           State
+        </th>
+     </tr>
+        </thead>
+        @{ if (ViewBag.Contracts != null)
+           {
+
+               foreach (var item in ViewBag.Contracts)
+          { 
+         <tr>
+        <td>
+            @item.tblEmployee.emp_name  @item.tblEmployee.emp_lname
+        </td>
+        <td>
+            @item.cntrct_title
+        </td>
+        <td>
+             @item.cntrct_sdate
+        </td>
+        <td>
+            @item.cntrct_edate
+        </td>
+        <td>
+             @item.cntrct_state
+        </td>
+    </tr>
+                       
+          }
+               
+           }
+        }
+        </table>
+  </div>
+  <div id="menu2" class="tab-pane fade">
+      <br />
+     <div class="row">
+        @{ if(ViewBag.Leave==null){
+         <div class="col-sm-12 col-md-2">
+
+  </div>
+         <div class="col-sm-12 col-md-2">
+    <div class="thumbnail thumbnail-info">
+        <h5 class="text-center">Annual Leave Balance</h5>
+        <h2 class="text-center">@ViewBag.Duration</h2>
+    </div>
+  </div>
+         <div class="col-sm-12 col-md-2">
+    <div class="thumbnail">
+        <h5 class="text-center">Study Leave Balance</h5>
+        <h2 class="text-center">$1200.50</h2>
+    </div>
+    </div>
+         <div class="col-sm-12 col-md-2">
+    <div class="thumbnail">
+        <h5 class="text-center">Special Leave Balance</h5>
+        <h2 class="text-center">$8546.50</h2>
+    </div>
+    </div>
+         <div class="col-sm-12 col-md-2">
+    <div class="thumbnail thumbnail-info">
+        <h5 class="text-center">Maternity Leave Balance</h5>
+        <h2 class="text-center">12 Days</h2>
+    </div>
+  </div>
+         <div class="col-sm-12 col-md-2">
+
+  </div>
+        } else 
+        {
+         <div class="col-sm-12 col-md-2">
+         </div>
+         foreach(var lv in ViewBag.Leave)
+         { 
+         <div class="col-sm-12 col-md-2">
+           <div class="thumbnail thumbnail-info">
+             <h5 class="text-center">@lv.tblLvType.lvtyp_title</h5>
+             <h2 class="text-center">@lv.lv_bal Days</h2>
+           </div>
+        </div>
+         }
+         <div class="col-sm-12 col-md-2">
+         </div>               
+        }
+        }
+ </div>
+     <legend>Leave Usage History</legend>
+      <table class="table table-striped table-hover table-bordered table-condensed" id="table1" >
+        <thead>
+          <tr>
+        <th>
+           Name
+        </th>
+        <th>
+            Leave Type
+        </th>
+        <th>
+           Start Date
+        </th>
+        <th>
+           End Date
+        </th>
+        <th>
+          No. Of Days
+        </th>
+        <th>
+          Leave Balance
+        </th>
+        <th>
+          State
+        </th>
+     </tr>
+        </thead>
+        @{ if(ViewBag.LeaveHistory!=null){
+               
+          foreach(var item in ViewBag.LeaveHistory)
+          { 
+         <tr>
+        <td>
+            @item.tblEmployee.emp_name  @item.tblEmployee.emp_lname
+        </td>
+        <td>
+            @item.tblLeave.tblLvType.lvtyp_title
+        </td>
+        <td>
+             @item.lv_sdate
+        </td>
+        <td>
+            @item.lv_edate
+        </td>
+        <td>
+             @item.lv_days
+        </td>
+        <td>
+             @item.lv_bal
+        </td>
+        <td>
+             @item.lv_state
+        </td>
+
+    </tr>
+                       
+          }
+               
+           }
+        }
+        </table>
+  </div>
+  <div id="menu3" class="tab-pane fade">
+      <br />
+     <div class="row">
+        @{ if(ViewBag.Leave==null){
+         <div class="col-sm-12 col-md-2">
+
+  </div>
+         <div class="col-sm-12 col-md-2">
+    <div class="thumbnail thumbnail-info">
+        <h5 class="text-center">Basic Salary</h5>
+        <h2 class="text-center">@ViewBag.Duration</h2>
+    </div>
+  </div>
+         <div class="col-sm-12 col-md-2">
+    <div class="thumbnail">
+        <h5 class="text-center">Loan Balance</h5>
+        <h2 class="text-center">$1200.50</h2>
+    </div>
+    </div>
+         <div class="col-sm-12 col-md-2">
+    <div class="thumbnail">
+        <h5 class="text-center">YTD Earnings</h5>
+        <h2 class="text-center">$8546.50</h2>
+    </div>
+    </div>
+         <div class="col-sm-12 col-md-2">
+    <div class="thumbnail thumbnail-info">
+        <h5 class="text-center">YTD Deductions/h5>
+        <h2 class="text-center">$546.50</h2>
+    </div>
+  </div>
+         <div class="col-sm-12 col-md-2">
+
+  </div>
+        } else 
+        {
+         <div class="col-sm-12 col-md-2">
+         </div>
+         foreach(var lv in ViewBag.Leave)
+         { 
+         <div class="col-sm-12 col-md-2">
+           <div class="thumbnail thumbnail-info">
+             <h5 class="text-center">@lv.tblLvType.lvtyp_title</h5>
+             <h2 class="text-center">@lv.lv_bal Days</h2>
+           </div>
+        </div>
+         }
+         <div class="col-sm-12 col-md-2">
+         </div>               
+        }
+        }
+ </div>
+     <legend>Leave Usage History</legend>
+      <table class="table table-striped table-hover table-bordered table-condensed" id="table1" >
+        <thead>
+          <tr>
+        <th>
+           Name
+        </th>
+        <th>
+            Leave Type
+        </th>
+        <th>
+           Start Date
+        </th>
+        <th>
+           End Date
+        </th>
+        <th>
+          No. Of Days
+        </th>
+        <th>
+          Leave Balance
+        </th>
+        <th>
+          State
+        </th>
+     </tr>
+        </thead>
+        @{ if(ViewBag.LeaveHistory!=null){
+               
+          foreach(var item in ViewBag.LeaveHistory)
+          { 
+         <tr>
+        <td>
+            @item.tblEmployee.emp_name  @item.tblEmployee.emp_lname
+        </td>
+        <td>
+            @item.tblLeave.tblLvType.lvtyp_title
+        </td>
+        <td>
+             @item.lv_sdate
+        </td>
+        <td>
+            @item.lv_edate
+        </td>
+        <td>
+             @item.lv_days
+        </td>
+        <td>
+             @item.lv_bal
+        </td>
+        <td>
+             @item.lv_state
+        </td>
+
+    </tr>
+                       
+          }
+               
+           }
+        }
+        </table>
+  </div>
+  <div id="menu4" class="tab-pane fade">
+    <h3>Training Schedule</h3>
+    <p>Traning Schedule Information</p>
+  </div>
+  <div id="menu5" class="tab-pane fade">
+    <h3>Achievements</h3>
+    <p>Your achievements</p>
+  </div>
+  <div id="menu6" class="tab-pane fade">
+    <h3>KPIs</h3>
+    <p>Perfomance Information</p>
+  </div>
+  <div id="menu7" class="tab-pane fade">
+    <h3>Training Schedule </h3>
+    <p>Training Schedules</p>
+  </div>
+  <div id="menu8" class="tab-pane fade">
+    <h3>Cirricullum Vitaes</h3>
+    <p>Information about Your CV</p>
+  </div>
+  <div id="menu9" class="tab-pane fade">
+    <h3>Documents</h3>
+    <p>All Documents</p>
+  </div>
+  <div id="menu10" class="tab-pane fade">
+    <h3>Other Information</h3>
+    <p>All other information</p>
+  </div>
+</div>
+
+
+
+
+
+<div id="uploadModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Upload Image</h4>
+            </div>
+            <div class="modal-body">
+    @using (Html.BeginForm("UploadFile", "Employee", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+         @Html.HiddenFor(model => model.emp_id)
+          <fieldset>
+            <legend></legend>
+             <label class="btn btn-primary" for="my-file-selector">
+                    <input id="uploadFile" type="file" name="uploadFile"  class="form-control" >
+                         Choose File
+             </label>
+                <span class='label label-info' id="upload-file-info"></span>
+           <hr class="featurette-divider" />
+                <input type="submit" class="btn btn-primary btn-sm" value ="Upload" />
+					 <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
+    </fieldset>  
+    }         
+            </div>
+        </div>
+        </div>
+ </div>

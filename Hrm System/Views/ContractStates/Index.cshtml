@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Hrm_System.Models.tblContractState>
+
+    @{
+        ViewBag.Title = "Index";
+    }
+
+    <h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table table-striped table-hover table-bordered table-condensed " id="table1">
+        <thead>
+            <tr>
+                <th>
+                    State
+                </th>
+                <th>
+                    Description
+                </th>
+                <th></th>
+            </tr>
+</thead>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.cntrct_state)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.cntrct_st_desc)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.cntrct_st_id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.cntrct_st_id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.cntrct_st_id })
+                    </td>
+                </tr>
+            }
+
+    </table>

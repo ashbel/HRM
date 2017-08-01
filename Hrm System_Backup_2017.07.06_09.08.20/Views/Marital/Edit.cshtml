@@ -1,0 +1,44 @@
+﻿@model Hrm_System.Models.tblMarital
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>tblMarital</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.marital_id)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.marital_id)
+            @Html.ValidationMessageFor(model => model.marital_id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.marital_status)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.marital_status)
+            @Html.ValidationMessageFor(model => model.marital_status)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

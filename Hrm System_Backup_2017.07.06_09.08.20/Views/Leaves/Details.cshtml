@@ -1,0 +1,50 @@
+﻿@model Hrm_System.Models.tblLeave
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>tblLeave</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.lv_id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.lv_id)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.lv_bal)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.lv_bal)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.tblLvType.lvtyp_title)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.tblLvType.lvtyp_title)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.tblEmployee.emp_name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.tblEmployee.emp_name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.lv_period)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.lv_period)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

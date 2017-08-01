@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Hrm_System.Models.tblEmployeeStatu>
+
+@{
+    ViewBag.Title = "Employmee Status";
+}
+
+<h2>Employment Status</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-striped table-hover table-bordered table-condensed" >
+    <tr>
+        <th>
+           Status
+        </th>
+        <th>
+            Description
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.empst_title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.empst_descr)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.empst_id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.empst_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.empst_id })
+        </td>
+    </tr>
+}
+
+</table>

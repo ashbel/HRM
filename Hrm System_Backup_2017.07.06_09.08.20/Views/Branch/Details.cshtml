@@ -1,0 +1,50 @@
+﻿@model Hrm_System.Models.tblBranch
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>tblBranch</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.br_id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.br_id)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.br_name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.br_name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.br_address)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.br_address)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.br_contact)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.br_contact)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.br_descr)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.br_descr)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

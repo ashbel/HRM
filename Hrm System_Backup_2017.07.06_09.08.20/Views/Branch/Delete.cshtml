@@ -1,0 +1,54 @@
+﻿@model Hrm_System.Models.tblBranch
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>tblBranch</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.br_id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.br_id)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.br_name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.br_name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.br_address)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.br_address)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.br_contact)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.br_contact)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.br_descr)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.br_descr)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

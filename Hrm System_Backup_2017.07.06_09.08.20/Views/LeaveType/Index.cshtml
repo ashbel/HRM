@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Hrm_System.Models.tblLvType>
+
+@{
+    ViewBag.Title = "Leave Types";
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create")  @Html.ActionLink("Assign Leave", "AssignLeave")
+</p>
+<table class="table table-striped table-hover table-bordered table-condensed" id="table1" >
+   <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.lvtyp_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lvtyp_title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lvtyp_num)
+        </th>
+        <th></th>
+    </tr>
+</thead>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.lvtyp_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lvtyp_title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lvtyp_num)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.lvtyp_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.lvtyp_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.lvtyp_id })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,33 @@
+﻿@model Hrm_System.Models.tblCity
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>tblCity</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.cty_name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.cty_name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.tblProvince.prov_name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.tblProvince.prov_name)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

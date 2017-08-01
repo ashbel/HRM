@@ -1,0 +1,227 @@
+﻿@model Hrm_System.Models.EmployeeModelView
+
+
+@{
+    ViewBag.Title = "Edit Employee";
+}
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+     <fieldset>
+        <legend>Edit Employee</legend>
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                @Html.HiddenFor(model => model.emp_id)
+               <legend> Basic Information</legend>
+                    <div class="editor-label">
+                       Firstname:
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.emp_name)
+                        @Html.ValidationMessageFor(model => model.emp_name)
+                    </div>
+                    <div class="editor-label">
+                       Surname:
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.emp_lname)
+                        @Html.ValidationMessageFor(model => model.emp_lname)
+                    </div>
+                    <div class="editor-label">
+                       ID Number:
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.emp_id_num)
+                        @Html.ValidationMessageFor(model => model.emp_id_num)
+                    </div>
+                    <div class="editor-label">
+                       Nationality:
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.emp_nation)
+                        @Html.ValidationMessageFor(model => model.emp_nation)
+                    </div>
+                    <div class="editor-label">
+                        Date of Birth:
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.emp_bDate)
+                        @Html.ValidationMessageFor(model => model.emp_bDate)
+                    </div>
+            </div>
+            <div class="col-xs-12 col-md-6">
+            <legend>Employment Information</legend>
+        <div class="editor-label">
+           EC Number:
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.emp_ec_num)
+            @Html.ValidationMessageFor(model => model.emp_ec_num)
+        </div>
+        <div class="editor-label">
+            Branch:
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("emp_branch", String.Empty)
+            @Html.ValidationMessageFor(model => model.emp_branch)
+        </div>
+        <div class="editor-label">
+            Department:
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("emp_dpt", String.Empty)
+            @Html.ValidationMessageFor(model => model.emp_dpt)
+        </div>
+        <div class="editor-label">
+            Employment Status:
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("emp_status", String.Empty)
+            @Html.ValidationMessageFor(model => model.emp_status)
+        </div>
+        <div class="editor-label">
+            Position
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("emp_pos_id", String.Empty)
+            @Html.ValidationMessageFor(model => model.emp_pos_id)
+        </div>
+        <div class="editor-label">
+            Status
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("emp_state", String.Empty)
+            @Html.ValidationMessageFor(model => model.emp_pos_id)
+        </div>
+        <div class="editor-label">
+            Start Date:
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.emp_jDate)
+            @Html.ValidationMessageFor(model => model.emp_jDate)
+        </div>
+            </div>
+        </div>
+            <hr />
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+               <legend> Contact Information</legend>
+                <div class="editor-label">
+                    Email Address:
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.emp_email)
+                    @Html.ValidationMessageFor(model => model.emp_email)
+                </div>
+                <div class="editor-label">
+                    Street Address:
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.emp_strt)
+                    @Html.ValidationMessageFor(model => model.emp_strt)
+                </div>
+        
+                <div class="editor-label">
+                    Area:
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.emp_nghbhd)
+                    @Html.ValidationMessageFor(model => model.emp_nghbhd)
+                </div>
+
+                <div class="editor-label">
+                    City:
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.emp_city)
+                    @Html.ValidationMessageFor(model => model.emp_city)
+                </div>
+                <div class="editor-label">
+                    Province:
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.emp_province)
+                    @Html.ValidationMessageFor(model => model.emp_province)
+                </div>
+                <div class="editor-label">
+                    Phone Number:
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.emp_phone)
+                    @Html.ValidationMessageFor(model => model.emp_phone)
+                </div>
+                <div class="editor-label">
+                    Cell Number:
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.emp_mobile)
+                    @Html.ValidationMessageFor(model => model.emp_mobile)
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <legend>Other Information</legend>
+                <div class="editor-label">
+                    Next Of Kin:
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.emp_kin)
+                    @Html.ValidationMessageFor(model => model.emp_kin)
+                </div>
+
+                <div class="editor-label">
+                    Next Of Kin Address:
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.emp_kin_add)
+                    @Html.ValidationMessageFor(model => model.emp_kin_add)
+                </div>
+
+                <div class="editor-label">
+                    Next Of Kin Phone:
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.emp_kin_ph)
+                    @Html.ValidationMessageFor(model => model.emp_kin_ph)
+                </div>
+
+                <div class="editor-label">
+                    Next Of Kin Relation:
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.emp_kin_rel)
+                    @Html.ValidationMessageFor(model => model.emp_kin_rel)
+                </div>
+            </div>
+        </div>
+
+    <hr />
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+@Styles.Render("~/Content/cssjqryUi")
+
+<script type="text/javascript">
+
+     $(document).ready(function () {
+         $('input[type=datetime]').datepicker({
+             dateFormat: "dd/M/yy",
+             changeMonth: true,
+             changeYear: true,
+             yearRange: "-60:+0"
+         });
+
+     });
+</script>
+}

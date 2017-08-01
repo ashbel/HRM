@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Hrm_System.Models.tblPositionHistory>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-striped table-hover table-bordered table-condensed" >
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ph_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tblEmployee.emp_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tblPosition.pos_title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tblDepartment.dpt_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ph_sal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tblBranch.br_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ph_sDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ph_eDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ph_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tblEmployee.emp_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tblPosition.pos_title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tblDepartment.dpt_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ph_sal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tblBranch.br_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ph_sDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ph_eDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

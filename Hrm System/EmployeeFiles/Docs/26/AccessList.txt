@@ -1,0 +1,61 @@
+
+-----------------------------------------------------------------------
+Cisco Configuration Professional (Cisco CP) is installed on this device.
+This feature requires the one-time use of the username "cisco" with the
+password "cisco". These default credentials have a privilege level of 15.
+
+YOU MUST USE CISCO CP or the CISCO IOS CLI TO CHANGE THESE  PUBLICLY-KNOWN
+CREDENTIALS
+
+Here are the Cisco IOS commands.
+
+username <myuser>  privilege 15 secret 0 <mypassword>
+no username cisco
+
+Replace <myuser> and <mypassword> with the username and password you want
+to use.
+
+IF YOU DO NOT CHANGE THE PUBLICLY-KNOWN CREDENTIALS, YOU WILL NOT BE ABLE
+TO LOG INTO THE DEVICE AGAIN AFTER YOU HAVE LOGGED OFF.
+
+For more information about Cisco CP please follow the instructions in the
+QUICK START GUIDE for your router or go to http://www.cisco.com/go/ciscocp
+-----------------------------------------------------------------------
+
+
+User Access Verification
+
+Password:
+% Password expiration warning.
+-----------------------------------------------------------------------
+
+Cisco Configuration Professional (Cisco CP) is installed on this device
+and it provides the default username "cisco" for  one-time use. If you have
+already used the username "cisco" to login to the router and your IOS image
+supports the "one-time" user option, then this username has already expired.
+You will not be able to login to the router with this username after you exit
+this session.
+
+It is strongly suggested that you create a new username with a privilege level
+of 15 using the following command.
+
+username <myuser> privilege 15 secret 0 <mypassword>
+
+Replace <myuser> and <mypassword> with the username and password you want to
+use.
+
+-----------------------------------------------------------------------
+
+UNTU-HQ#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+UNTU-HQ(config)#access
+UNTU-HQ(config)#access-list
+% Incomplete command.
+
+UNTU-HQ(config)#access-list 101 permi
+UNTU-HQ(config)#access-list 101 permit ip host 192.168.2.91
+% Incomplete command.
+
+UNTU-HQ(config)#access-list 101 permit ip host 192.168.2.91 any
+UNTU-HQ(config)#access-list 101 permit ip host 192.168.2.92 any
+UNTU-HQ(config)#

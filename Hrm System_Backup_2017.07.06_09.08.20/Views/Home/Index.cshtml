@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "PPC-HRM";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+<h1>Managing People for success ....</h1>
+<hr size="30"><div id="loginModal" class="modal show" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <div class="imgcontainer">
+                    <div class="img-responsive">
+                        <img src="~/Content/cssimages/ppc_logo1.jpg" alt="logo" width="200px" height="100px" style="margin: 0 auto;" />
+                    </div>
+                </div>
+                    <hr class="featurette-divider" />
+                    @using (Html.BeginForm("LoginModal", "Home"))
+                    {
+                        <fieldset>
+                            <label><b>Username</b></label>
+                            <input type="text" placeholder="Enter Username" name="uname" required><br />
+
+                            <label><b>Password</b></label>
+                            <input type="password" placeholder="Enter Password" name="psw" required><br />
+
+                            <button type="submit">Login</button>
+                            <input type="checkbox" checked="checked"> Remember me
+                            <span class="psw"> <a href="#">Forgot Password?</a></span>
+                        </fieldset>
+                    }
+                </div>
+            <div class="col-xs-12 col-sm-4 "></div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+       $(document).ready(function () {
+           $("#loginModal").modal({ backdrop: 'static', keyboard: false, show: true })
+       });
+</script>
+
+<div id ="footer">
+    <hr size="30">
+    Evaluation Copy<br />
+    FI Systems<br />
+    Copyright 2017. All rights Reserved.
+</div>
+

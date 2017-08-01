@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/knockout")
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/bootstrap.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery-{version}.js")"></script>
+    <script src="@Url.Content("~/Scripts/knockout-{version}.js")"></script>
+    <script src="@Url.Content("~/Scripts/modernizr-*")"></script>
+    <link href="@Url.Content("~/Content/FooterStyle.css")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Content/kendo/2015.2.902/kendo.common.min.css")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Content/kendo/2015.2.902/kendo.mobile.all.min.css")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Content/kendo/2015.2.902/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Content/kendo/2015.2.902/kendo.blueopal.min.css")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Content/kendo/2015.2.902/kendo.dataviz.blueopal.min.css")" rel="stylesheet" type="text/css" />
+	<script src="@Url.Content("~/Scripts/kendo/2015.2.902/jquery.min.js")"></script>
+	<script src="@Url.Content("~/Scripts/kendo/2015.2.902/jszip.min.js")"></script>
+	<script src="@Url.Content("~/Scripts/kendo/2015.2.902/kendo.all.min.js")"></script>
+	<script src="@Url.Content("~/Scripts/kendo/2015.2.902/kendo.aspnetmvc.min.js")"></script>
+	<script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
+</head>
+<body>
+       <div class="k-header k-shadow" style="height:110px;background-color:#9fd2ed">
+       <div style="height:63px;padding-top:10px;">
+    <div style="text-align:right; float:right;padding-right:10px; ">@DateTime.Now.ToString("dddd dd MMMM yyyy") 
+        <br />
+ 
+         @if (User.Identity.IsAuthenticated)
+            {
+   <span><b>@User.Identity.Name</b></span><br />
+             <a href="@Url.Action("Logoff","Home")" > Logout </a>
+         }  
+       </div>
+    </div>
+
+       <div style ="float:left; width:100%;" >
+         
+    @(Html.Kendo().Menu()
+      .Name("Menu")
+      .Items(items =>
+      {
+          items.Add().Text("Home").Action("Home","Home");
+          items.Add().Text("Organisation")
+          .Items(children =>
+          {
+              children.Add().Text("Companies").Action("Index", "Companies");
+              children.Add().Text("Stations").Action("Index", "Stations");
+              children.Add().Text("Departments").Action("Index", "Departments");
+              children.Add().Text("Projects").Action("Index", "Projects");
+              children.Add().Text("Organisation News").Action("Index", "News");
+              children.Add().Text("Policies").Action("Index", "Policies");
+              children.Add().Text("Announcements").Action("Index", "Announcements");
+              children.Add().Text("System Settings").Action("Index", "Settings");
+              children.Add().Text("System Logs").Action("Index", "Logs");
+
+          });
+          items.Add().Text("Recruitment")
+          .Items(children =>
+          {
+              children.Add().Text("Dashboard").Action("Index", "Recruitment");
+              children.Add().Text("Screening").Action("Index", "Screening");
+              children.Add().Text("Job Post Requirements").Action("Index", "PostsRq");
+              children.Add().Text("Job Posts").Action("Index", "JobPosts");
+              children.Add().Text("Job Candidates").Action("Index", "Candidates");
+              children.Add().Text("Shortlist Candidates").Action("Index", "ShortCandidates");
+              children.Add().Text("Job Tests").Action("Index", "JobTests");
+              children.Add().Text("Job Interview").Action("Index", "JobIntvw");      
+
+          });
+          items.Add().Text("Employees")
+            .Items(children =>
+            {
+                children.Add().Text("Dashboard").Action("Index", "EmpDash");
+                children.Add().Text("Employees").Action("Index", "Employee");
+                children.Add().Text("Contracts").Action("Index", "Contracts");
+                children.Add().Text("Assignments").Action("Index", "Assignments");
+                children.Add().Text("Requisitions").Action("Index", "Requisitions");
+                children.Add().Text("Transfers").Action("Index", "Transfers");
+                children.Add().Text("Resignations").Action("Index", "Resignations");
+                children.Add().Text("Achievements").Action("Index", "Achievements");
+                children.Add().Text("Travels").Action("Index", "Travels");
+                children.Add().Text("Promotions").Action("Index", "Promotions");
+                children.Add().Text("Complaints").Action("Index", "Complaints");
+                children.Add().Text("Warning").Action("Index", "Warning");
+                children.Add().Text("Memos").Action("Index", "Memos");
+                children.Add().Text("Terminations").Action("Index", "Terminations");
+                children.Add().Text("Polls").Action("Index", "Polls");
+                children.Add().Text("Perfomance Evaluation").Action("Index", "PerfEval");
+                children.Add().Text("Employee Exit").Action("Index", "EmployeeExit");
+
+            });
+          items.Add().Text("Time Sheet")
+            .Items(children =>
+            {
+                children.Add().Text("Scheduler").Action("Index", "Scheduler");
+                children.Add().Text("Attendance").Action("Index", "Attendance");
+                children.Add().Text("Employee Hours").Action("Index", "EmployeeHours");
+                children.Add().Text("Leaves").Action("Index", "Leaves");
+                children.Add().Text("Worksheet").Action("Index", "Worksheet");
+                children.Add().Text("Work Shifts").Action("Index", "tblWorkShifts");
+                children.Add().Text("Holidays").Action("Index", "Holidays");
+
+            });
+          items.Add().Text("Payroll")
+            .Items(children =>
+            {
+                children.Add().Text("Payroll Dashboard").Action("Index", "PayrollDash");
+                children.Add().Text("Salary").Action("Index", "Salary");
+                children.Add().Text("Salary Payslips").Action("Index", "Payslips");
+                children.Add().Text("Payroll Structure").Action("Index", "PayStructure");
+                children.Add().Text("Hourly Wages").Action("Index", "Wages");
+                children.Add().Text("Deductions").Action("Index", "Deductions");
+                children.Add().Text("Bonuses").Action("Index", "Bonuses");
+                children.Add().Text("Commissions").Action("Index", "Commissions");
+                children.Add().Text("Adjustements").Action("Index", "Adjustements");
+                children.Add().Text("Reimbursements").Action("Index", "Reimbursements");
+                children.Add().Text("Overtimes").Action("Index", "Overtimes");
+                children.Add().Text("Advance Salary").Action("Index", "SalAdvance");
+                children.Add().Text("Loans").Action("Index", "Loans");
+                children.Add().Text("Insurance").Action("Index", "Insurance");
+
+            });
+          items.Add().Text("Reports")
+            .Items(children =>
+            {
+                children.Add().Text("HR Reports").Action("Index", "HRReports");
+                children.Add().Text("Recruitment Reports").Action("Index", "RecruiReports");
+                children.Add().Text("Employee Reports").Action("Index", "EmployeeReports");
+                children.Add().Text("Timesheet Reports").Action("Index", "TimesheetReports");
+                children.Add().Text("Payroll Reports").Action("Index", "PayrollReports");
+                children.Add().Text("Training Reports").Action("Index", "TrainingReports");
+                children.Add().Text("Graphs").Action("Index", "Graphs");
+                children.Add().Text("Reports Generator").Action("Index", "ReportGenerator");
+
+            });
+          items.Add().Text("Administration")
+           .Items(children =>
+           {
+               children.Add().Text("Branches").Action("Index", "Branch");
+               children.Add().Text("Job Roles").Action("Index", "Position");
+               children.Add().Text("Job Levels").Action("Index", "JobLevel");
+               children.Add().Text("Employee State").Action("Index", "EmployeeState");
+               children.Add().Text("Department").Action("Index", "Department");
+               children.Add().Text("Leave Type").Action("Index", "LeaveType");
+               children.Add().Text("Gender").Action("Index", "Gender");
+               children.Add().Text("Marital Status").Action("Index", "Marital");
+               children.Add().Text("Users").Action("Index", "Users");
+               children.Add().Text("Organisation").Action("Index", "Organisation");
+           });
+          
+      })
+    )
+</div>
+       
+         
+</div>
+        <p><br /></p>
+<div class="content">
+    <div style="padding-left:10px;padding-right:10px;">
+        @RenderBody()
+
+    </div>
+</div>
+
+    
+    @RenderSection("scripts", required: false)
+</body>
+</html>

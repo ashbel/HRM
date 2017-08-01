@@ -1,0 +1,479 @@
+﻿@model Hrm_System.Models.EmployeeModelView
+
+@{
+    ViewBag.Title = "PPC-HRM - Create Employee";
+}
+
+
+@using (Html.BeginForm("Create", "Employee", FormMethod.Post, new { enctype = "multipart/form-data" })) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>New Employee</legend>
+        <div class="row">
+            <div class="col-xs-12 col-md-4">
+               <legend> Basic Information</legend>
+                <div class="form-group form-group-sm">
+                         <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <label for="title">Title:</label>
+                                <select class="form-control" id="title" name="title">
+                                    @{ if (ViewBag.emp_salutation != null)
+                                        {
+                                            foreach (var i in ViewBag.emp_salutation)
+                                            {
+                                                <option value="@i.sal_id">@i.sal_title</option>
+                                            }
+                                        }
+                                    }                                   
+                                </select>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="sex">Sex:</label>
+                                <select class="form-control" id="sex" name="sex">
+                                    @{ if (ViewBag.emp_gender != null)
+                                        {
+                                            foreach (var i in ViewBag.emp_gender)
+                                            {
+                                                <option value="@i.emp_sx_id">@i.emp_sex</option>
+                                            }
+                                        }
+                                    } 
+                                </select>
+                            </div>
+                        </div>
+                </div>
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <label for="fname">Name:</label>
+                            <input type="text" class="form-control " id="fname" name="fname" placeholder="Name" required>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <label for="sname">Surname:</label>
+                            <input type="text" class="form-control" id="sname"  name="sname" placeholder="Surname" required>
+                        </div>
+                    </div>
+                    </div>
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <label for="mname">Middle Name:</label>
+                            <input type="text" class="form-control" id="mname" name="mname" placeholder="Optional">
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <label for="idnum">Id Number:</label>
+                            <input type="text" class="form-control" id="idnum" name="idnum" placeholder="12-123456A12" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <label for="nation">Nationality:</label>
+                            <input type="text" class="form-control" id="nation" name="nation" placeholder="Nationality" required>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <label for="dob">Date Of Birth:</label>
+                            <input type="date" class="form-control" id="dob" name="dob" required>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <label for="dlicence">Drivers Licence No.:</label>
+                            <input type="text" class="form-control" id="dlicence" name="dlicence" placeholder="Optional">
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <label for="pnum">Marital Status:</label>
+                            <select class="form-control" id="marital_status" name="marital_status" required>
+                                @{ if (ViewBag.Marital_state != null)
+                                    {
+                                        foreach (var i in ViewBag.Marital_state)
+                                        {
+                                            <option value="@i.marital_id">@i.marital_status</option>
+                                        }
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <label for="pdate">Passport Expiry Date:</label>
+                            <input type="date" class="form-control" id="pdate" name="pdate">
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <label for="pnum">Passport Number:</label>
+                            <input type="text" class="form-control" id="pnum" name="pnum" placeholder="Optional">
+
+                        </div>
+                    </div>
+                </div>
+                <legend> Contact Information</legend>
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <label for="email">Email:</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Email Address">
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <label for="home">Home Address:</label>
+                            <input type="text" class="form-control" id="home" name="home" placeholder="Home Address" required>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <label for="area">Area:</label>
+                            <input type="text" class="form-control" id="area" name="area" placeholder="Surburb">
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <label for="city">City:</label>
+                            <select class="form-control" id="city" name="city">
+                                @{ if (ViewBag.emp_cty != null)
+                                    {
+                                        foreach (var i in ViewBag.emp_cty)
+                                        {
+                                            <option value="@i.cty_id">@i.cty_name</option>
+                                        }
+                                    }
+                                }
+                            </select>
+
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <label for="province">Province:</label>
+                            <select class="form-control" id="province" name="province">
+                                @{ if (ViewBag.emp_prv != null)
+                                    {
+                                        foreach (var i in ViewBag.emp_prv)
+                                        {
+                                            <option value="@i.prov_id">@i.prov_name</option>
+                                        }
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <label for="phonenum">Phone Number:</label>
+                            <input type="tel" class="form-control" id="phonenum" name="phonenum"  required>
+
+                        </div>
+                    </div>
+                </div>                   
+        </div>
+            <div class="col-xs-12 col-md-4">
+            <legend>Employment Information</legend>
+
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <label for="sdate">Start Date:</label>
+                            <input type="date" class="form-control" id="sdate" name="sdate" required>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <label for="ecnum">EC Number:</label>
+                            <input type="text" class="form-control" id="ecnum" name="ecnum" placeholder="Optional">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <label for="estatus">Employment Status:</label>
+                                <select class="form-control" id="estatus" name="estatus">
+                                    @{ if (ViewBag.emp_status != null)
+                                        {
+                                            foreach (var i in ViewBag.emp_status)
+                                            {
+                                                <option value="@i.empst_id">@i.empst_title</option>
+                                            }
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                </div>
+                <legend>Contract Information</legend>
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <label for="kinaddress">Contract Title:</label>
+                            <input type="text" class="form-control" id="contract_title" name="contract_title">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <label for="contract">Contract Type</label>
+                            <select class="form-control" id="contract" name="contract">
+                                @{ if (ViewBag.emp_state != null)
+                                    {
+                                        foreach (var i in ViewBag.emp_state)
+                                        {
+                                            <option value="@i.stat_id">@i.stat_name</option>
+                                        }
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <label for="contract">Contract State</label>
+                            <select class="form-control" id="contract_state" name="contract_state">
+                                @{ if (ViewBag.Contract_state != null)
+                                    {
+                                        foreach (var i in ViewBag.Contract_state)
+                                        {
+                                            <option value="@i.cntrct_st_id">@i.cntrct_state</option>
+                                        }
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <label for="branch">Branch:</label>
+                            <select class="form-control" id="branch" name="branch">
+                                @{ if (ViewBag.emp_branch != null)
+                                    {
+                                        foreach (var i in ViewBag.emp_branch)
+                                        {
+                                            <option value="@i.br_id">@i.br_name</option>
+                                        }
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <label for="dpt">Department:</label>
+                            <select class="form-control" id="dpt" name="dpt">
+                                @{ if (ViewBag.emp_dpt != null)
+                                    {
+                                        foreach (var i in ViewBag.emp_dpt)
+                                        {
+                                            <option value="@i.dpt_id">@i.dpt_name</option>
+                                        }
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <label for="pos">Position:</label>
+                            <select class="form-control" id="pos" name="pos">
+                                @{ if (ViewBag.emp_pos_ID != null)
+                                    {
+                                        foreach (var i in ViewBag.emp_pos_ID)
+                                        {
+                                            <option value="@i.pos_id">@i.pos_title</option>
+                                        }
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <label for="kin_phone">Start Date:</label>
+                            <input type="date" class="form-control" id="cntrct_sdate" name="cntrct_sdate">
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <label for="kin_rel">End Date:</label>
+                            <input type="date" class="form-control" id="cntrct_edate" name="cntrct_edate">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <label for="cntrct_desc">Contract Additional Information:</label>
+                            <textarea class="form-control" rows="5" id="cntrct_desc" name="cntrct_desc"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+       
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <legend>Upload Documents</legend>
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <label for="ecnum">Photo:</label>
+                            <input type="file" class="form-control" id="photo" name="photo" accept="image/*">
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <label for="ecnum">Contract Document:</label>
+                            <input type="file" class="form-control" id="cotract_doc" name="contract_doc" >
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <label for="sdate">Upload CV:</label>
+                            <input type="file" class="form-control" id="cv" name="cv"/>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <label for="ecnum">O Level Certificate:</label>
+                            <input type="file" class="form-control" id="olevel" name="olevel" >
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <label for="sdate">A Level Certficate:</label>
+                            <input type="file" class="form-control" id="alevel" name="alevel">
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <label for="ecnum">University/College Certificate:</label>
+                            <input type="file" class="form-control" id="uni" name="uni" >
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <label for="sdate">ID:</label>
+                            <input type="file" class="form-control" id="idscan" name="idscan">
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <label for="ecnum">Passport:</label>
+                            <input type="file" class="form-control" id="passport" name="passport" >
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <label for="sdate">Driver's Licence:</label>
+                            <input type="file" class="form-control" id="drvlicence" name="drvlicence">
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <label for="ecnum">Additional Documents (Select One Or More):</label>
+                            <input type="file" class="form-control" id="otherDocs" name="otherDocs" multiple>
+
+                        </div>
+                    </div>
+                </div>
+
+                <legend>Other Information</legend>
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <label for="kin">Next Of Kin:</label>
+                            <input type="text" class="form-control" id="kin" placeholder="Optional" name="kin">
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <label for="kinaddress">Next Of Kin Address:</label>
+                            <input type="text" class="form-control" id="kinaddress" placeholder="Optional" name="kinaddress">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <label for="kin_phone">Next Of Kin Phone:</label>
+                            <input type="tel" class="form-control" id="kin_phone" placeholder="Optional" name="kin_phone">
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <label for="kin_rel">Relationship</label>
+                            <input type="text" class="form-control" id="kin_rel" placeholder="Optional" name="kin_rel">
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <hr />
+            <div class="row">
+                <div class="col-sm-12 col-md-3"></div>
+                <div class="col-sm-12 col-md-6">
+                <button type="submit" style="background-color: #4CAF50;color: white;padding: 14px 20px;margin: 8px 0;border: none;cursor: pointer;width: 100%;">Submit</button></div>
+                <div class="col-sm-12 col-md-3"></div>
+            </div>
+            
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Styles.Render("~/Content/themes/base/css")
+}
+<style>
+    #selectedFiles img {
+        max-width: 125px;
+        max-height: 125px;
+        float: left;
+        margin-bottom: 10px;
+    }
+</style>
+
+<script>
+    var selDiv = "";
+    document.addEventListener("DOMContentLoaded", init, false);
+
+    function init() {
+
+        document.querySelector('#files').addEventListener('change', handleFileSelect, false);
+        selDiv = document.querySelector("#selectedFiles");
+    }
+
+    function handleFileSelect(e) {
+
+
+        if(!e.target.files || !window.FileReader) return;
+
+        selDiv.innerHTML = "";
+
+        var files = e.target.files;
+            if(!files.type.match("image.*")) {
+                return;
+            }
+
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var html = "<img src=\"" + e.target.result + "\">" + f.name + "<br clear=\"left\"/>";
+                selDiv.innerHTML += html;
+                alert(html);
+            }
+            reader.readAsDataURL(f);
+        };
+</script>

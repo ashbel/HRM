@@ -1,0 +1,3365 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="HRMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tblAchievement">
+          <Key>
+            <PropertyRef Name="achvt_id" />
+          </Key>
+          <Property Name="achvt_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="emp_id" Type="int" />
+          <Property Name="achvt_name" Type="varchar" MaxLength="500" />
+          <Property Name="achvt_date" Type="date" />
+          <Property Name="achvt_comment" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="tblAllowanceLnks">
+          <Key>
+            <PropertyRef Name="allow_lnk_id" />
+          </Key>
+          <Property Name="allow_lnk_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="allowance_id" Type="int" />
+          <Property Name="allowance_amnt" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="allowance_sdate" Type="datetime" />
+          <Property Name="allowance_edate" Type="datetime" />
+          <Property Name="allowance_perm" Type="bit" />
+          <Property Name="allowance_month" Type="datetime" />
+          <Property Name="create_date" Type="nchar" MaxLength="10" />
+          <Property Name="emp_id" Type="int" />
+          <Property Name="allowance_notes" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="tblAllowances">
+          <Key>
+            <PropertyRef Name="allowance_id" />
+          </Key>
+          <Property Name="allowance_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="allowance_name" Type="varchar" MaxLength="50" />
+          <Property Name="allowance_value" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="allowance_perc" Type="varchar" MaxLength="50" />
+          <Property Name="allowance_desc" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="tblBanks">
+          <Key>
+            <PropertyRef Name="bnk_id" />
+          </Key>
+          <Property Name="bnk_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bnk_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="bnk_code" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblBranches">
+          <Key>
+            <PropertyRef Name="br_id" />
+          </Key>
+          <Property Name="br_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="br_name" Type="varchar" MaxLength="50" />
+          <Property Name="br_address" Type="varchar" MaxLength="50" />
+          <Property Name="br_contact" Type="varchar" MaxLength="50" />
+          <Property Name="br_descr" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblCities">
+          <Key>
+            <PropertyRef Name="cty_id" />
+          </Key>
+          <Property Name="cty_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cty_name" Type="varchar" MaxLength="50" />
+          <Property Name="prov_id" Type="int" />
+        </EntityType>
+        <EntityType Name="tblContracts">
+          <Key>
+            <PropertyRef Name="cntrct_id" />
+          </Key>
+          <Property Name="cntrct_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="emp_id" Type="int" />
+          <Property Name="cntrct_title" Type="varchar" MaxLength="50" />
+          <Property Name="cntrct_sdate" Type="datetime" />
+          <Property Name="cntrct_edate" Type="datetime" />
+          <Property Name="cntrct_state" Type="int" />
+          <Property Name="cntcrt_typ_id" Type="int" />
+          <Property Name="cntrct_desc" Type="varchar" MaxLength="1000" />
+          <Property Name="create_date" Type="datetime" />
+          <Property Name="dpt_id" Type="int" />
+          <Property Name="br_id" Type="int" />
+          <Property Name="pos_id" Type="int" />
+        </EntityType>
+        <EntityType Name="tblContractState">
+          <Key>
+            <PropertyRef Name="cntrct_st_id" />
+          </Key>
+          <Property Name="cntrct_st_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cntrct_state" Type="varchar" MaxLength="50" />
+          <Property Name="cntrct_st_desc" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="tblContractTypes">
+          <Key>
+            <PropertyRef Name="cntcrt_typ_id" />
+          </Key>
+          <Property Name="cntcrt_typ_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cntrct_typ" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="cntrct_desc" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblCourses">
+          <Key>
+            <PropertyRef Name="course_id" />
+          </Key>
+          <Property Name="course_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="course_nm" Type="varchar" MaxLength="70" />
+          <Property Name="course_dur" Type="varchar" MaxLength="50" />
+          <Property Name="course_descr" Type="varchar" MaxLength="500" />
+          <Property Name="type_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblCourseType">
+          <Key>
+            <PropertyRef Name="type_id" />
+          </Key>
+          <Property Name="type_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="type_name" Type="varchar" MaxLength="50" />
+          <Property Name="typ_descr" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="tblDeductionLnks">
+          <Key>
+            <PropertyRef Name="ded_lnk_id" />
+          </Key>
+          <Property Name="ded_lnk_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="deduction_id" Type="int" />
+          <Property Name="deduction_amnt" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="deduction_sdate" Type="datetime" />
+          <Property Name="deduction_edate" Type="datetime" />
+          <Property Name="deduction_permanent" Type="bit" />
+          <Property Name="deduction_mnth" Type="datetime" />
+          <Property Name="create_date" Type="varchar" MaxLength="50" />
+          <Property Name="emp_id" Type="int" />
+          <Property Name="deduction_notes" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="tblDeductions">
+          <Key>
+            <PropertyRef Name="deduction_id" />
+          </Key>
+          <Property Name="deduction_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="deduction_name" Type="varchar" MaxLength="50" />
+          <Property Name="deduction_value" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="deduction_perc" Type="varchar" MaxLength="50" />
+          <Property Name="deduction_desc" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="tblDepartments">
+          <Key>
+            <PropertyRef Name="dpt_id" />
+          </Key>
+          <Property Name="dpt_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dpt_name" Type="varchar" MaxLength="50" />
+          <Property Name="dpt_desc" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblDependants">
+          <Key>
+            <PropertyRef Name="dep_id" />
+          </Key>
+          <Property Name="dep_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="emp_id" Type="int" />
+          <Property Name="dep_name" Type="varchar" MaxLength="50" />
+          <Property Name="dep_dob" Type="date" />
+          <Property Name="dep_rltn" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblDocuments">
+          <Key>
+            <PropertyRef Name="doc_id" />
+          </Key>
+          <Property Name="doc_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="doc_name" Type="varchar" MaxLength="500" />
+          <Property Name="doc_path" Type="varchar" MaxLength="500" />
+          <Property Name="emp_id" Type="int" />
+          <Property Name="doc_date" Type="datetime" />
+          <Property Name="doc_type" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="tblEducation">
+          <Key>
+            <PropertyRef Name="edu_id" />
+          </Key>
+          <Property Name="edu_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="emp_id" Type="int" />
+          <Property Name="edu_lvl_id" Type="int" />
+          <Property Name="edu_name" Type="varchar" MaxLength="500" />
+          <Property Name="edu_qlfcn" Type="varchar" MaxLength="500" />
+          <Property Name="edu_score" Type="varchar" MaxLength="50" />
+          <Property Name="edu_comment" Type="varchar(max)" />
+          <Property Name="edu_sdate" Type="date" />
+          <Property Name="edu_edate" Type="date" />
+        </EntityType>
+        <EntityType Name="tblEduLevel">
+          <Key>
+            <PropertyRef Name="edu_lv_id" />
+          </Key>
+          <Property Name="edu_lv_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="edu_lv_name" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="tblEmployeeContacts">
+          <Key>
+            <PropertyRef Name="cnt_id" />
+          </Key>
+          <Property Name="cnt_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="emp_id" Type="int" />
+          <Property Name="emp_strt" Type="varchar" MaxLength="50" />
+          <Property Name="emp_nghbhd" Type="varchar" MaxLength="50" />
+          <Property Name="emp_city" Type="int" />
+          <Property Name="emp_province" Type="int" />
+          <Property Name="emp_phone" Type="varchar" MaxLength="50" />
+          <Property Name="emp_mobile" Type="varchar" MaxLength="50" />
+          <Property Name="emp_kin" Type="varchar" MaxLength="50" />
+          <Property Name="emp_kin_add" Type="varchar" MaxLength="100" />
+          <Property Name="emp_kin_ph" Type="varchar" MaxLength="50" />
+          <Property Name="rel_id" Type="int" />
+        </EntityType>
+        <EntityType Name="tblEmployees">
+          <Key>
+            <PropertyRef Name="emp_id" />
+          </Key>
+          <Property Name="emp_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="emp_name" Type="varchar" MaxLength="50" />
+          <Property Name="emp_lname" Type="varchar" MaxLength="50" />
+          <Property Name="emp_email" Type="varchar" MaxLength="50" />
+          <Property Name="emp_branch" Type="int" />
+          <Property Name="emp_dpt" Type="int" />
+          <Property Name="emp_status" Type="int" />
+          <Property Name="emp_bDate" Type="datetime" />
+          <Property Name="emp_jDate" Type="datetime" />
+          <Property Name="emp_cDate" Type="datetime" />
+          <Property Name="emp_pos_id" Type="int" />
+          <Property Name="emp_id_num" Type="varchar" MaxLength="50" />
+          <Property Name="emp_ec_num" Type="varchar" MaxLength="50" />
+          <Property Name="emp_nation" Type="varchar" MaxLength="50" />
+          <Property Name="emp_state" Type="int" />
+          <Property Name="img_id" Type="int" />
+          <Property Name="emp_sex" Type="int" />
+          <Property Name="emp_marital" Type="int" />
+          <Property Name="emp_sal" Type="int" />
+          <Property Name="emp_mid_names" Type="varchar" MaxLength="50" />
+          <Property Name="emp_passport_num" Type="varchar" MaxLength="50" />
+          <Property Name="emp_passport_date" Type="datetime" />
+          <Property Name="emp_drv_num" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblEmployeeStatus">
+          <Key>
+            <PropertyRef Name="empst_id" />
+          </Key>
+          <Property Name="empst_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="empst_title" Type="varchar" MaxLength="50" />
+          <Property Name="empst_descr" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblEmplStatus">
+          <Key>
+            <PropertyRef Name="stat_id" />
+          </Key>
+          <Property Name="stat_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="stat_name" Type="varchar" MaxLength="50" />
+          <Property Name="stat_desc" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblGenders">
+          <Key>
+            <PropertyRef Name="emp_sx_id" />
+          </Key>
+          <Property Name="emp_sx_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="emp_sex" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblgrades">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Grade" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblImages">
+          <Key>
+            <PropertyRef Name="img_id" />
+          </Key>
+          <Property Name="img_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="img_data" Type="varbinary(max)" />
+          <Property Name="img_desc" Type="varchar" MaxLength="100" />
+          <Property Name="emp_id" Type="int" />
+        </EntityType>
+        <EntityType Name="tblJobLevels">
+          <Key>
+            <PropertyRef Name="lvl_id" />
+          </Key>
+          <Property Name="lvl_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="lvl_title" Type="varchar" MaxLength="50" />
+          <Property Name="lvl_desc" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblKPI">
+          <Key>
+            <PropertyRef Name="kpi_id" />
+          </Key>
+          <Property Name="kpi_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="emp_id" Type="int" />
+          <Property Name="kpi_score" Type="varchar" MaxLength="50" />
+          <Property Name="kpi_prd" Type="varchar" MaxLength="50" />
+          <Property Name="kpi_date" Type="date" />
+          <Property Name="kpi_comment" Type="varchar(max)" />
+          <Property Name="kpi_title" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="tblLeaves">
+          <Key>
+            <PropertyRef Name="lv_id" />
+          </Key>
+          <Property Name="lv_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="lv_bal" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="lvtyp_id" Type="int" />
+          <Property Name="emp_id" Type="int" />
+          <Property Name="lv_period" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblLvTypes">
+          <Key>
+            <PropertyRef Name="lvtyp_id" />
+          </Key>
+          <Property Name="lvtyp_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="lvtyp_title" Type="varchar" MaxLength="50" />
+          <Property Name="lvtyp_num" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="tblLvUsages">
+          <Key>
+            <PropertyRef Name="lv_u_id" />
+          </Key>
+          <Property Name="lv_u_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="emp_id" Type="int" />
+          <Property Name="lv_id" Type="int" />
+          <Property Name="lv_sdate" Type="datetime" />
+          <Property Name="lv_edate" Type="datetime" />
+          <Property Name="lv_days" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="lv_bal" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="lv_state" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblMaritals">
+          <Key>
+            <PropertyRef Name="marital_id" />
+          </Key>
+          <Property Name="marital_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="marital_status" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblOrganisations">
+          <Key>
+            <PropertyRef Name="org_id" />
+          </Key>
+          <Property Name="org_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="org_name" Type="varchar" MaxLength="50" />
+          <Property Name="org_logo" Type="varchar" MaxLength="50" />
+          <Property Name="org_address" Type="varchar" MaxLength="50" />
+          <Property Name="org_descr" Type="varchar" MaxLength="50" />
+          <Property Name="org_phone" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblPayMethods">
+          <Key>
+            <PropertyRef Name="pay_method_id" />
+          </Key>
+          <Property Name="pay_method_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pay_title" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblPayrolls">
+          <Key>
+            <PropertyRef Name="pay_id" />
+          </Key>
+          <Property Name="pay_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="emp_id" Type="int" />
+          <Property Name="emp_Salary" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="emp_bnk" Type="int" />
+          <Property Name="emp_method" Type="int" />
+          <Property Name="emp_acc_num" Type="varchar" MaxLength="50" />
+          <Property Name="pay_start_date" Type="datetime" />
+          <Property Name="pay_end_date" Type="datetime" />
+          <Property Name="pay_status" Type="varchar" MaxLength="50" />
+          <Property Name="create_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblPositionHistories">
+          <Key>
+            <PropertyRef Name="ph_id" />
+          </Key>
+          <Property Name="ph_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="emp_id" Type="int" />
+          <Property Name="pos_id" Type="int" />
+          <Property Name="dpt_id" Type="int" />
+          <Property Name="ph_sal" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="br_id" Type="int" />
+          <Property Name="ph_sDate" Type="datetime" />
+          <Property Name="ph_eDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblPositions">
+          <Key>
+            <PropertyRef Name="pos_id" />
+          </Key>
+          <Property Name="pos_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="lvl_id" Type="int" />
+          <Property Name="pos_title" Type="varchar" MaxLength="50" />
+          <Property Name="pos_desc" Type="varchar" MaxLength="50" />
+          <Property Name="dp_id" Type="int" />
+        </EntityType>
+        <EntityType Name="tblProvinces">
+          <Key>
+            <PropertyRef Name="prov_id" />
+          </Key>
+          <Property Name="prov_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="prov_name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblRelationships">
+          <Key>
+            <PropertyRef Name="rel_id" />
+          </Key>
+          <Property Name="rel_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rel_title" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblSalutations">
+          <Key>
+            <PropertyRef Name="sal_id" />
+          </Key>
+          <Property Name="sal_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sal_title" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblTraining">
+          <Key>
+            <PropertyRef Name="tr_id" />
+          </Key>
+          <Property Name="tr_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="emp_id" Type="int" Nullable="false" />
+          <Property Name="course_id" Type="int" Nullable="false" />
+          <Property Name="tr_sdate" Type="date" />
+          <Property Name="tr_edate" Type="date" />
+          <Property Name="tr_status" Type="varchar" MaxLength="50" />
+          <Property Name="tr_score" Type="varchar" MaxLength="50" />
+          <Property Name="tr_comments" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="tblUsers">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_name" Type="varchar" MaxLength="50" />
+          <Property Name="user_password" Type="varchar" MaxLength="50" />
+          <Property Name="user_role" Type="varchar" MaxLength="50" />
+          <Property Name="emp_id" Type="int" />
+        </EntityType>
+        <EntityType Name="tblWkshftLinks">
+          <Key>
+            <PropertyRef Name="wk_lnk_id" />
+          </Key>
+          <Property Name="wk_lnk_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="wkshft_id" Type="int" />
+          <Property Name="emp_id" Type="int" />
+          <Property Name="wk_lnk_stDate" Type="datetime" />
+          <Property Name="wk_lnk_eDate" Type="datetime" />
+          <Property Name="wk_lnk_status" Type="varchar" MaxLength="50" />
+          <Property Name="create_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblWork">
+          <Key>
+            <PropertyRef Name="wrk_id" />
+          </Key>
+          <Property Name="wrk_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="emp_id" Type="int" />
+          <Property Name="wk_company" Type="varchar" MaxLength="500" />
+          <Property Name="wk_position" Type="varchar" MaxLength="50" />
+          <Property Name="wk_sdate" Type="date" />
+          <Property Name="wk_edate" Type="date" />
+          <Property Name="wk_desc" Type="varchar(max)" />
+          <Property Name="wk_comment" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="tblWorkshifts">
+          <Key>
+            <PropertyRef Name="wkshft_id" />
+          </Key>
+          <Property Name="wkshft_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="wkshft_title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="wkshft_hrs" Type="int" />
+          <Property Name="wkshft_from" Type="time" Precision="7" />
+          <Property Name="wkshft_to" Type="time" Precision="7" />
+          <Property Name="wkshft_lunch_from" Type="time" Precision="7" />
+          <Property Name="wkshft_lunch_to" Type="time" Precision="7" />
+          <Property Name="wkshft_brk_from" Type="time" Precision="7" />
+          <Property Name="wkshft_brk_to" Type="time" Precision="7" />
+          <Property Name="wkshft_xtrabrk_from" Type="time" Precision="7" />
+          <Property Name="wkshft_xtrabrk_to" Type="time" Precision="7" />
+          <Property Name="wkshft_notes" Type="varchar" MaxLength="1000" />
+          <Property Name="inputter" Type="int" Nullable="false" />
+          <Property Name="create_date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_EmployeeContacts_tblEmployees1">
+          <End Role="tblEmployees" Type="Self.tblEmployees" Multiplicity="0..1" />
+          <End Role="tblEmployeeContacts" Type="Self.tblEmployeeContacts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployees">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="tblEmployeeContacts">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblAchievement_tblEmployees">
+          <End Role="tblEmployees" Type="Self.tblEmployees" Multiplicity="0..1" />
+          <End Role="tblAchievement" Type="Self.tblAchievement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployees">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="tblAchievement">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblAllowanceLnk_tblAllowances">
+          <End Role="tblAllowances" Type="Self.tblAllowances" Multiplicity="0..1" />
+          <End Role="tblAllowanceLnks" Type="Self.tblAllowanceLnks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAllowances">
+              <PropertyRef Name="allowance_id" />
+            </Principal>
+            <Dependent Role="tblAllowanceLnks">
+              <PropertyRef Name="allowance_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblAllowanceLnk_tblEmployees">
+          <End Role="tblEmployees" Type="Self.tblEmployees" Multiplicity="0..1" />
+          <End Role="tblAllowanceLnks" Type="Self.tblAllowanceLnks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployees">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="tblAllowanceLnks">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCity_tblProvince">
+          <End Role="tblProvinces" Type="Self.tblProvinces" Multiplicity="0..1" />
+          <End Role="tblCities" Type="Self.tblCities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProvinces">
+              <PropertyRef Name="prov_id" />
+            </Principal>
+            <Dependent Role="tblCities">
+              <PropertyRef Name="prov_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblContracts_tblBranches">
+          <End Role="tblBranches" Type="Self.tblBranches" Multiplicity="0..1" />
+          <End Role="tblContracts" Type="Self.tblContracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBranches">
+              <PropertyRef Name="br_id" />
+            </Principal>
+            <Dependent Role="tblContracts">
+              <PropertyRef Name="br_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblContracts_tblContractState">
+          <End Role="tblContractState" Type="Self.tblContractState" Multiplicity="0..1" />
+          <End Role="tblContracts" Type="Self.tblContracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblContractState">
+              <PropertyRef Name="cntrct_st_id" />
+            </Principal>
+            <Dependent Role="tblContracts">
+              <PropertyRef Name="cntrct_state" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblContracts_tblContractTypes">
+          <End Role="tblContractTypes" Type="Self.tblContractTypes" Multiplicity="0..1" />
+          <End Role="tblContracts" Type="Self.tblContracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblContractTypes">
+              <PropertyRef Name="cntcrt_typ_id" />
+            </Principal>
+            <Dependent Role="tblContracts">
+              <PropertyRef Name="cntcrt_typ_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblContracts_tblDepartments">
+          <End Role="tblDepartments" Type="Self.tblDepartments" Multiplicity="0..1" />
+          <End Role="tblContracts" Type="Self.tblContracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDepartments">
+              <PropertyRef Name="dpt_id" />
+            </Principal>
+            <Dependent Role="tblContracts">
+              <PropertyRef Name="dpt_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblContracts_tblEmployees">
+          <End Role="tblEmployees" Type="Self.tblEmployees" Multiplicity="0..1" />
+          <End Role="tblContracts" Type="Self.tblContracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployees">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="tblContracts">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblContracts_tblPositions">
+          <End Role="tblPositions" Type="Self.tblPositions" Multiplicity="0..1" />
+          <End Role="tblContracts" Type="Self.tblContracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPositions">
+              <PropertyRef Name="pos_id" />
+            </Principal>
+            <Dependent Role="tblContracts">
+              <PropertyRef Name="pos_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCourses_tblCourseType">
+          <End Role="tblCourseType" Type="Self.tblCourseType" Multiplicity="1" />
+          <End Role="tblCourses" Type="Self.tblCourses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCourseType">
+              <PropertyRef Name="type_id" />
+            </Principal>
+            <Dependent Role="tblCourses">
+              <PropertyRef Name="type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblDeductionLnk_tblDeductions">
+          <End Role="tblDeductions" Type="Self.tblDeductions" Multiplicity="0..1" />
+          <End Role="tblDeductionLnks" Type="Self.tblDeductionLnks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDeductions">
+              <PropertyRef Name="deduction_id" />
+            </Principal>
+            <Dependent Role="tblDeductionLnks">
+              <PropertyRef Name="deduction_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblDeductionLnk_tblEmployees">
+          <End Role="tblEmployees" Type="Self.tblEmployees" Multiplicity="0..1" />
+          <End Role="tblDeductionLnks" Type="Self.tblDeductionLnks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployees">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="tblDeductionLnks">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblDependants_tblEmployees">
+          <End Role="tblEmployees" Type="Self.tblEmployees" Multiplicity="0..1" />
+          <End Role="tblDependants" Type="Self.tblDependants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployees">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="tblDependants">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblDocuments_tblEmployees">
+          <End Role="tblEmployees" Type="Self.tblEmployees" Multiplicity="0..1" />
+          <End Role="tblDocuments" Type="Self.tblDocuments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployees">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="tblDocuments">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEducation_tblEduLevel">
+          <End Role="tblEduLevel" Type="Self.tblEduLevel" Multiplicity="0..1" />
+          <End Role="tblEducation" Type="Self.tblEducation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEduLevel">
+              <PropertyRef Name="edu_lv_id" />
+            </Principal>
+            <Dependent Role="tblEducation">
+              <PropertyRef Name="edu_lvl_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEducation_tblEmployees">
+          <End Role="tblEmployees" Type="Self.tblEmployees" Multiplicity="0..1" />
+          <End Role="tblEducation" Type="Self.tblEducation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployees">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="tblEducation">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEmployeeContacts_tblCity">
+          <End Role="tblCities" Type="Self.tblCities" Multiplicity="0..1" />
+          <End Role="tblEmployeeContacts" Type="Self.tblEmployeeContacts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCities">
+              <PropertyRef Name="cty_id" />
+            </Principal>
+            <Dependent Role="tblEmployeeContacts">
+              <PropertyRef Name="emp_city" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEmployeeContacts_tblProvinces">
+          <End Role="tblProvinces" Type="Self.tblProvinces" Multiplicity="0..1" />
+          <End Role="tblEmployeeContacts" Type="Self.tblEmployeeContacts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProvinces">
+              <PropertyRef Name="prov_id" />
+            </Principal>
+            <Dependent Role="tblEmployeeContacts">
+              <PropertyRef Name="emp_province" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEmployeeContacts_tblRelationships">
+          <End Role="tblRelationships" Type="Self.tblRelationships" Multiplicity="0..1" />
+          <End Role="tblEmployeeContacts" Type="Self.tblEmployeeContacts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRelationships">
+              <PropertyRef Name="rel_id" />
+            </Principal>
+            <Dependent Role="tblEmployeeContacts">
+              <PropertyRef Name="rel_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEmployees_tblBranch">
+          <End Role="tblBranches" Type="Self.tblBranches" Multiplicity="0..1" />
+          <End Role="tblEmployees" Type="Self.tblEmployees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBranches">
+              <PropertyRef Name="br_id" />
+            </Principal>
+            <Dependent Role="tblEmployees">
+              <PropertyRef Name="emp_branch" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEmployees_tblDepartment">
+          <End Role="tblDepartments" Type="Self.tblDepartments" Multiplicity="0..1" />
+          <End Role="tblEmployees" Type="Self.tblEmployees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDepartments">
+              <PropertyRef Name="dpt_id" />
+            </Principal>
+            <Dependent Role="tblEmployees">
+              <PropertyRef Name="emp_dpt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEmployees_tblEmployees">
+          <End Role="tblEmployees" Type="Self.tblEmployees" Multiplicity="1" />
+          <End Role="tblEmployees1" Type="Self.tblEmployees" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployees">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="tblEmployees1">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEmployees_tblEmployeeStatus">
+          <End Role="tblEmployeeStatus" Type="Self.tblEmployeeStatus" Multiplicity="0..1" />
+          <End Role="tblEmployees" Type="Self.tblEmployees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployeeStatus">
+              <PropertyRef Name="empst_id" />
+            </Principal>
+            <Dependent Role="tblEmployees">
+              <PropertyRef Name="emp_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEmployees_tblEmplStatus">
+          <End Role="tblEmplStatus" Type="Self.tblEmplStatus" Multiplicity="0..1" />
+          <End Role="tblEmployees" Type="Self.tblEmployees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmplStatus">
+              <PropertyRef Name="stat_id" />
+            </Principal>
+            <Dependent Role="tblEmployees">
+              <PropertyRef Name="emp_state" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEmployees_tblGender">
+          <End Role="tblGenders" Type="Self.tblGenders" Multiplicity="0..1" />
+          <End Role="tblEmployees" Type="Self.tblEmployees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblGenders">
+              <PropertyRef Name="emp_sx_id" />
+            </Principal>
+            <Dependent Role="tblEmployees">
+              <PropertyRef Name="emp_sex" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEmployees_tblImages">
+          <End Role="tblImages" Type="Self.tblImages" Multiplicity="0..1" />
+          <End Role="tblEmployees" Type="Self.tblEmployees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblImages">
+              <PropertyRef Name="img_id" />
+            </Principal>
+            <Dependent Role="tblEmployees">
+              <PropertyRef Name="img_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEmployees_tblMarital">
+          <End Role="tblMaritals" Type="Self.tblMaritals" Multiplicity="0..1" />
+          <End Role="tblEmployees" Type="Self.tblEmployees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMaritals">
+              <PropertyRef Name="marital_id" />
+            </Principal>
+            <Dependent Role="tblEmployees">
+              <PropertyRef Name="emp_marital" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEmployees_tblPositions">
+          <End Role="tblPositions" Type="Self.tblPositions" Multiplicity="0..1" />
+          <End Role="tblEmployees" Type="Self.tblEmployees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPositions">
+              <PropertyRef Name="pos_id" />
+            </Principal>
+            <Dependent Role="tblEmployees">
+              <PropertyRef Name="emp_pos_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEmployees_tblSalutation">
+          <End Role="tblSalutations" Type="Self.tblSalutations" Multiplicity="0..1" />
+          <End Role="tblEmployees" Type="Self.tblEmployees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSalutations">
+              <PropertyRef Name="sal_id" />
+            </Principal>
+            <Dependent Role="tblEmployees">
+              <PropertyRef Name="emp_sal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblKPI_tblEmployees">
+          <End Role="tblEmployees" Type="Self.tblEmployees" Multiplicity="0..1" />
+          <End Role="tblKPI" Type="Self.tblKPI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployees">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="tblKPI">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblLeave_tblEmployees">
+          <End Role="tblEmployees" Type="Self.tblEmployees" Multiplicity="0..1" />
+          <End Role="tblLeaves" Type="Self.tblLeaves" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployees">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="tblLeaves">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblLeave_tblLvType">
+          <End Role="tblLvTypes" Type="Self.tblLvTypes" Multiplicity="0..1" />
+          <End Role="tblLeaves" Type="Self.tblLeaves" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblLvTypes">
+              <PropertyRef Name="lvtyp_id" />
+            </Principal>
+            <Dependent Role="tblLeaves">
+              <PropertyRef Name="lvtyp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblLvUsage_tblEmployees">
+          <End Role="tblEmployees" Type="Self.tblEmployees" Multiplicity="0..1" />
+          <End Role="tblLvUsages" Type="Self.tblLvUsages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployees">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="tblLvUsages">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblLvUsage_tblLeave">
+          <End Role="tblLeaves" Type="Self.tblLeaves" Multiplicity="0..1" />
+          <End Role="tblLvUsages" Type="Self.tblLvUsages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblLeaves">
+              <PropertyRef Name="lv_id" />
+            </Principal>
+            <Dependent Role="tblLvUsages">
+              <PropertyRef Name="lv_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPayroll_tblBanks">
+          <End Role="tblBanks" Type="Self.tblBanks" Multiplicity="0..1" />
+          <End Role="tblPayrolls" Type="Self.tblPayrolls" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBanks">
+              <PropertyRef Name="bnk_id" />
+            </Principal>
+            <Dependent Role="tblPayrolls">
+              <PropertyRef Name="emp_bnk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPayroll_tblEmployees">
+          <End Role="tblEmployees" Type="Self.tblEmployees" Multiplicity="0..1" />
+          <End Role="tblPayrolls" Type="Self.tblPayrolls" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployees">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="tblPayrolls">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPayroll_tblPayMethod">
+          <End Role="tblPayMethods" Type="Self.tblPayMethods" Multiplicity="0..1" />
+          <End Role="tblPayrolls" Type="Self.tblPayrolls" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPayMethods">
+              <PropertyRef Name="pay_method_id" />
+            </Principal>
+            <Dependent Role="tblPayrolls">
+              <PropertyRef Name="emp_method" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPositionHistory_tblBranch">
+          <End Role="tblBranches" Type="Self.tblBranches" Multiplicity="0..1" />
+          <End Role="tblPositionHistories" Type="Self.tblPositionHistories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBranches">
+              <PropertyRef Name="br_id" />
+            </Principal>
+            <Dependent Role="tblPositionHistories">
+              <PropertyRef Name="br_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPositionHistory_tblDepartment">
+          <End Role="tblDepartments" Type="Self.tblDepartments" Multiplicity="0..1" />
+          <End Role="tblPositionHistories" Type="Self.tblPositionHistories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDepartments">
+              <PropertyRef Name="dpt_id" />
+            </Principal>
+            <Dependent Role="tblPositionHistories">
+              <PropertyRef Name="dpt_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPositionHistory_tblEmployees">
+          <End Role="tblEmployees" Type="Self.tblEmployees" Multiplicity="0..1" />
+          <End Role="tblPositionHistories" Type="Self.tblPositionHistories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployees">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="tblPositionHistories">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPositionHistory_tblPositions">
+          <End Role="tblPositions" Type="Self.tblPositions" Multiplicity="0..1" />
+          <End Role="tblPositionHistories" Type="Self.tblPositionHistories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPositions">
+              <PropertyRef Name="pos_id" />
+            </Principal>
+            <Dependent Role="tblPositionHistories">
+              <PropertyRef Name="pos_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPositions_tblDepartments">
+          <End Role="tblDepartments" Type="Self.tblDepartments" Multiplicity="0..1" />
+          <End Role="tblPositions" Type="Self.tblPositions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDepartments">
+              <PropertyRef Name="dpt_id" />
+            </Principal>
+            <Dependent Role="tblPositions">
+              <PropertyRef Name="dp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPositions_tblJobLevels">
+          <End Role="tblJobLevels" Type="Self.tblJobLevels" Multiplicity="0..1" />
+          <End Role="tblPositions" Type="Self.tblPositions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblJobLevels">
+              <PropertyRef Name="lvl_id" />
+            </Principal>
+            <Dependent Role="tblPositions">
+              <PropertyRef Name="lvl_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTraining_tblCourses">
+          <End Role="tblCourses" Type="Self.tblCourses" Multiplicity="1" />
+          <End Role="tblTraining" Type="Self.tblTraining" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCourses">
+              <PropertyRef Name="course_id" />
+            </Principal>
+            <Dependent Role="tblTraining">
+              <PropertyRef Name="course_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTraining_tblEmployees">
+          <End Role="tblEmployees" Type="Self.tblEmployees" Multiplicity="1" />
+          <End Role="tblTraining" Type="Self.tblTraining" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployees">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="tblTraining">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblUsers_tblEmployees">
+          <End Role="tblEmployees" Type="Self.tblEmployees" Multiplicity="0..1" />
+          <End Role="tblUsers" Type="Self.tblUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployees">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="tblUsers">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblWkshftLink_tblEmployees">
+          <End Role="tblEmployees" Type="Self.tblEmployees" Multiplicity="0..1" />
+          <End Role="tblWkshftLinks" Type="Self.tblWkshftLinks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployees">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="tblWkshftLinks">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblWkshftLink_tblWorkshifts">
+          <End Role="tblWorkshifts" Type="Self.tblWorkshifts" Multiplicity="0..1" />
+          <End Role="tblWkshftLinks" Type="Self.tblWkshftLinks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblWorkshifts">
+              <PropertyRef Name="wkshft_id" />
+            </Principal>
+            <Dependent Role="tblWkshftLinks">
+              <PropertyRef Name="wkshft_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblWork_tblEmployees">
+          <End Role="tblEmployees" Type="Self.tblEmployees" Multiplicity="0..1" />
+          <End Role="tblWork" Type="Self.tblWork" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployees">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="tblWork">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HRMModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblAchievement" EntityType="Self.tblAchievement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblAllowanceLnks" EntityType="Self.tblAllowanceLnks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblAllowances" EntityType="Self.tblAllowances" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblBanks" EntityType="Self.tblBanks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblBranches" EntityType="Self.tblBranches" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCities" EntityType="Self.tblCities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblContracts" EntityType="Self.tblContracts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblContractState" EntityType="Self.tblContractState" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblContractTypes" EntityType="Self.tblContractTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCourses" EntityType="Self.tblCourses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCourseType" EntityType="Self.tblCourseType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblDeductionLnks" EntityType="Self.tblDeductionLnks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblDeductions" EntityType="Self.tblDeductions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblDepartments" EntityType="Self.tblDepartments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblDependants" EntityType="Self.tblDependants" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblDocuments" EntityType="Self.tblDocuments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblEducation" EntityType="Self.tblEducation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblEduLevel" EntityType="Self.tblEduLevel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblEmployeeContacts" EntityType="Self.tblEmployeeContacts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblEmployees" EntityType="Self.tblEmployees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblEmployeeStatus" EntityType="Self.tblEmployeeStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblEmplStatus" EntityType="Self.tblEmplStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblGenders" EntityType="Self.tblGenders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblgrades" EntityType="Self.tblgrades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblImages" EntityType="Self.tblImages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblJobLevels" EntityType="Self.tblJobLevels" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblKPI" EntityType="Self.tblKPI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblLeaves" EntityType="Self.tblLeaves" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblLvTypes" EntityType="Self.tblLvTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblLvUsages" EntityType="Self.tblLvUsages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblMaritals" EntityType="Self.tblMaritals" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblOrganisations" EntityType="Self.tblOrganisations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPayMethods" EntityType="Self.tblPayMethods" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPayrolls" EntityType="Self.tblPayrolls" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPositionHistories" EntityType="Self.tblPositionHistories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPositions" EntityType="Self.tblPositions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblProvinces" EntityType="Self.tblProvinces" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblRelationships" EntityType="Self.tblRelationships" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblSalutations" EntityType="Self.tblSalutations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTraining" EntityType="Self.tblTraining" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUsers" EntityType="Self.tblUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblWkshftLinks" EntityType="Self.tblWkshftLinks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblWork" EntityType="Self.tblWork" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblWorkshifts" EntityType="Self.tblWorkshifts" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_EmployeeContacts_tblEmployees1" Association="Self.FK_EmployeeContacts_tblEmployees1">
+            <End Role="tblEmployees" EntitySet="tblEmployees" />
+            <End Role="tblEmployeeContacts" EntitySet="tblEmployeeContacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblAchievement_tblEmployees" Association="Self.FK_tblAchievement_tblEmployees">
+            <End Role="tblEmployees" EntitySet="tblEmployees" />
+            <End Role="tblAchievement" EntitySet="tblAchievement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblAllowanceLnk_tblAllowances" Association="Self.FK_tblAllowanceLnk_tblAllowances">
+            <End Role="tblAllowances" EntitySet="tblAllowances" />
+            <End Role="tblAllowanceLnks" EntitySet="tblAllowanceLnks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblAllowanceLnk_tblEmployees" Association="Self.FK_tblAllowanceLnk_tblEmployees">
+            <End Role="tblEmployees" EntitySet="tblEmployees" />
+            <End Role="tblAllowanceLnks" EntitySet="tblAllowanceLnks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCity_tblProvince" Association="Self.FK_tblCity_tblProvince">
+            <End Role="tblProvinces" EntitySet="tblProvinces" />
+            <End Role="tblCities" EntitySet="tblCities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblContracts_tblBranches" Association="Self.FK_tblContracts_tblBranches">
+            <End Role="tblBranches" EntitySet="tblBranches" />
+            <End Role="tblContracts" EntitySet="tblContracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblContracts_tblContractState" Association="Self.FK_tblContracts_tblContractState">
+            <End Role="tblContractState" EntitySet="tblContractState" />
+            <End Role="tblContracts" EntitySet="tblContracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblContracts_tblContractTypes" Association="Self.FK_tblContracts_tblContractTypes">
+            <End Role="tblContractTypes" EntitySet="tblContractTypes" />
+            <End Role="tblContracts" EntitySet="tblContracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblContracts_tblDepartments" Association="Self.FK_tblContracts_tblDepartments">
+            <End Role="tblDepartments" EntitySet="tblDepartments" />
+            <End Role="tblContracts" EntitySet="tblContracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblContracts_tblEmployees" Association="Self.FK_tblContracts_tblEmployees">
+            <End Role="tblEmployees" EntitySet="tblEmployees" />
+            <End Role="tblContracts" EntitySet="tblContracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblContracts_tblPositions" Association="Self.FK_tblContracts_tblPositions">
+            <End Role="tblPositions" EntitySet="tblPositions" />
+            <End Role="tblContracts" EntitySet="tblContracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCourses_tblCourseType" Association="Self.FK_tblCourses_tblCourseType">
+            <End Role="tblCourseType" EntitySet="tblCourseType" />
+            <End Role="tblCourses" EntitySet="tblCourses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblDeductionLnk_tblDeductions" Association="Self.FK_tblDeductionLnk_tblDeductions">
+            <End Role="tblDeductions" EntitySet="tblDeductions" />
+            <End Role="tblDeductionLnks" EntitySet="tblDeductionLnks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblDeductionLnk_tblEmployees" Association="Self.FK_tblDeductionLnk_tblEmployees">
+            <End Role="tblEmployees" EntitySet="tblEmployees" />
+            <End Role="tblDeductionLnks" EntitySet="tblDeductionLnks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblDependants_tblEmployees" Association="Self.FK_tblDependants_tblEmployees">
+            <End Role="tblEmployees" EntitySet="tblEmployees" />
+            <End Role="tblDependants" EntitySet="tblDependants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblDocuments_tblEmployees" Association="Self.FK_tblDocuments_tblEmployees">
+            <End Role="tblEmployees" EntitySet="tblEmployees" />
+            <End Role="tblDocuments" EntitySet="tblDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEducation_tblEduLevel" Association="Self.FK_tblEducation_tblEduLevel">
+            <End Role="tblEduLevel" EntitySet="tblEduLevel" />
+            <End Role="tblEducation" EntitySet="tblEducation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEducation_tblEmployees" Association="Self.FK_tblEducation_tblEmployees">
+            <End Role="tblEmployees" EntitySet="tblEmployees" />
+            <End Role="tblEducation" EntitySet="tblEducation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEmployeeContacts_tblCity" Association="Self.FK_tblEmployeeContacts_tblCity">
+            <End Role="tblCities" EntitySet="tblCities" />
+            <End Role="tblEmployeeContacts" EntitySet="tblEmployeeContacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEmployeeContacts_tblProvinces" Association="Self.FK_tblEmployeeContacts_tblProvinces">
+            <End Role="tblProvinces" EntitySet="tblProvinces" />
+            <End Role="tblEmployeeContacts" EntitySet="tblEmployeeContacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEmployeeContacts_tblRelationships" Association="Self.FK_tblEmployeeContacts_tblRelationships">
+            <End Role="tblRelationships" EntitySet="tblRelationships" />
+            <End Role="tblEmployeeContacts" EntitySet="tblEmployeeContacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEmployees_tblBranch" Association="Self.FK_tblEmployees_tblBranch">
+            <End Role="tblBranches" EntitySet="tblBranches" />
+            <End Role="tblEmployees" EntitySet="tblEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEmployees_tblDepartment" Association="Self.FK_tblEmployees_tblDepartment">
+            <End Role="tblDepartments" EntitySet="tblDepartments" />
+            <End Role="tblEmployees" EntitySet="tblEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEmployees_tblEmployees" Association="Self.FK_tblEmployees_tblEmployees">
+            <End Role="tblEmployees" EntitySet="tblEmployees" />
+            <End Role="tblEmployees1" EntitySet="tblEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEmployees_tblEmployeeStatus" Association="Self.FK_tblEmployees_tblEmployeeStatus">
+            <End Role="tblEmployeeStatus" EntitySet="tblEmployeeStatus" />
+            <End Role="tblEmployees" EntitySet="tblEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEmployees_tblEmplStatus" Association="Self.FK_tblEmployees_tblEmplStatus">
+            <End Role="tblEmplStatus" EntitySet="tblEmplStatus" />
+            <End Role="tblEmployees" EntitySet="tblEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEmployees_tblGender" Association="Self.FK_tblEmployees_tblGender">
+            <End Role="tblGenders" EntitySet="tblGenders" />
+            <End Role="tblEmployees" EntitySet="tblEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEmployees_tblImages" Association="Self.FK_tblEmployees_tblImages">
+            <End Role="tblImages" EntitySet="tblImages" />
+            <End Role="tblEmployees" EntitySet="tblEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEmployees_tblMarital" Association="Self.FK_tblEmployees_tblMarital">
+            <End Role="tblMaritals" EntitySet="tblMaritals" />
+            <End Role="tblEmployees" EntitySet="tblEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEmployees_tblPositions" Association="Self.FK_tblEmployees_tblPositions">
+            <End Role="tblPositions" EntitySet="tblPositions" />
+            <End Role="tblEmployees" EntitySet="tblEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEmployees_tblSalutation" Association="Self.FK_tblEmployees_tblSalutation">
+            <End Role="tblSalutations" EntitySet="tblSalutations" />
+            <End Role="tblEmployees" EntitySet="tblEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblKPI_tblEmployees" Association="Self.FK_tblKPI_tblEmployees">
+            <End Role="tblEmployees" EntitySet="tblEmployees" />
+            <End Role="tblKPI" EntitySet="tblKPI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblLeave_tblEmployees" Association="Self.FK_tblLeave_tblEmployees">
+            <End Role="tblEmployees" EntitySet="tblEmployees" />
+            <End Role="tblLeaves" EntitySet="tblLeaves" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblLeave_tblLvType" Association="Self.FK_tblLeave_tblLvType">
+            <End Role="tblLvTypes" EntitySet="tblLvTypes" />
+            <End Role="tblLeaves" EntitySet="tblLeaves" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblLvUsage_tblEmployees" Association="Self.FK_tblLvUsage_tblEmployees">
+            <End Role="tblEmployees" EntitySet="tblEmployees" />
+            <End Role="tblLvUsages" EntitySet="tblLvUsages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblLvUsage_tblLeave" Association="Self.FK_tblLvUsage_tblLeave">
+            <End Role="tblLeaves" EntitySet="tblLeaves" />
+            <End Role="tblLvUsages" EntitySet="tblLvUsages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPayroll_tblBanks" Association="Self.FK_tblPayroll_tblBanks">
+            <End Role="tblBanks" EntitySet="tblBanks" />
+            <End Role="tblPayrolls" EntitySet="tblPayrolls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPayroll_tblEmployees" Association="Self.FK_tblPayroll_tblEmployees">
+            <End Role="tblEmployees" EntitySet="tblEmployees" />
+            <End Role="tblPayrolls" EntitySet="tblPayrolls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPayroll_tblPayMethod" Association="Self.FK_tblPayroll_tblPayMethod">
+            <End Role="tblPayMethods" EntitySet="tblPayMethods" />
+            <End Role="tblPayrolls" EntitySet="tblPayrolls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPositionHistory_tblBranch" Association="Self.FK_tblPositionHistory_tblBranch">
+            <End Role="tblBranches" EntitySet="tblBranches" />
+            <End Role="tblPositionHistories" EntitySet="tblPositionHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPositionHistory_tblDepartment" Association="Self.FK_tblPositionHistory_tblDepartment">
+            <End Role="tblDepartments" EntitySet="tblDepartments" />
+            <End Role="tblPositionHistories" EntitySet="tblPositionHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPositionHistory_tblEmployees" Association="Self.FK_tblPositionHistory_tblEmployees">
+            <End Role="tblEmployees" EntitySet="tblEmployees" />
+            <End Role="tblPositionHistories" EntitySet="tblPositionHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPositionHistory_tblPositions" Association="Self.FK_tblPositionHistory_tblPositions">
+            <End Role="tblPositions" EntitySet="tblPositions" />
+            <End Role="tblPositionHistories" EntitySet="tblPositionHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPositions_tblDepartments" Association="Self.FK_tblPositions_tblDepartments">
+            <End Role="tblDepartments" EntitySet="tblDepartments" />
+            <End Role="tblPositions" EntitySet="tblPositions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPositions_tblJobLevels" Association="Self.FK_tblPositions_tblJobLevels">
+            <End Role="tblJobLevels" EntitySet="tblJobLevels" />
+            <End Role="tblPositions" EntitySet="tblPositions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTraining_tblCourses" Association="Self.FK_tblTraining_tblCourses">
+            <End Role="tblCourses" EntitySet="tblCourses" />
+            <End Role="tblTraining" EntitySet="tblTraining" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTraining_tblEmployees" Association="Self.FK_tblTraining_tblEmployees">
+            <End Role="tblEmployees" EntitySet="tblEmployees" />
+            <End Role="tblTraining" EntitySet="tblTraining" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblUsers_tblEmployees" Association="Self.FK_tblUsers_tblEmployees">
+            <End Role="tblEmployees" EntitySet="tblEmployees" />
+            <End Role="tblUsers" EntitySet="tblUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblWkshftLink_tblEmployees" Association="Self.FK_tblWkshftLink_tblEmployees">
+            <End Role="tblEmployees" EntitySet="tblEmployees" />
+            <End Role="tblWkshftLinks" EntitySet="tblWkshftLinks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblWkshftLink_tblWorkshifts" Association="Self.FK_tblWkshftLink_tblWorkshifts">
+            <End Role="tblWorkshifts" EntitySet="tblWorkshifts" />
+            <End Role="tblWkshftLinks" EntitySet="tblWkshftLinks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblWork_tblEmployees" Association="Self.FK_tblWork_tblEmployees">
+            <End Role="tblEmployees" EntitySet="tblEmployees" />
+            <End Role="tblWork" EntitySet="tblWork" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HRMModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+        <EntityContainer Name="HRMEntities" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+          <EntitySet Name="tblBranches" EntityType="HRMModel.tblBranch" />
+          <EntitySet Name="tblDepartments" EntityType="HRMModel.tblDepartment" />
+          <EntitySet Name="tblEmployees" EntityType="HRMModel.tblEmployee" />
+          <EntitySet Name="tblEmployeeStatus" EntityType="HRMModel.tblEmployeeStatu" />
+          <EntitySet Name="tblJobLevels" EntityType="HRMModel.tblJobLevel" />
+          <EntitySet Name="tblOrganisations" EntityType="HRMModel.tblOrganisation" />
+          <EntitySet Name="tblPositionHistories" EntityType="HRMModel.tblPositionHistory" />
+          <EntitySet Name="tblPositions" EntityType="HRMModel.tblPosition" />
+          <EntitySet Name="tblUsers" EntityType="HRMModel.tblUser" />
+          <AssociationSet Name="FK_tblEmployees_tblBranch" Association="HRMModel.FK_tblEmployees_tblBranch">
+            <End Role="tblBranch" EntitySet="tblBranches" />
+            <End Role="tblEmployees" EntitySet="tblEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPositionHistory_tblBranch" Association="HRMModel.FK_tblPositionHistory_tblBranch">
+            <End Role="tblBranch" EntitySet="tblBranches" />
+            <End Role="tblPositionHistory" EntitySet="tblPositionHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEmployees_tblDepartment" Association="HRMModel.FK_tblEmployees_tblDepartment">
+            <End Role="tblDepartment" EntitySet="tblDepartments" />
+            <End Role="tblEmployees" EntitySet="tblEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPositionHistory_tblDepartment" Association="HRMModel.FK_tblPositionHistory_tblDepartment">
+            <End Role="tblDepartment" EntitySet="tblDepartments" />
+            <End Role="tblPositionHistory" EntitySet="tblPositionHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEmployees_tblEmployeeStatus" Association="HRMModel.FK_tblEmployees_tblEmployeeStatus">
+            <End Role="tblEmployeeStatus" EntitySet="tblEmployeeStatus" />
+            <End Role="tblEmployees" EntitySet="tblEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPositionHistory_tblEmployees" Association="HRMModel.FK_tblPositionHistory_tblEmployees">
+            <End Role="tblEmployees" EntitySet="tblEmployees" />
+            <End Role="tblPositionHistory" EntitySet="tblPositionHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblUsers_tblEmployees" Association="HRMModel.FK_tblUsers_tblEmployees">
+            <End Role="tblEmployees" EntitySet="tblEmployees" />
+            <End Role="tblUsers" EntitySet="tblUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPositionHistory_tblPositions" Association="HRMModel.FK_tblPositionHistory_tblPositions">
+            <End Role="tblPositions" EntitySet="tblPositions" />
+            <End Role="tblPositionHistory" EntitySet="tblPositionHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPositions_tblJobLevels" Association="HRMModel.FK_tblPositions_tblJobLevels">
+            <End Role="tblJobLevel" EntitySet="tblJobLevels" />
+            <End Role="tblPosition" EntitySet="tblPositions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEmployees_tblPositions" Association="HRMModel.FK_tblEmployees_tblPositions">
+            <End Role="tblPosition" EntitySet="tblPositions" />
+            <End Role="tblEmployee" EntitySet="tblEmployees" />
+          </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="HRMModel.sysdiagram" />
+          <AssociationSet Name="FK_tblEmployees_tblEmployees" Association="HRMModel.FK_tblEmployees_tblEmployees">
+            <End Role="tblEmployee" EntitySet="tblEmployees" />
+            <End Role="tblEmployee1" EntitySet="tblEmployees" />
+          </AssociationSet>
+          <EntitySet Name="tblEmplStatus" EntityType="HRMModel.tblEmplStatu" />
+          <AssociationSet Name="FK_tblEmployees_tblEmplStatus" Association="HRMModel.FK_tblEmployees_tblEmplStatus">
+            <End Role="tblEmplStatu" EntitySet="tblEmplStatus" />
+            <End Role="tblEmployee" EntitySet="tblEmployees" />
+          </AssociationSet>
+          <EntitySet Name="tblImages" EntityType="HRMModel.tblImage" />
+          <AssociationSet Name="FK_tblEmployees_tblImages" Association="HRMModel.FK_tblEmployees_tblImages">
+            <End Role="tblImage" EntitySet="tblImages" />
+            <End Role="tblEmployee" EntitySet="tblEmployees" />
+          </AssociationSet>
+          <EntitySet Name="tblContracts" EntityType="HRMModel.tblContract" />
+          <EntitySet Name="tblLeaves" EntityType="HRMModel.tblLeave" />
+          <EntitySet Name="tblLvTypes" EntityType="HRMModel.tblLvType" />
+          <EntitySet Name="tblLvUsages" EntityType="HRMModel.tblLvUsage" />
+          <AssociationSet Name="FK_tblLeave_tblEmployees" Association="HRMModel.FK_tblLeave_tblEmployees">
+            <End Role="tblEmployee" EntitySet="tblEmployees" />
+            <End Role="tblLeave" EntitySet="tblLeaves" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblLvUsage_tblEmployees" Association="HRMModel.FK_tblLvUsage_tblEmployees">
+            <End Role="tblEmployee" EntitySet="tblEmployees" />
+            <End Role="tblLvUsage" EntitySet="tblLvUsages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblLeave_tblLvType" Association="HRMModel.FK_tblLeave_tblLvType">
+            <End Role="tblLvType" EntitySet="tblLvTypes" />
+            <End Role="tblLeave" EntitySet="tblLeaves" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblLvUsage_tblLeave" Association="HRMModel.FK_tblLvUsage_tblLeave">
+            <End Role="tblLeave" EntitySet="tblLeaves" />
+            <End Role="tblLvUsage" EntitySet="tblLvUsages" />
+          </AssociationSet>
+          <EntitySet Name="tblMaritals" EntityType="HRMModel.tblMarital" />
+          <AssociationSet Name="FK_tblEmployees_tblMarital" Association="HRMModel.FK_tblEmployees_tblMarital">
+            <End Role="tblMarital" EntitySet="tblMaritals" />
+            <End Role="tblEmployee" EntitySet="tblEmployees" />
+          </AssociationSet>
+          <EntitySet Name="tblGenders" EntityType="HRMModel.tblGender" />
+          <AssociationSet Name="FK_tblEmployees_tblGender" Association="HRMModel.FK_tblEmployees_tblGender">
+            <End Role="tblGender" EntitySet="tblGenders" />
+            <End Role="tblEmployee" EntitySet="tblEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblContracts_tblEmployees" Association="HRMModel.FK_tblContracts_tblEmployees">
+            <End Role="tblEmployee" EntitySet="tblEmployees" />
+            <End Role="tblContract" EntitySet="tblContracts" />
+          </AssociationSet>
+          <EntitySet Name="tblAllowanceLnks" EntityType="HRMModel.tblAllowanceLnk" />
+          <EntitySet Name="tblAllowances" EntityType="HRMModel.tblAllowance" />
+          <EntitySet Name="tblBanks" EntityType="HRMModel.tblBank" />
+          <EntitySet Name="tblContractTypes" EntityType="HRMModel.tblContractType" />
+          <EntitySet Name="tblDeductionLnks" EntityType="HRMModel.tblDeductionLnk" />
+          <EntitySet Name="tblDeductions" EntityType="HRMModel.tblDeduction" />
+          <EntitySet Name="tblEmployeeContacts" EntityType="HRMModel.tblEmployeeContact" />
+          <EntitySet Name="tblgrades" EntityType="HRMModel.tblgrade" />
+          <EntitySet Name="tblPayMethods" EntityType="HRMModel.tblPayMethod" />
+          <EntitySet Name="tblPayrolls" EntityType="HRMModel.tblPayroll" />
+          <EntitySet Name="tblSalutations" EntityType="HRMModel.tblSalutation" />
+          <EntitySet Name="tblWkshftLinks" EntityType="HRMModel.tblWkshftLink" />
+          <EntitySet Name="tblWorkshifts" EntityType="HRMModel.tblWorkshift" />
+          <AssociationSet Name="FK_tblAllowanceLnk_tblAllowances" Association="HRMModel.FK_tblAllowanceLnk_tblAllowances">
+            <End Role="tblAllowance" EntitySet="tblAllowances" />
+            <End Role="tblAllowanceLnk" EntitySet="tblAllowanceLnks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblAllowanceLnk_tblEmployees" Association="HRMModel.FK_tblAllowanceLnk_tblEmployees">
+            <End Role="tblEmployee" EntitySet="tblEmployees" />
+            <End Role="tblAllowanceLnk" EntitySet="tblAllowanceLnks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPayroll_tblBanks" Association="HRMModel.FK_tblPayroll_tblBanks">
+            <End Role="tblBank" EntitySet="tblBanks" />
+            <End Role="tblPayroll" EntitySet="tblPayrolls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblContracts_tblContractTypes" Association="HRMModel.FK_tblContracts_tblContractTypes">
+            <End Role="tblContractType" EntitySet="tblContractTypes" />
+            <End Role="tblContract" EntitySet="tblContracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblDeductionLnk_tblDeductions" Association="HRMModel.FK_tblDeductionLnk_tblDeductions">
+            <End Role="tblDeduction" EntitySet="tblDeductions" />
+            <End Role="tblDeductionLnk" EntitySet="tblDeductionLnks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblDeductionLnk_tblEmployees" Association="HRMModel.FK_tblDeductionLnk_tblEmployees">
+            <End Role="tblEmployee" EntitySet="tblEmployees" />
+            <End Role="tblDeductionLnk" EntitySet="tblDeductionLnks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeContacts_tblEmployees1" Association="HRMModel.FK_EmployeeContacts_tblEmployees1">
+            <End Role="tblEmployee" EntitySet="tblEmployees" />
+            <End Role="tblEmployeeContact" EntitySet="tblEmployeeContacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEmployees_tblSalutation" Association="HRMModel.FK_tblEmployees_tblSalutation">
+            <End Role="tblSalutation" EntitySet="tblSalutations" />
+            <End Role="tblEmployee" EntitySet="tblEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPayroll_tblEmployees" Association="HRMModel.FK_tblPayroll_tblEmployees">
+            <End Role="tblEmployee" EntitySet="tblEmployees" />
+            <End Role="tblPayroll" EntitySet="tblPayrolls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblWkshftLink_tblEmployees" Association="HRMModel.FK_tblWkshftLink_tblEmployees">
+            <End Role="tblEmployee" EntitySet="tblEmployees" />
+            <End Role="tblWkshftLink" EntitySet="tblWkshftLinks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPayroll_tblPayMethod" Association="HRMModel.FK_tblPayroll_tblPayMethod">
+            <End Role="tblPayMethod" EntitySet="tblPayMethods" />
+            <End Role="tblPayroll" EntitySet="tblPayrolls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblWkshftLink_tblWorkshifts" Association="HRMModel.FK_tblWkshftLink_tblWorkshifts">
+            <End Role="tblWorkshift" EntitySet="tblWorkshifts" />
+            <End Role="tblWkshftLink" EntitySet="tblWkshftLinks" />
+          </AssociationSet>
+          <EntitySet Name="tblRelationships" EntityType="HRMModel.tblRelationship" />
+          <AssociationSet Name="FK_tblEmployeeContacts_tblRelationships" Association="HRMModel.FK_tblEmployeeContacts_tblRelationships">
+            <End Role="tblRelationship" EntitySet="tblRelationships" />
+            <End Role="tblEmployeeContact" EntitySet="tblEmployeeContacts" />
+          </AssociationSet>
+          <EntitySet Name="tblCities" EntityType="HRMModel.tblCity" />
+          <AssociationSet Name="FK_tblEmployeeContacts_tblCity" Association="HRMModel.FK_tblEmployeeContacts_tblCity">
+            <End Role="tblCity" EntitySet="tblCities" />
+            <End Role="tblEmployeeContact" EntitySet="tblEmployeeContacts" />
+          </AssociationSet>
+          <EntitySet Name="tblProvinces" EntityType="HRMModel.tblProvince" />
+          <AssociationSet Name="FK_tblCity_tblProvince" Association="HRMModel.FK_tblCity_tblProvince">
+            <End Role="tblProvince" EntitySet="tblProvinces" />
+            <End Role="tblCity" EntitySet="tblCities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPositions_tblDepartments" Association="HRMModel.FK_tblPositions_tblDepartments">
+            <End Role="tblDepartment" EntitySet="tblDepartments" />
+            <End Role="tblPosition" EntitySet="tblPositions" />
+          </AssociationSet>
+          <EntitySet Name="tblCourses" EntityType="HRMModel.tblCours" />
+          <EntitySet Name="tblCourseTypes" EntityType="HRMModel.tblCourseType" />
+          <EntitySet Name="tblTrainings" EntityType="HRMModel.tblTraining" />
+          <AssociationSet Name="FK_tblCourses_tblCourseType" Association="HRMModel.FK_tblCourses_tblCourseType">
+            <End Role="tblCourseType" EntitySet="tblCourseTypes" />
+            <End Role="tblCours" EntitySet="tblCourses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTraining_tblCourses" Association="HRMModel.FK_tblTraining_tblCourses">
+            <End Role="tblCours" EntitySet="tblCourses" />
+            <End Role="tblTraining" EntitySet="tblTrainings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTraining_tblEmployees" Association="HRMModel.FK_tblTraining_tblEmployees">
+            <End Role="tblEmployee" EntitySet="tblEmployees" />
+            <End Role="tblTraining" EntitySet="tblTrainings" />
+          </AssociationSet>
+          <EntitySet Name="tblDocuments" EntityType="HRMModel.tblDocument" />
+          <AssociationSet Name="FK_tblDocuments_tblEmployees" Association="HRMModel.FK_tblDocuments_tblEmployees">
+            <End Role="tblEmployee" EntitySet="tblEmployees" />
+            <End Role="tblDocument" EntitySet="tblDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEmployeeContacts_tblProvinces" Association="HRMModel.FK_tblEmployeeContacts_tblProvinces">
+            <End Role="tblProvince" EntitySet="tblProvinces" />
+            <End Role="tblEmployeeContact" EntitySet="tblEmployeeContacts" />
+          </AssociationSet>
+          <EntitySet Name="tblContractStates" EntityType="HRMModel.tblContractState" />
+          <AssociationSet Name="FK_tblContracts_tblContractState" Association="HRMModel.FK_tblContracts_tblContractState">
+            <End Role="tblContractState" EntitySet="tblContractStates" />
+            <End Role="tblContract" EntitySet="tblContracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblContracts_tblBranches" Association="HRMModel.FK_tblContracts_tblBranches">
+            <End Role="tblBranch" EntitySet="tblBranches" />
+            <End Role="tblContract" EntitySet="tblContracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblContracts_tblDepartments" Association="HRMModel.FK_tblContracts_tblDepartments">
+            <End Role="tblDepartment" EntitySet="tblDepartments" />
+            <End Role="tblContract" EntitySet="tblContracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblContracts_tblPositions" Association="HRMModel.FK_tblContracts_tblPositions">
+            <End Role="tblPosition" EntitySet="tblPositions" />
+            <End Role="tblContract" EntitySet="tblContracts" />
+          </AssociationSet>
+          <EntitySet Name="tblDependants" EntityType="HRMModel.tblDependant" />
+          <EntitySet Name="tblEducations" EntityType="HRMModel.tblEducation" />
+          <EntitySet Name="tblEduLevels" EntityType="HRMModel.tblEduLevel" />
+          <EntitySet Name="tblWorks" EntityType="HRMModel.tblWork" />
+          <AssociationSet Name="FK_tblDependants_tblEmployees" Association="HRMModel.FK_tblDependants_tblEmployees">
+            <End Role="tblEmployee" EntitySet="tblEmployees" />
+            <End Role="tblDependant" EntitySet="tblDependants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEducation_tblEduLevel" Association="HRMModel.FK_tblEducation_tblEduLevel">
+            <End Role="tblEduLevel" EntitySet="tblEduLevels" />
+            <End Role="tblEducation" EntitySet="tblEducations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEducation_tblEmployees" Association="HRMModel.FK_tblEducation_tblEmployees">
+            <End Role="tblEmployee" EntitySet="tblEmployees" />
+            <End Role="tblEducation" EntitySet="tblEducations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblWork_tblEmployees" Association="HRMModel.FK_tblWork_tblEmployees">
+            <End Role="tblEmployee" EntitySet="tblEmployees" />
+            <End Role="tblWork" EntitySet="tblWorks" />
+          </AssociationSet>
+          <EntitySet Name="tblAchievements" EntityType="HRMModel.tblAchievement" />
+          <EntitySet Name="tblKPIs" EntityType="HRMModel.tblKPI" />
+          <AssociationSet Name="FK_tblAchievement_tblEmployees" Association="HRMModel.FK_tblAchievement_tblEmployees">
+            <End Role="tblEmployee" EntitySet="tblEmployees" />
+            <End Role="tblAchievement" EntitySet="tblAchievements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblKPI_tblEmployees" Association="HRMModel.FK_tblKPI_tblEmployees">
+            <End Role="tblEmployee" EntitySet="tblEmployees" />
+            <End Role="tblKPI" EntitySet="tblKPIs" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tblBranch">
+          <Key>
+            <PropertyRef Name="br_id" />
+          </Key>
+          <Property Name="br_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="br_name" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="br_address" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="br_contact" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="br_descr" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="tblEmployees" Relationship="HRMModel.FK_tblEmployees_tblBranch" FromRole="tblBranch" ToRole="tblEmployees" />
+          <NavigationProperty Name="tblPositionHistories" Relationship="HRMModel.FK_tblPositionHistory_tblBranch" FromRole="tblBranch" ToRole="tblPositionHistory" />
+          <NavigationProperty Name="tblContracts" Relationship="HRMModel.FK_tblContracts_tblBranches" FromRole="tblBranch" ToRole="tblContract" />
+        </EntityType>
+        <EntityType Name="tblDepartment">
+          <Key>
+            <PropertyRef Name="dpt_id" />
+          </Key>
+          <Property Name="dpt_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="dpt_name" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="dpt_desc" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="tblEmployees" Relationship="HRMModel.FK_tblEmployees_tblDepartment" FromRole="tblDepartment" ToRole="tblEmployees" />
+          <NavigationProperty Name="tblPositionHistories" Relationship="HRMModel.FK_tblPositionHistory_tblDepartment" FromRole="tblDepartment" ToRole="tblPositionHistory" />
+          <NavigationProperty Name="tblPositions" Relationship="HRMModel.FK_tblPositions_tblDepartments" FromRole="tblDepartment" ToRole="tblPosition" />
+          <NavigationProperty Name="tblContracts" Relationship="HRMModel.FK_tblContracts_tblDepartments" FromRole="tblDepartment" ToRole="tblContract" />
+        </EntityType>
+        <EntityType Name="tblEmployee">
+          <Key>
+            <PropertyRef Name="emp_id" />
+          </Key>
+          <Property Name="emp_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="emp_name" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="emp_lname" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="emp_email" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="emp_branch" Type="Int32" />
+          <Property Name="emp_dpt" Type="Int32" />
+          <Property Name="emp_status" Type="Int32" />
+          <Property Name="emp_bDate" Type="DateTime" Precision="3" />
+          <Property Name="emp_jDate" Type="DateTime" Precision="3" />
+          <Property Name="emp_cDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tblBranch" Relationship="HRMModel.FK_tblEmployees_tblBranch" FromRole="tblEmployees" ToRole="tblBranch" />
+          <NavigationProperty Name="tblDepartment" Relationship="HRMModel.FK_tblEmployees_tblDepartment" FromRole="tblEmployees" ToRole="tblDepartment" />
+          <NavigationProperty Name="tblEmployeeStatu" Relationship="HRMModel.FK_tblEmployees_tblEmployeeStatus" FromRole="tblEmployees" ToRole="tblEmployeeStatus" />
+          <NavigationProperty Name="tblPositionHistories" Relationship="HRMModel.FK_tblPositionHistory_tblEmployees" FromRole="tblEmployees" ToRole="tblPositionHistory" />
+          <NavigationProperty Name="tblUsers" Relationship="HRMModel.FK_tblUsers_tblEmployees" FromRole="tblEmployees" ToRole="tblUsers" />
+          <Property Type="Int32" Name="emp_pos_id" />
+          <NavigationProperty Name="tblPosition" Relationship="HRMModel.FK_tblEmployees_tblPositions" FromRole="tblEmployee" ToRole="tblPosition" />
+          <Property Type="String" Name="emp_id_num" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="emp_ec_num" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="emp_nation" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblEmployees1" Relationship="HRMModel.FK_tblEmployees_tblEmployees" FromRole="tblEmployee" ToRole="tblEmployee1" />
+          <NavigationProperty Name="tblEmployee1" Relationship="HRMModel.FK_tblEmployees_tblEmployees" FromRole="tblEmployee1" ToRole="tblEmployee" />
+          <Property Type="Int32" Name="emp_state" />
+          <NavigationProperty Name="tblEmplStatu" Relationship="HRMModel.FK_tblEmployees_tblEmplStatus" FromRole="tblEmployee" ToRole="tblEmplStatu" />
+          <Property Type="Int32" Name="img_id" />
+          <NavigationProperty Name="tblImage" Relationship="HRMModel.FK_tblEmployees_tblImages" FromRole="tblEmployee" ToRole="tblImage" />
+          <NavigationProperty Name="tblLeaves" Relationship="HRMModel.FK_tblLeave_tblEmployees" FromRole="tblEmployee" ToRole="tblLeave" />
+          <NavigationProperty Name="tblLvUsages" Relationship="HRMModel.FK_tblLvUsage_tblEmployees" FromRole="tblEmployee" ToRole="tblLvUsage" />
+          <Property Type="Int32" Name="emp_sex" />
+          <Property Type="Int32" Name="emp_marital" />
+          <NavigationProperty Name="tblMarital" Relationship="HRMModel.FK_tblEmployees_tblMarital" FromRole="tblEmployee" ToRole="tblMarital" />
+          <NavigationProperty Name="tblGender" Relationship="HRMModel.FK_tblEmployees_tblGender" FromRole="tblEmployee" ToRole="tblGender" />
+          <NavigationProperty Name="tblContracts" Relationship="HRMModel.FK_tblContracts_tblEmployees" FromRole="tblEmployee" ToRole="tblContract" />
+          <Property Type="Int32" Name="emp_sal" />
+          <Property Type="String" Name="emp_mid_names" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="emp_passport_num" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="emp_passport_date" Precision="3" />
+          <Property Type="String" Name="emp_drv_num" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblAllowanceLnks" Relationship="HRMModel.FK_tblAllowanceLnk_tblEmployees" FromRole="tblEmployee" ToRole="tblAllowanceLnk" />
+          <NavigationProperty Name="tblDeductionLnks" Relationship="HRMModel.FK_tblDeductionLnk_tblEmployees" FromRole="tblEmployee" ToRole="tblDeductionLnk" />
+          <NavigationProperty Name="tblEmployeeContacts" Relationship="HRMModel.FK_EmployeeContacts_tblEmployees1" FromRole="tblEmployee" ToRole="tblEmployeeContact" />
+          <NavigationProperty Name="tblSalutation" Relationship="HRMModel.FK_tblEmployees_tblSalutation" FromRole="tblEmployee" ToRole="tblSalutation" />
+          <NavigationProperty Name="tblPayrolls" Relationship="HRMModel.FK_tblPayroll_tblEmployees" FromRole="tblEmployee" ToRole="tblPayroll" />
+          <NavigationProperty Name="tblWkshftLinks" Relationship="HRMModel.FK_tblWkshftLink_tblEmployees" FromRole="tblEmployee" ToRole="tblWkshftLink" />
+          <NavigationProperty Name="tblTrainings" Relationship="HRMModel.FK_tblTraining_tblEmployees" FromRole="tblEmployee" ToRole="tblTraining" />
+          <NavigationProperty Name="tblDocuments" Relationship="HRMModel.FK_tblDocuments_tblEmployees" FromRole="tblEmployee" ToRole="tblDocument" />
+          <NavigationProperty Name="tblDependants" Relationship="HRMModel.FK_tblDependants_tblEmployees" FromRole="tblEmployee" ToRole="tblDependant" />
+          <NavigationProperty Name="tblEducations" Relationship="HRMModel.FK_tblEducation_tblEmployees" FromRole="tblEmployee" ToRole="tblEducation" />
+          <NavigationProperty Name="tblWorks" Relationship="HRMModel.FK_tblWork_tblEmployees" FromRole="tblEmployee" ToRole="tblWork" />
+          <NavigationProperty Name="tblAchievements" Relationship="HRMModel.FK_tblAchievement_tblEmployees" FromRole="tblEmployee" ToRole="tblAchievement" />
+          <NavigationProperty Name="tblKPIs" Relationship="HRMModel.FK_tblKPI_tblEmployees" FromRole="tblEmployee" ToRole="tblKPI" />
+        </EntityType>
+        <EntityType Name="tblEmployeeStatu">
+          <Key>
+            <PropertyRef Name="empst_id" />
+          </Key>
+          <Property Name="empst_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="empst_title" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="empst_descr" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="tblEmployees" Relationship="HRMModel.FK_tblEmployees_tblEmployeeStatus" FromRole="tblEmployeeStatus" ToRole="tblEmployees" />
+        </EntityType>
+        <EntityType Name="tblJobLevel">
+          <Key>
+            <PropertyRef Name="lvl_id" />
+          </Key>
+          <Property Name="lvl_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="lvl_title" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="lvl_desc" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="tblPositions" Relationship="HRMModel.FK_tblPositions_tblJobLevels" FromRole="tblJobLevel" ToRole="tblPosition" />
+        </EntityType>
+        <EntityType Name="tblOrganisation">
+          <Key>
+            <PropertyRef Name="org_id" />
+          </Key>
+          <Property Name="org_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="org_name" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="org_logo" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="org_address" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="org_descr" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="org_phone" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tblPositionHistory">
+          <Key>
+            <PropertyRef Name="ph_id" />
+          </Key>
+          <Property Name="ph_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="emp_id" Type="Int32" />
+          <Property Name="pos_id" Type="Int32" />
+          <Property Name="dpt_id" Type="Int32" />
+          <Property Name="ph_sal" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="br_id" Type="Int32" />
+          <Property Name="ph_sDate" Type="DateTime" Precision="3" />
+          <Property Name="ph_eDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tblBranch" Relationship="HRMModel.FK_tblPositionHistory_tblBranch" FromRole="tblPositionHistory" ToRole="tblBranch" />
+          <NavigationProperty Name="tblDepartment" Relationship="HRMModel.FK_tblPositionHistory_tblDepartment" FromRole="tblPositionHistory" ToRole="tblDepartment" />
+          <NavigationProperty Name="tblEmployee" Relationship="HRMModel.FK_tblPositionHistory_tblEmployees" FromRole="tblPositionHistory" ToRole="tblEmployees" />
+          <NavigationProperty Name="tblPosition" Relationship="HRMModel.FK_tblPositionHistory_tblPositions" FromRole="tblPositionHistory" ToRole="tblPositions" />
+        </EntityType>
+        <EntityType Name="tblPosition">
+          <Key>
+            <PropertyRef Name="pos_id" />
+          </Key>
+          <Property Name="pos_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="lvl_id" Type="Int32" />
+          <Property Name="pos_title" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="pos_desc" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="tblPositionHistories" Relationship="HRMModel.FK_tblPositionHistory_tblPositions" FromRole="tblPositions" ToRole="tblPositionHistory" />
+          <NavigationProperty Name="tblJobLevel" Relationship="HRMModel.FK_tblPositions_tblJobLevels" FromRole="tblPosition" ToRole="tblJobLevel" />
+          <NavigationProperty Name="tblEmployees" Relationship="HRMModel.FK_tblEmployees_tblPositions" FromRole="tblPosition" ToRole="tblEmployee" />
+          <Property Name="dp_id" Type="Int32" />
+          <NavigationProperty Name="tblDepartment" Relationship="HRMModel.FK_tblPositions_tblDepartments" FromRole="tblPosition" ToRole="tblDepartment" />
+          <NavigationProperty Name="tblContracts" Relationship="HRMModel.FK_tblContracts_tblPositions" FromRole="tblPosition" ToRole="tblContract" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="user_name" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="user_password" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="user_role" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="emp_id" Type="Int32" />
+          <NavigationProperty Name="tblEmployee" Relationship="HRMModel.FK_tblUsers_tblEmployees" FromRole="tblUsers" ToRole="tblEmployees" />
+        </EntityType>
+        <Association Name="FK_tblEmployees_tblBranch">
+          <End Role="tblBranch" Type="HRMModel.tblBranch" Multiplicity="0..1" />
+          <End Role="tblEmployees" Type="HRMModel.tblEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBranch">
+              <PropertyRef Name="br_id" />
+            </Principal>
+            <Dependent Role="tblEmployees">
+              <PropertyRef Name="emp_branch" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPositionHistory_tblBranch">
+          <End Role="tblBranch" Type="HRMModel.tblBranch" Multiplicity="0..1" />
+          <End Role="tblPositionHistory" Type="HRMModel.tblPositionHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBranch">
+              <PropertyRef Name="br_id" />
+            </Principal>
+            <Dependent Role="tblPositionHistory">
+              <PropertyRef Name="br_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEmployees_tblDepartment">
+          <End Role="tblDepartment" Type="HRMModel.tblDepartment" Multiplicity="0..1" />
+          <End Role="tblEmployees" Type="HRMModel.tblEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDepartment">
+              <PropertyRef Name="dpt_id" />
+            </Principal>
+            <Dependent Role="tblEmployees">
+              <PropertyRef Name="emp_dpt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPositionHistory_tblDepartment">
+          <End Role="tblDepartment" Type="HRMModel.tblDepartment" Multiplicity="0..1" />
+          <End Role="tblPositionHistory" Type="HRMModel.tblPositionHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDepartment">
+              <PropertyRef Name="dpt_id" />
+            </Principal>
+            <Dependent Role="tblPositionHistory">
+              <PropertyRef Name="dpt_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEmployees_tblEmployeeStatus">
+          <End Role="tblEmployeeStatus" Type="HRMModel.tblEmployeeStatu" Multiplicity="0..1" />
+          <End Role="tblEmployees" Type="HRMModel.tblEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployeeStatus">
+              <PropertyRef Name="empst_id" />
+            </Principal>
+            <Dependent Role="tblEmployees">
+              <PropertyRef Name="emp_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPositionHistory_tblEmployees">
+          <End Role="tblEmployees" Type="HRMModel.tblEmployee" Multiplicity="0..1" />
+          <End Role="tblPositionHistory" Type="HRMModel.tblPositionHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployees">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="tblPositionHistory">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblUsers_tblEmployees">
+          <End Role="tblEmployees" Type="HRMModel.tblEmployee" Multiplicity="0..1" />
+          <End Role="tblUsers" Type="HRMModel.tblUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployees">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="tblUsers">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPositionHistory_tblPositions">
+          <End Role="tblPositions" Type="HRMModel.tblPosition" Multiplicity="0..1" />
+          <End Role="tblPositionHistory" Type="HRMModel.tblPositionHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPositions">
+              <PropertyRef Name="pos_id" />
+            </Principal>
+            <Dependent Role="tblPositionHistory">
+              <PropertyRef Name="pos_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPositions_tblJobLevels">
+          <End Type="HRMModel.tblJobLevel" Role="tblJobLevel" Multiplicity="0..1" />
+          <End Type="HRMModel.tblPosition" Role="tblPosition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblJobLevel">
+              <PropertyRef Name="lvl_id" />
+            </Principal>
+            <Dependent Role="tblPosition">
+              <PropertyRef Name="lvl_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEmployees_tblPositions">
+          <End Type="HRMModel.tblPosition" Role="tblPosition" Multiplicity="0..1" />
+          <End Type="HRMModel.tblEmployee" Role="tblEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPosition">
+              <PropertyRef Name="pos_id" />
+            </Principal>
+            <Dependent Role="tblEmployee">
+              <PropertyRef Name="emp_pos_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="principal_id" Nullable="false" />
+          <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Int32" Name="version" />
+          <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_tblEmployees_tblEmployees">
+          <End Type="HRMModel.tblEmployee" Role="tblEmployee" Multiplicity="1" />
+          <End Type="HRMModel.tblEmployee" Role="tblEmployee1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployee">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="tblEmployee1">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblEmplStatu">
+          <Key>
+            <PropertyRef Name="stat_id" />
+          </Key>
+          <Property Type="Int32" Name="stat_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="stat_name" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="stat_desc" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblEmployees" Relationship="HRMModel.FK_tblEmployees_tblEmplStatus" FromRole="tblEmplStatu" ToRole="tblEmployee" />
+        </EntityType>
+        <Association Name="FK_tblEmployees_tblEmplStatus">
+          <End Type="HRMModel.tblEmplStatu" Role="tblEmplStatu" Multiplicity="0..1" />
+          <End Type="HRMModel.tblEmployee" Role="tblEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmplStatu">
+              <PropertyRef Name="stat_id" />
+            </Principal>
+            <Dependent Role="tblEmployee">
+              <PropertyRef Name="emp_state" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblImage">
+          <Key>
+            <PropertyRef Name="img_id" />
+          </Key>
+          <Property Type="Int32" Name="img_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Binary" Name="img_data" MaxLength="Max" FixedLength="false" />
+          <Property Type="String" Name="img_desc" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="emp_id" />
+          <NavigationProperty Name="tblEmployees" Relationship="HRMModel.FK_tblEmployees_tblImages" FromRole="tblImage" ToRole="tblEmployee" />
+        </EntityType>
+        <Association Name="FK_tblEmployees_tblImages">
+          <End Type="HRMModel.tblImage" Role="tblImage" Multiplicity="0..1" />
+          <End Type="HRMModel.tblEmployee" Role="tblEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblImage">
+              <PropertyRef Name="img_id" />
+            </Principal>
+            <Dependent Role="tblEmployee">
+              <PropertyRef Name="img_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblContract">
+          <Key>
+            <PropertyRef Name="cntrct_id" />
+          </Key>
+          <Property Type="Int32" Name="cntrct_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Int32" Name="emp_id" />
+          <Property Type="String" Name="cntrct_title" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="cntrct_sdate" Precision="3" />
+          <Property Type="DateTime" Name="cntrct_edate" Precision="3" />
+          <Property Type="Int32" Name="cntrct_state" />
+          <NavigationProperty Name="tblEmployee" Relationship="HRMModel.FK_tblContracts_tblEmployees" FromRole="tblContract" ToRole="tblEmployee" />
+          <Property Type="Int32" Name="cntcrt_typ_id" />
+          <Property Type="String" Name="cntrct_desc" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="create_date" Precision="3" />
+          <NavigationProperty Name="tblContractType" Relationship="HRMModel.FK_tblContracts_tblContractTypes" FromRole="tblContract" ToRole="tblContractType" />
+          <NavigationProperty Name="tblContractState" Relationship="HRMModel.FK_tblContracts_tblContractState" FromRole="tblContract" ToRole="tblContractState" />
+          <Property Name="dpt_id" Type="Int32" />
+          <Property Name="br_id" Type="Int32" />
+          <Property Name="pos_id" Type="Int32" />
+          <NavigationProperty Name="tblBranch" Relationship="HRMModel.FK_tblContracts_tblBranches" FromRole="tblContract" ToRole="tblBranch" />
+          <NavigationProperty Name="tblDepartment" Relationship="HRMModel.FK_tblContracts_tblDepartments" FromRole="tblContract" ToRole="tblDepartment" />
+          <NavigationProperty Name="tblPosition" Relationship="HRMModel.FK_tblContracts_tblPositions" FromRole="tblContract" ToRole="tblPosition" />
+        </EntityType>
+        <EntityType Name="tblLeave">
+          <Key>
+            <PropertyRef Name="lv_id" />
+          </Key>
+          <Property Type="Int32" Name="lv_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Decimal" Name="lv_bal" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="lvtyp_id" />
+          <Property Type="Int32" Name="emp_id" />
+          <NavigationProperty Name="tblEmployee" Relationship="HRMModel.FK_tblLeave_tblEmployees" FromRole="tblLeave" ToRole="tblEmployee" />
+          <NavigationProperty Name="tblLvType" Relationship="HRMModel.FK_tblLeave_tblLvType" FromRole="tblLeave" ToRole="tblLvType" />
+          <NavigationProperty Name="tblLvUsages" Relationship="HRMModel.FK_tblLvUsage_tblLeave" FromRole="tblLeave" ToRole="tblLvUsage" />
+          <Property Type="DateTime" Name="lv_period" Precision="3" />
+        </EntityType>
+        <EntityType Name="tblLvType">
+          <Key>
+            <PropertyRef Name="lvtyp_id" />
+          </Key>
+          <Property Type="Int32" Name="lvtyp_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="lvtyp_title" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="lvtyp_num" Precision="18" Scale="2" />
+          <NavigationProperty Name="tblLeaves" Relationship="HRMModel.FK_tblLeave_tblLvType" FromRole="tblLvType" ToRole="tblLeave" />
+        </EntityType>
+        <EntityType Name="tblLvUsage">
+          <Key>
+            <PropertyRef Name="lv_u_id" />
+          </Key>
+          <Property Type="Int32" Name="lv_u_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Int32" Name="emp_id" />
+          <Property Type="Int32" Name="lv_id" />
+          <Property Type="DateTime" Name="lv_sdate" Precision="3" />
+          <Property Type="DateTime" Name="lv_edate" Precision="3" />
+          <Property Type="Decimal" Name="lv_days" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="lv_bal" Precision="18" Scale="2" />
+          <Property Type="String" Name="lv_state" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblEmployee" Relationship="HRMModel.FK_tblLvUsage_tblEmployees" FromRole="tblLvUsage" ToRole="tblEmployee" />
+          <NavigationProperty Name="tblLeave" Relationship="HRMModel.FK_tblLvUsage_tblLeave" FromRole="tblLvUsage" ToRole="tblLeave" />
+        </EntityType>
+        <Association Name="FK_tblLeave_tblEmployees">
+          <End Type="HRMModel.tblEmployee" Role="tblEmployee" Multiplicity="0..1" />
+          <End Type="HRMModel.tblLeave" Role="tblLeave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployee">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="tblLeave">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblLvUsage_tblEmployees">
+          <End Type="HRMModel.tblEmployee" Role="tblEmployee" Multiplicity="0..1" />
+          <End Type="HRMModel.tblLvUsage" Role="tblLvUsage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployee">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="tblLvUsage">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblLeave_tblLvType">
+          <End Type="HRMModel.tblLvType" Role="tblLvType" Multiplicity="0..1" />
+          <End Type="HRMModel.tblLeave" Role="tblLeave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblLvType">
+              <PropertyRef Name="lvtyp_id" />
+            </Principal>
+            <Dependent Role="tblLeave">
+              <PropertyRef Name="lvtyp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblLvUsage_tblLeave">
+          <End Type="HRMModel.tblLeave" Role="tblLeave" Multiplicity="0..1" />
+          <End Type="HRMModel.tblLvUsage" Role="tblLvUsage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblLeave">
+              <PropertyRef Name="lv_id" />
+            </Principal>
+            <Dependent Role="tblLvUsage">
+              <PropertyRef Name="lv_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblMarital">
+          <Key>
+            <PropertyRef Name="marital_id" />
+          </Key>
+          <Property Type="Int32" Name="marital_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="marital_status" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblEmployees" Relationship="HRMModel.FK_tblEmployees_tblMarital" FromRole="tblMarital" ToRole="tblEmployee" />
+        </EntityType>
+        <Association Name="FK_tblEmployees_tblMarital">
+          <End Type="HRMModel.tblMarital" Role="tblMarital" Multiplicity="0..1" />
+          <End Type="HRMModel.tblEmployee" Role="tblEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMarital">
+              <PropertyRef Name="marital_id" />
+            </Principal>
+            <Dependent Role="tblEmployee">
+              <PropertyRef Name="emp_marital" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblGender">
+          <Key>
+            <PropertyRef Name="emp_sx_id" />
+          </Key>
+          <Property Type="Int32" Name="emp_sx_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="emp_sex" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblEmployees" Relationship="HRMModel.FK_tblEmployees_tblGender" FromRole="tblGender" ToRole="tblEmployee" />
+        </EntityType>
+        <Association Name="FK_tblEmployees_tblGender">
+          <End Type="HRMModel.tblGender" Role="tblGender" Multiplicity="0..1" />
+          <End Type="HRMModel.tblEmployee" Role="tblEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblGender">
+              <PropertyRef Name="emp_sx_id" />
+            </Principal>
+            <Dependent Role="tblEmployee">
+              <PropertyRef Name="emp_sex" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblContracts_tblEmployees">
+          <End Type="HRMModel.tblEmployee" Role="tblEmployee" Multiplicity="0..1" />
+          <End Type="HRMModel.tblContract" Role="tblContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployee">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="tblContract">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblAllowanceLnk">
+          <Key>
+            <PropertyRef Name="allow_lnk_id" />
+          </Key>
+          <Property Type="Int32" Name="allow_lnk_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Int32" Name="allowance_id" />
+          <Property Type="Decimal" Name="allowance_amnt" Precision="19" Scale="4" />
+          <Property Type="DateTime" Name="allowance_sdate" Precision="3" />
+          <Property Type="DateTime" Name="allowance_edate" Precision="3" />
+          <Property Type="Boolean" Name="allowance_perm" />
+          <Property Type="DateTime" Name="allowance_month" Precision="3" />
+          <Property Type="String" Name="create_date" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Type="Int32" Name="emp_id" />
+          <Property Type="String" Name="allowance_notes" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblAllowance" Relationship="HRMModel.FK_tblAllowanceLnk_tblAllowances" FromRole="tblAllowanceLnk" ToRole="tblAllowance" />
+          <NavigationProperty Name="tblEmployee" Relationship="HRMModel.FK_tblAllowanceLnk_tblEmployees" FromRole="tblAllowanceLnk" ToRole="tblEmployee" />
+        </EntityType>
+        <EntityType Name="tblAllowance">
+          <Key>
+            <PropertyRef Name="allowance_id" />
+          </Key>
+          <Property Type="Int32" Name="allowance_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="allowance_name" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="allowance_value" Precision="19" Scale="4" />
+          <Property Type="String" Name="allowance_perc" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="allowance_desc" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblAllowanceLnks" Relationship="HRMModel.FK_tblAllowanceLnk_tblAllowances" FromRole="tblAllowance" ToRole="tblAllowanceLnk" />
+        </EntityType>
+        <EntityType Name="tblBank">
+          <Key>
+            <PropertyRef Name="bnk_id" />
+          </Key>
+          <Property Type="Int32" Name="bnk_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="bnk_name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="bnk_code" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblPayrolls" Relationship="HRMModel.FK_tblPayroll_tblBanks" FromRole="tblBank" ToRole="tblPayroll" />
+        </EntityType>
+        <EntityType Name="tblContractType">
+          <Key>
+            <PropertyRef Name="cntcrt_typ_id" />
+          </Key>
+          <Property Type="Int32" Name="cntcrt_typ_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="cntrct_typ" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="cntrct_desc" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblContracts" Relationship="HRMModel.FK_tblContracts_tblContractTypes" FromRole="tblContractType" ToRole="tblContract" />
+        </EntityType>
+        <EntityType Name="tblDeductionLnk">
+          <Key>
+            <PropertyRef Name="ded_lnk_id" />
+          </Key>
+          <Property Type="Int32" Name="ded_lnk_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Int32" Name="deduction_id" />
+          <Property Type="Decimal" Name="deduction_amnt" Precision="19" Scale="4" />
+          <Property Type="DateTime" Name="deduction_sdate" Precision="3" />
+          <Property Type="DateTime" Name="deduction_edate" Precision="3" />
+          <Property Type="Boolean" Name="deduction_permanent" />
+          <Property Type="DateTime" Name="deduction_mnth" Precision="3" />
+          <Property Type="String" Name="create_date" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="emp_id" />
+          <Property Type="String" Name="deduction_notes" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblDeduction" Relationship="HRMModel.FK_tblDeductionLnk_tblDeductions" FromRole="tblDeductionLnk" ToRole="tblDeduction" />
+          <NavigationProperty Name="tblEmployee" Relationship="HRMModel.FK_tblDeductionLnk_tblEmployees" FromRole="tblDeductionLnk" ToRole="tblEmployee" />
+        </EntityType>
+        <EntityType Name="tblDeduction">
+          <Key>
+            <PropertyRef Name="deduction_id" />
+          </Key>
+          <Property Type="Int32" Name="deduction_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="deduction_name" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="deduction_value" Precision="19" Scale="4" />
+          <Property Type="String" Name="deduction_perc" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="deduction_desc" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblDeductionLnks" Relationship="HRMModel.FK_tblDeductionLnk_tblDeductions" FromRole="tblDeduction" ToRole="tblDeductionLnk" />
+        </EntityType>
+        <EntityType Name="tblEmployeeContact">
+          <Key>
+            <PropertyRef Name="cnt_id" />
+          </Key>
+          <Property Type="Int32" Name="cnt_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Int32" Name="emp_id" />
+          <Property Type="String" Name="emp_strt" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="emp_nghbhd" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="emp_city" />
+          <Property Type="Int32" Name="emp_province" />
+          <Property Type="String" Name="emp_phone" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="emp_mobile" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="emp_kin" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="emp_kin_add" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="emp_kin_ph" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblEmployee" Relationship="HRMModel.FK_EmployeeContacts_tblEmployees1" FromRole="tblEmployeeContact" ToRole="tblEmployee" />
+          <Property Type="Int32" Name="rel_id" />
+          <NavigationProperty Name="tblRelationship" Relationship="HRMModel.FK_tblEmployeeContacts_tblRelationships" FromRole="tblEmployeeContact" ToRole="tblRelationship" />
+          <NavigationProperty Name="tblCity" Relationship="HRMModel.FK_tblEmployeeContacts_tblCity" FromRole="tblEmployeeContact" ToRole="tblCity" />
+          <NavigationProperty Name="tblProvince" Relationship="HRMModel.FK_tblEmployeeContacts_tblProvinces" FromRole="tblEmployeeContact" ToRole="tblProvince" />
+        </EntityType>
+        <EntityType Name="tblgrade">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="Grade" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblPayMethod">
+          <Key>
+            <PropertyRef Name="pay_method_id" />
+          </Key>
+          <Property Type="Int32" Name="pay_method_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="pay_title" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblPayrolls" Relationship="HRMModel.FK_tblPayroll_tblPayMethod" FromRole="tblPayMethod" ToRole="tblPayroll" />
+        </EntityType>
+        <EntityType Name="tblPayroll">
+          <Key>
+            <PropertyRef Name="pay_id" />
+          </Key>
+          <Property Type="Int32" Name="pay_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Int32" Name="emp_id" />
+          <Property Type="Decimal" Name="emp_Salary" Precision="19" Scale="4" />
+          <Property Type="Int32" Name="emp_bnk" />
+          <Property Type="Int32" Name="emp_method" />
+          <Property Type="String" Name="emp_acc_num" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="pay_start_date" Precision="3" />
+          <Property Type="DateTime" Name="pay_end_date" Precision="3" />
+          <Property Type="String" Name="pay_status" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="create_date" Precision="3" />
+          <NavigationProperty Name="tblBank" Relationship="HRMModel.FK_tblPayroll_tblBanks" FromRole="tblPayroll" ToRole="tblBank" />
+          <NavigationProperty Name="tblEmployee" Relationship="HRMModel.FK_tblPayroll_tblEmployees" FromRole="tblPayroll" ToRole="tblEmployee" />
+          <NavigationProperty Name="tblPayMethod" Relationship="HRMModel.FK_tblPayroll_tblPayMethod" FromRole="tblPayroll" ToRole="tblPayMethod" />
+        </EntityType>
+        <EntityType Name="tblSalutation">
+          <Key>
+            <PropertyRef Name="sal_id" />
+          </Key>
+          <Property Type="Int32" Name="sal_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="sal_title" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblEmployees" Relationship="HRMModel.FK_tblEmployees_tblSalutation" FromRole="tblSalutation" ToRole="tblEmployee" />
+        </EntityType>
+        <EntityType Name="tblWkshftLink">
+          <Key>
+            <PropertyRef Name="wk_lnk_id" />
+          </Key>
+          <Property Type="Int32" Name="wk_lnk_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Int32" Name="wkshft_id" />
+          <Property Type="Int32" Name="emp_id" />
+          <Property Type="DateTime" Name="wk_lnk_stDate" Precision="3" />
+          <Property Type="DateTime" Name="wk_lnk_eDate" Precision="3" />
+          <Property Type="String" Name="wk_lnk_status" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="create_date" Precision="3" />
+          <NavigationProperty Name="tblEmployee" Relationship="HRMModel.FK_tblWkshftLink_tblEmployees" FromRole="tblWkshftLink" ToRole="tblEmployee" />
+          <NavigationProperty Name="tblWorkshift" Relationship="HRMModel.FK_tblWkshftLink_tblWorkshifts" FromRole="tblWkshftLink" ToRole="tblWorkshift" />
+        </EntityType>
+        <EntityType Name="tblWorkshift">
+          <Key>
+            <PropertyRef Name="wkshft_id" />
+          </Key>
+          <Property Type="Int32" Name="wkshft_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="wkshft_title" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="wkshft_hrs" />
+          <Property Type="Time" Name="wkshft_from" Precision="7" />
+          <Property Type="Time" Name="wkshft_to" Precision="7" />
+          <Property Type="Time" Name="wkshft_lunch_from" Precision="7" />
+          <Property Type="Time" Name="wkshft_lunch_to" Precision="7" />
+          <Property Type="Time" Name="wkshft_brk_from" Precision="7" />
+          <Property Type="Time" Name="wkshft_brk_to" Precision="7" />
+          <Property Type="Time" Name="wkshft_xtrabrk_from" Precision="7" />
+          <Property Type="Time" Name="wkshft_xtrabrk_to" Precision="7" />
+          <Property Type="String" Name="wkshft_notes" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="inputter" Nullable="false" />
+          <Property Type="DateTime" Name="create_date" Nullable="false" Precision="3" />
+          <NavigationProperty Name="tblWkshftLinks" Relationship="HRMModel.FK_tblWkshftLink_tblWorkshifts" FromRole="tblWorkshift" ToRole="tblWkshftLink" />
+        </EntityType>
+        <Association Name="FK_tblAllowanceLnk_tblAllowances">
+          <End Type="HRMModel.tblAllowance" Role="tblAllowance" Multiplicity="0..1" />
+          <End Type="HRMModel.tblAllowanceLnk" Role="tblAllowanceLnk" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAllowance">
+              <PropertyRef Name="allowance_id" />
+            </Principal>
+            <Dependent Role="tblAllowanceLnk">
+              <PropertyRef Name="allowance_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblAllowanceLnk_tblEmployees">
+          <End Type="HRMModel.tblEmployee" Role="tblEmployee" Multiplicity="0..1" />
+          <End Type="HRMModel.tblAllowanceLnk" Role="tblAllowanceLnk" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployee">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="tblAllowanceLnk">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPayroll_tblBanks">
+          <End Type="HRMModel.tblBank" Role="tblBank" Multiplicity="0..1" />
+          <End Type="HRMModel.tblPayroll" Role="tblPayroll" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBank">
+              <PropertyRef Name="bnk_id" />
+            </Principal>
+            <Dependent Role="tblPayroll">
+              <PropertyRef Name="emp_bnk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblContracts_tblContractTypes">
+          <End Type="HRMModel.tblContractType" Role="tblContractType" Multiplicity="0..1" />
+          <End Type="HRMModel.tblContract" Role="tblContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblContractType">
+              <PropertyRef Name="cntcrt_typ_id" />
+            </Principal>
+            <Dependent Role="tblContract">
+              <PropertyRef Name="cntcrt_typ_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblDeductionLnk_tblDeductions">
+          <End Type="HRMModel.tblDeduction" Role="tblDeduction" Multiplicity="0..1" />
+          <End Type="HRMModel.tblDeductionLnk" Role="tblDeductionLnk" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDeduction">
+              <PropertyRef Name="deduction_id" />
+            </Principal>
+            <Dependent Role="tblDeductionLnk">
+              <PropertyRef Name="deduction_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblDeductionLnk_tblEmployees">
+          <End Type="HRMModel.tblEmployee" Role="tblEmployee" Multiplicity="0..1" />
+          <End Type="HRMModel.tblDeductionLnk" Role="tblDeductionLnk" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployee">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="tblDeductionLnk">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeContacts_tblEmployees1">
+          <End Type="HRMModel.tblEmployee" Role="tblEmployee" Multiplicity="0..1" />
+          <End Type="HRMModel.tblEmployeeContact" Role="tblEmployeeContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployee">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="tblEmployeeContact">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEmployees_tblSalutation">
+          <End Type="HRMModel.tblSalutation" Role="tblSalutation" Multiplicity="0..1" />
+          <End Type="HRMModel.tblEmployee" Role="tblEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSalutation">
+              <PropertyRef Name="sal_id" />
+            </Principal>
+            <Dependent Role="tblEmployee">
+              <PropertyRef Name="emp_sal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPayroll_tblEmployees">
+          <End Type="HRMModel.tblEmployee" Role="tblEmployee" Multiplicity="0..1" />
+          <End Type="HRMModel.tblPayroll" Role="tblPayroll" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployee">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="tblPayroll">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblWkshftLink_tblEmployees">
+          <End Type="HRMModel.tblEmployee" Role="tblEmployee" Multiplicity="0..1" />
+          <End Type="HRMModel.tblWkshftLink" Role="tblWkshftLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployee">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="tblWkshftLink">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPayroll_tblPayMethod">
+          <End Type="HRMModel.tblPayMethod" Role="tblPayMethod" Multiplicity="0..1" />
+          <End Type="HRMModel.tblPayroll" Role="tblPayroll" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPayMethod">
+              <PropertyRef Name="pay_method_id" />
+            </Principal>
+            <Dependent Role="tblPayroll">
+              <PropertyRef Name="emp_method" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblWkshftLink_tblWorkshifts">
+          <End Type="HRMModel.tblWorkshift" Role="tblWorkshift" Multiplicity="0..1" />
+          <End Type="HRMModel.tblWkshftLink" Role="tblWkshftLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblWorkshift">
+              <PropertyRef Name="wkshft_id" />
+            </Principal>
+            <Dependent Role="tblWkshftLink">
+              <PropertyRef Name="wkshft_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblRelationship">
+          <Key>
+            <PropertyRef Name="rel_id" />
+          </Key>
+          <Property Type="Int32" Name="rel_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="rel_title" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblEmployeeContacts" Relationship="HRMModel.FK_tblEmployeeContacts_tblRelationships" FromRole="tblRelationship" ToRole="tblEmployeeContact" />
+        </EntityType>
+        <Association Name="FK_tblEmployeeContacts_tblRelationships">
+          <End Type="HRMModel.tblRelationship" Role="tblRelationship" Multiplicity="0..1" />
+          <End Type="HRMModel.tblEmployeeContact" Role="tblEmployeeContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRelationship">
+              <PropertyRef Name="rel_id" />
+            </Principal>
+            <Dependent Role="tblEmployeeContact">
+              <PropertyRef Name="rel_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblCity">
+          <Key>
+            <PropertyRef Name="cty_id" />
+          </Key>
+          <Property Type="Int32" Name="cty_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="cty_name" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblEmployeeContacts" Relationship="HRMModel.FK_tblEmployeeContacts_tblCity" FromRole="tblCity" ToRole="tblEmployeeContact" />
+          <Property Type="Int32" Name="prov_id" />
+          <NavigationProperty Name="tblProvince" Relationship="HRMModel.FK_tblCity_tblProvince" FromRole="tblCity" ToRole="tblProvince" />
+        </EntityType>
+        <Association Name="FK_tblEmployeeContacts_tblCity">
+          <End Type="HRMModel.tblCity" Role="tblCity" Multiplicity="0..1" />
+          <End Type="HRMModel.tblEmployeeContact" Role="tblEmployeeContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCity">
+              <PropertyRef Name="cty_id" />
+            </Principal>
+            <Dependent Role="tblEmployeeContact">
+              <PropertyRef Name="emp_city" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblProvince">
+          <Key>
+            <PropertyRef Name="prov_id" />
+          </Key>
+          <Property Type="Int32" Name="prov_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="prov_name" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblCities" Relationship="HRMModel.FK_tblCity_tblProvince" FromRole="tblProvince" ToRole="tblCity" />
+          <NavigationProperty Name="tblEmployeeContacts" Relationship="HRMModel.FK_tblEmployeeContacts_tblProvinces" FromRole="tblProvince" ToRole="tblEmployeeContact" />
+        </EntityType>
+        <Association Name="FK_tblCity_tblProvince">
+          <End Type="HRMModel.tblProvince" Role="tblProvince" Multiplicity="0..1" />
+          <End Type="HRMModel.tblCity" Role="tblCity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProvince">
+              <PropertyRef Name="prov_id" />
+            </Principal>
+            <Dependent Role="tblCity">
+              <PropertyRef Name="prov_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPositions_tblDepartments">
+          <End Type="HRMModel.tblDepartment" Role="tblDepartment" Multiplicity="0..1" />
+          <End Type="HRMModel.tblPosition" Role="tblPosition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDepartment">
+              <PropertyRef Name="dpt_id" />
+            </Principal>
+            <Dependent Role="tblPosition">
+              <PropertyRef Name="dp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblCours">
+          <Key>
+            <PropertyRef Name="course_id" />
+          </Key>
+          <Property Name="course_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="course_nm" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="course_dur" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="course_descr" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="type_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblCourseType" Relationship="HRMModel.FK_tblCourses_tblCourseType" FromRole="tblCours" ToRole="tblCourseType" />
+          <NavigationProperty Name="tblTrainings" Relationship="HRMModel.FK_tblTraining_tblCourses" FromRole="tblCours" ToRole="tblTraining" />
+        </EntityType>
+        <EntityType Name="tblCourseType">
+          <Key>
+            <PropertyRef Name="type_id" />
+          </Key>
+          <Property Name="type_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="typ_descr" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblCourses" Relationship="HRMModel.FK_tblCourses_tblCourseType" FromRole="tblCourseType" ToRole="tblCours" />
+        </EntityType>
+        <EntityType Name="tblTraining">
+          <Key>
+            <PropertyRef Name="tr_id" />
+          </Key>
+          <Property Name="tr_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="emp_id" Type="Int32" Nullable="false" />
+          <Property Name="course_id" Type="Int32" Nullable="false" />
+          <Property Name="tr_sdate" Type="DateTime" Precision="0" />
+          <Property Name="tr_edate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="tblCours" Relationship="HRMModel.FK_tblTraining_tblCourses" FromRole="tblTraining" ToRole="tblCours" />
+          <NavigationProperty Name="tblEmployee" Relationship="HRMModel.FK_tblTraining_tblEmployees" FromRole="tblTraining" ToRole="tblEmployee" />
+          <Property Name="tr_status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tr_score" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tr_comments" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_tblCourses_tblCourseType">
+          <End Type="HRMModel.tblCourseType" Role="tblCourseType" Multiplicity="1" />
+          <End Type="HRMModel.tblCours" Role="tblCours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCourseType">
+              <PropertyRef Name="type_id" />
+            </Principal>
+            <Dependent Role="tblCours">
+              <PropertyRef Name="type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTraining_tblCourses">
+          <End Type="HRMModel.tblCours" Role="tblCours" Multiplicity="1" />
+          <End Type="HRMModel.tblTraining" Role="tblTraining" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCours">
+              <PropertyRef Name="course_id" />
+            </Principal>
+            <Dependent Role="tblTraining">
+              <PropertyRef Name="course_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTraining_tblEmployees">
+          <End Type="HRMModel.tblEmployee" Role="tblEmployee" Multiplicity="1" />
+          <End Type="HRMModel.tblTraining" Role="tblTraining" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployee">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="tblTraining">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblDocument">
+          <Key>
+            <PropertyRef Name="doc_id" />
+          </Key>
+          <Property Name="doc_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="doc_name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="doc_path" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="emp_id" Type="Int32" />
+          <Property Name="doc_date" Type="DateTime" Precision="3" />
+          <Property Name="doc_type" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblEmployee" Relationship="HRMModel.FK_tblDocuments_tblEmployees" FromRole="tblDocument" ToRole="tblEmployee" />
+        </EntityType>
+        <Association Name="FK_tblDocuments_tblEmployees">
+          <End Type="HRMModel.tblEmployee" Role="tblEmployee" Multiplicity="0..1" />
+          <End Type="HRMModel.tblDocument" Role="tblDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployee">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="tblDocument">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEmployeeContacts_tblProvinces">
+          <End Type="HRMModel.tblProvince" Role="tblProvince" Multiplicity="0..1" />
+          <End Type="HRMModel.tblEmployeeContact" Role="tblEmployeeContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProvince">
+              <PropertyRef Name="prov_id" />
+            </Principal>
+            <Dependent Role="tblEmployeeContact">
+              <PropertyRef Name="emp_province" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblContractState">
+          <Key>
+            <PropertyRef Name="cntrct_st_id" />
+          </Key>
+          <Property Name="cntrct_st_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cntrct_state" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cntrct_st_desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblContracts" Relationship="HRMModel.FK_tblContracts_tblContractState" FromRole="tblContractState" ToRole="tblContract" />
+        </EntityType>
+        <Association Name="FK_tblContracts_tblContractState">
+          <End Type="HRMModel.tblContractState" Role="tblContractState" Multiplicity="0..1" />
+          <End Type="HRMModel.tblContract" Role="tblContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblContractState">
+              <PropertyRef Name="cntrct_st_id" />
+            </Principal>
+            <Dependent Role="tblContract">
+              <PropertyRef Name="cntrct_state" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblContracts_tblBranches">
+          <End Type="HRMModel.tblBranch" Role="tblBranch" Multiplicity="0..1" />
+          <End Type="HRMModel.tblContract" Role="tblContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBranch">
+              <PropertyRef Name="br_id" />
+            </Principal>
+            <Dependent Role="tblContract">
+              <PropertyRef Name="br_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblContracts_tblDepartments">
+          <End Type="HRMModel.tblDepartment" Role="tblDepartment" Multiplicity="0..1" />
+          <End Type="HRMModel.tblContract" Role="tblContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDepartment">
+              <PropertyRef Name="dpt_id" />
+            </Principal>
+            <Dependent Role="tblContract">
+              <PropertyRef Name="dpt_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblContracts_tblPositions">
+          <End Type="HRMModel.tblPosition" Role="tblPosition" Multiplicity="0..1" />
+          <End Type="HRMModel.tblContract" Role="tblContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPosition">
+              <PropertyRef Name="pos_id" />
+            </Principal>
+            <Dependent Role="tblContract">
+              <PropertyRef Name="pos_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblDependant">
+          <Key>
+            <PropertyRef Name="dep_id" />
+          </Key>
+          <Property Name="dep_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="emp_id" Type="Int32" />
+          <Property Name="dep_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dep_dob" Type="DateTime" Precision="0" />
+          <Property Name="dep_rltn" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblEmployee" Relationship="HRMModel.FK_tblDependants_tblEmployees" FromRole="tblDependant" ToRole="tblEmployee" />
+        </EntityType>
+        <EntityType Name="tblEducation">
+          <Key>
+            <PropertyRef Name="edu_id" />
+          </Key>
+          <Property Name="edu_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="emp_id" Type="Int32" />
+          <Property Name="edu_lvl_id" Type="Int32" />
+          <Property Name="edu_name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="edu_qlfcn" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="edu_score" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="edu_comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblEduLevel" Relationship="HRMModel.FK_tblEducation_tblEduLevel" FromRole="tblEducation" ToRole="tblEduLevel" />
+          <NavigationProperty Name="tblEmployee" Relationship="HRMModel.FK_tblEducation_tblEmployees" FromRole="tblEducation" ToRole="tblEmployee" />
+          <Property Name="edu_sdate" Type="DateTime" Precision="0" />
+          <Property Name="edu_edate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="tblEduLevel">
+          <Key>
+            <PropertyRef Name="edu_lv_id" />
+          </Key>
+          <Property Name="edu_lv_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="edu_lv_name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblEducations" Relationship="HRMModel.FK_tblEducation_tblEduLevel" FromRole="tblEduLevel" ToRole="tblEducation" />
+        </EntityType>
+        <EntityType Name="tblWork">
+          <Key>
+            <PropertyRef Name="wrk_id" />
+          </Key>
+          <Property Name="wrk_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="emp_id" Type="Int32" />
+          <Property Name="wk_company" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="wk_position" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="wk_sdate" Type="DateTime" Precision="0" />
+          <Property Name="wk_edate" Type="DateTime" Precision="0" />
+          <Property Name="wk_desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="wk_comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblEmployee" Relationship="HRMModel.FK_tblWork_tblEmployees" FromRole="tblWork" ToRole="tblEmployee" />
+        </EntityType>
+        <Association Name="FK_tblDependants_tblEmployees">
+          <End Type="HRMModel.tblEmployee" Role="tblEmployee" Multiplicity="0..1" />
+          <End Type="HRMModel.tblDependant" Role="tblDependant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployee">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="tblDependant">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEducation_tblEduLevel">
+          <End Type="HRMModel.tblEduLevel" Role="tblEduLevel" Multiplicity="0..1" />
+          <End Type="HRMModel.tblEducation" Role="tblEducation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEduLevel">
+              <PropertyRef Name="edu_lv_id" />
+            </Principal>
+            <Dependent Role="tblEducation">
+              <PropertyRef Name="edu_lvl_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEducation_tblEmployees">
+          <End Type="HRMModel.tblEmployee" Role="tblEmployee" Multiplicity="0..1" />
+          <End Type="HRMModel.tblEducation" Role="tblEducation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployee">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="tblEducation">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblWork_tblEmployees">
+          <End Type="HRMModel.tblEmployee" Role="tblEmployee" Multiplicity="0..1" />
+          <End Type="HRMModel.tblWork" Role="tblWork" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployee">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="tblWork">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblAchievement">
+          <Key>
+            <PropertyRef Name="achvt_id" />
+          </Key>
+          <Property Name="achvt_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="emp_id" Type="Int32" />
+          <Property Name="achvt_name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="achvt_date" Type="DateTime" Precision="0" />
+          <Property Name="achvt_comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblEmployee" Relationship="HRMModel.FK_tblAchievement_tblEmployees" FromRole="tblAchievement" ToRole="tblEmployee" />
+        </EntityType>
+        <EntityType Name="tblKPI">
+          <Key>
+            <PropertyRef Name="kpi_id" />
+          </Key>
+          <Property Name="kpi_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="emp_id" Type="Int32" />
+          <Property Name="kpi_score" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="kpi_prd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="kpi_date" Type="DateTime" Precision="0" />
+          <Property Name="kpi_comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblEmployee" Relationship="HRMModel.FK_tblKPI_tblEmployees" FromRole="tblKPI" ToRole="tblEmployee" />
+          <Property Name="kpi_title" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_tblAchievement_tblEmployees">
+          <End Type="HRMModel.tblEmployee" Role="tblEmployee" Multiplicity="0..1" />
+          <End Type="HRMModel.tblAchievement" Role="tblAchievement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployee">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="tblAchievement">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblKPI_tblEmployees">
+          <End Type="HRMModel.tblEmployee" Role="tblEmployee" Multiplicity="0..1" />
+          <End Type="HRMModel.tblKPI" Role="tblKPI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployee">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="tblKPI">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="HRMModelStoreContainer" CdmEntityContainer="HRMEntities">
+    <EntitySetMapping Name="tblBranches">
+      <EntityTypeMapping TypeName="IsTypeOf(HRMModel.tblBranch)">
+        <MappingFragment StoreEntitySet="tblBranches">
+          <ScalarProperty Name="br_id" ColumnName="br_id" />
+          <ScalarProperty Name="br_name" ColumnName="br_name" />
+          <ScalarProperty Name="br_address" ColumnName="br_address" />
+          <ScalarProperty Name="br_contact" ColumnName="br_contact" />
+          <ScalarProperty Name="br_descr" ColumnName="br_descr" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblDepartments">
+      <EntityTypeMapping TypeName="IsTypeOf(HRMModel.tblDepartment)">
+        <MappingFragment StoreEntitySet="tblDepartments">
+          <ScalarProperty Name="dpt_id" ColumnName="dpt_id" />
+          <ScalarProperty Name="dpt_name" ColumnName="dpt_name" />
+          <ScalarProperty Name="dpt_desc" ColumnName="dpt_desc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblEmployees">
+      <EntityTypeMapping TypeName="IsTypeOf(HRMModel.tblEmployee)">
+        <MappingFragment StoreEntitySet="tblEmployees">
+          <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+          <ScalarProperty Name="emp_name" ColumnName="emp_name" />
+          <ScalarProperty Name="emp_lname" ColumnName="emp_lname" />
+          <ScalarProperty Name="emp_email" ColumnName="emp_email" />
+          <ScalarProperty Name="emp_branch" ColumnName="emp_branch" />
+          <ScalarProperty Name="emp_dpt" ColumnName="emp_dpt" />
+          <ScalarProperty Name="emp_status" ColumnName="emp_status" />
+          <ScalarProperty Name="emp_bDate" ColumnName="emp_bDate" />
+          <ScalarProperty Name="emp_jDate" ColumnName="emp_jDate" />
+          <ScalarProperty Name="emp_cDate" ColumnName="emp_cDate" />
+          <ScalarProperty Name="emp_pos_id" ColumnName="emp_pos_id" />
+          <ScalarProperty Name="emp_id_num" ColumnName="emp_id_num" />
+          <ScalarProperty Name="emp_ec_num" ColumnName="emp_ec_num" />
+          <ScalarProperty Name="emp_nation" ColumnName="emp_nation" />
+          <ScalarProperty Name="emp_state" ColumnName="emp_state" />
+          <ScalarProperty Name="img_id" ColumnName="img_id" />
+          <ScalarProperty Name="emp_sex" ColumnName="emp_sex" />
+          <ScalarProperty Name="emp_marital" ColumnName="emp_marital" />
+          <ScalarProperty Name="emp_sal" ColumnName="emp_sal" />
+          <ScalarProperty Name="emp_mid_names" ColumnName="emp_mid_names" />
+          <ScalarProperty Name="emp_passport_num" ColumnName="emp_passport_num" />
+          <ScalarProperty Name="emp_passport_date" ColumnName="emp_passport_date" />
+          <ScalarProperty Name="emp_drv_num" ColumnName="emp_drv_num" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblEmployeeStatus">
+      <EntityTypeMapping TypeName="IsTypeOf(HRMModel.tblEmployeeStatu)">
+        <MappingFragment StoreEntitySet="tblEmployeeStatus">
+          <ScalarProperty Name="empst_id" ColumnName="empst_id" />
+          <ScalarProperty Name="empst_title" ColumnName="empst_title" />
+          <ScalarProperty Name="empst_descr" ColumnName="empst_descr" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblJobLevels">
+      <EntityTypeMapping TypeName="IsTypeOf(HRMModel.tblJobLevel)">
+        <MappingFragment StoreEntitySet="tblJobLevels">
+          <ScalarProperty Name="lvl_id" ColumnName="lvl_id" />
+          <ScalarProperty Name="lvl_title" ColumnName="lvl_title" />
+          <ScalarProperty Name="lvl_desc" ColumnName="lvl_desc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblOrganisations">
+      <EntityTypeMapping TypeName="IsTypeOf(HRMModel.tblOrganisation)">
+        <MappingFragment StoreEntitySet="tblOrganisations">
+          <ScalarProperty Name="org_id" ColumnName="org_id" />
+          <ScalarProperty Name="org_name" ColumnName="org_name" />
+          <ScalarProperty Name="org_logo" ColumnName="org_logo" />
+          <ScalarProperty Name="org_address" ColumnName="org_address" />
+          <ScalarProperty Name="org_descr" ColumnName="org_descr" />
+          <ScalarProperty Name="org_phone" ColumnName="org_phone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblPositionHistories">
+      <EntityTypeMapping TypeName="IsTypeOf(HRMModel.tblPositionHistory)">
+        <MappingFragment StoreEntitySet="tblPositionHistories">
+          <ScalarProperty Name="ph_id" ColumnName="ph_id" />
+          <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+          <ScalarProperty Name="pos_id" ColumnName="pos_id" />
+          <ScalarProperty Name="dpt_id" ColumnName="dpt_id" />
+          <ScalarProperty Name="ph_sal" ColumnName="ph_sal" />
+          <ScalarProperty Name="br_id" ColumnName="br_id" />
+          <ScalarProperty Name="ph_sDate" ColumnName="ph_sDate" />
+          <ScalarProperty Name="ph_eDate" ColumnName="ph_eDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblPositions">
+      <EntityTypeMapping TypeName="IsTypeOf(HRMModel.tblPosition)">
+        <MappingFragment StoreEntitySet="tblPositions">
+          <ScalarProperty Name="dp_id" ColumnName="dp_id" />
+                <ScalarProperty Name="pos_id" ColumnName="pos_id" />
+          <ScalarProperty Name="lvl_id" ColumnName="lvl_id" />
+          <ScalarProperty Name="pos_title" ColumnName="pos_title" />
+          <ScalarProperty Name="pos_desc" ColumnName="pos_desc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUsers">
+      <EntityTypeMapping TypeName="IsTypeOf(HRMModel.tblUser)">
+        <MappingFragment StoreEntitySet="tblUsers">
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="user_name" ColumnName="user_name" />
+          <ScalarProperty Name="user_password" ColumnName="user_password" />
+          <ScalarProperty Name="user_role" ColumnName="user_role" />
+          <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="IsTypeOf(HRMModel.sysdiagram)">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblEmplStatus">
+      <EntityTypeMapping TypeName="IsTypeOf(HRMModel.tblEmplStatu)">
+        <MappingFragment StoreEntitySet="tblEmplStatus">
+          <ScalarProperty Name="stat_id" ColumnName="stat_id" />
+          <ScalarProperty Name="stat_name" ColumnName="stat_name" />
+          <ScalarProperty Name="stat_desc" ColumnName="stat_desc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblImages">
+      <EntityTypeMapping TypeName="IsTypeOf(HRMModel.tblImage)">
+        <MappingFragment StoreEntitySet="tblImages">
+          <ScalarProperty Name="img_id" ColumnName="img_id" />
+          <ScalarProperty Name="img_data" ColumnName="img_data" />
+          <ScalarProperty Name="img_desc" ColumnName="img_desc" />
+          <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblContracts">
+      <EntityTypeMapping TypeName="IsTypeOf(HRMModel.tblContract)">
+        <MappingFragment StoreEntitySet="tblContracts">
+          <ScalarProperty Name="pos_id" ColumnName="pos_id" />
+                <ScalarProperty Name="br_id" ColumnName="br_id" />
+                <ScalarProperty Name="dpt_id" ColumnName="dpt_id" />
+                <ScalarProperty Name="cntrct_id" ColumnName="cntrct_id" />
+          <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+          <ScalarProperty Name="cntrct_title" ColumnName="cntrct_title" />
+          <ScalarProperty Name="cntrct_sdate" ColumnName="cntrct_sdate" />
+          <ScalarProperty Name="cntrct_edate" ColumnName="cntrct_edate" />
+          <ScalarProperty Name="cntrct_state" ColumnName="cntrct_state" />
+          <ScalarProperty Name="cntcrt_typ_id" ColumnName="cntcrt_typ_id" />
+          <ScalarProperty Name="cntrct_desc" ColumnName="cntrct_desc" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblLeaves">
+      <EntityTypeMapping TypeName="IsTypeOf(HRMModel.tblLeave)">
+        <MappingFragment StoreEntitySet="tblLeaves">
+          <ScalarProperty Name="lv_id" ColumnName="lv_id" />
+          <ScalarProperty Name="lv_bal" ColumnName="lv_bal" />
+          <ScalarProperty Name="lvtyp_id" ColumnName="lvtyp_id" />
+          <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+          <ScalarProperty Name="lv_period" ColumnName="lv_period" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblLvTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(HRMModel.tblLvType)">
+        <MappingFragment StoreEntitySet="tblLvTypes">
+          <ScalarProperty Name="lvtyp_id" ColumnName="lvtyp_id" />
+          <ScalarProperty Name="lvtyp_title" ColumnName="lvtyp_title" />
+          <ScalarProperty Name="lvtyp_num" ColumnName="lvtyp_num" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblLvUsages">
+      <EntityTypeMapping TypeName="IsTypeOf(HRMModel.tblLvUsage)">
+        <MappingFragment StoreEntitySet="tblLvUsages">
+          <ScalarProperty Name="lv_u_id" ColumnName="lv_u_id" />
+          <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+          <ScalarProperty Name="lv_id" ColumnName="lv_id" />
+          <ScalarProperty Name="lv_sdate" ColumnName="lv_sdate" />
+          <ScalarProperty Name="lv_edate" ColumnName="lv_edate" />
+          <ScalarProperty Name="lv_days" ColumnName="lv_days" />
+          <ScalarProperty Name="lv_bal" ColumnName="lv_bal" />
+          <ScalarProperty Name="lv_state" ColumnName="lv_state" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblMaritals">
+      <EntityTypeMapping TypeName="IsTypeOf(HRMModel.tblMarital)">
+        <MappingFragment StoreEntitySet="tblMaritals">
+          <ScalarProperty Name="marital_id" ColumnName="marital_id" />
+          <ScalarProperty Name="marital_status" ColumnName="marital_status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblGenders">
+      <EntityTypeMapping TypeName="IsTypeOf(HRMModel.tblGender)">
+        <MappingFragment StoreEntitySet="tblGenders">
+          <ScalarProperty Name="emp_sx_id" ColumnName="emp_sx_id" />
+          <ScalarProperty Name="emp_sex" ColumnName="emp_sex" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblAllowanceLnks">
+      <EntityTypeMapping TypeName="IsTypeOf(HRMModel.tblAllowanceLnk)">
+        <MappingFragment StoreEntitySet="tblAllowanceLnks">
+          <ScalarProperty Name="allow_lnk_id" ColumnName="allow_lnk_id" />
+          <ScalarProperty Name="allowance_id" ColumnName="allowance_id" />
+          <ScalarProperty Name="allowance_amnt" ColumnName="allowance_amnt" />
+          <ScalarProperty Name="allowance_sdate" ColumnName="allowance_sdate" />
+          <ScalarProperty Name="allowance_edate" ColumnName="allowance_edate" />
+          <ScalarProperty Name="allowance_perm" ColumnName="allowance_perm" />
+          <ScalarProperty Name="allowance_month" ColumnName="allowance_month" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+          <ScalarProperty Name="allowance_notes" ColumnName="allowance_notes" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblAllowances">
+      <EntityTypeMapping TypeName="IsTypeOf(HRMModel.tblAllowance)">
+        <MappingFragment StoreEntitySet="tblAllowances">
+          <ScalarProperty Name="allowance_id" ColumnName="allowance_id" />
+          <ScalarProperty Name="allowance_name" ColumnName="allowance_name" />
+          <ScalarProperty Name="allowance_value" ColumnName="allowance_value" />
+          <ScalarProperty Name="allowance_perc" ColumnName="allowance_perc" />
+          <ScalarProperty Name="allowance_desc" ColumnName="allowance_desc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblBanks">
+      <EntityTypeMapping TypeName="IsTypeOf(HRMModel.tblBank)">
+        <MappingFragment StoreEntitySet="tblBanks">
+          <ScalarProperty Name="bnk_id" ColumnName="bnk_id" />
+          <ScalarProperty Name="bnk_name" ColumnName="bnk_name" />
+          <ScalarProperty Name="bnk_code" ColumnName="bnk_code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblContractTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(HRMModel.tblContractType)">
+        <MappingFragment StoreEntitySet="tblContractTypes">
+          <ScalarProperty Name="cntcrt_typ_id" ColumnName="cntcrt_typ_id" />
+          <ScalarProperty Name="cntrct_typ" ColumnName="cntrct_typ" />
+          <ScalarProperty Name="cntrct_desc" ColumnName="cntrct_desc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblDeductionLnks">
+      <EntityTypeMapping TypeName="IsTypeOf(HRMModel.tblDeductionLnk)">
+        <MappingFragment StoreEntitySet="tblDeductionLnks">
+          <ScalarProperty Name="ded_lnk_id" ColumnName="ded_lnk_id" />
+          <ScalarProperty Name="deduction_id" ColumnName="deduction_id" />
+          <ScalarProperty Name="deduction_amnt" ColumnName="deduction_amnt" />
+          <ScalarProperty Name="deduction_sdate" ColumnName="deduction_sdate" />
+          <ScalarProperty Name="deduction_edate" ColumnName="deduction_edate" />
+          <ScalarProperty Name="deduction_permanent" ColumnName="deduction_permanent" />
+          <ScalarProperty Name="deduction_mnth" ColumnName="deduction_mnth" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+          <ScalarProperty Name="deduction_notes" ColumnName="deduction_notes" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblDeductions">
+      <EntityTypeMapping TypeName="IsTypeOf(HRMModel.tblDeduction)">
+        <MappingFragment StoreEntitySet="tblDeductions">
+          <ScalarProperty Name="deduction_id" ColumnName="deduction_id" />
+          <ScalarProperty Name="deduction_name" ColumnName="deduction_name" />
+          <ScalarProperty Name="deduction_value" ColumnName="deduction_value" />
+          <ScalarProperty Name="deduction_perc" ColumnName="deduction_perc" />
+          <ScalarProperty Name="deduction_desc" ColumnName="deduction_desc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblEmployeeContacts">
+      <EntityTypeMapping TypeName="IsTypeOf(HRMModel.tblEmployeeContact)">
+        <MappingFragment StoreEntitySet="tblEmployeeContacts">
+          <ScalarProperty Name="cnt_id" ColumnName="cnt_id" />
+          <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+          <ScalarProperty Name="emp_strt" ColumnName="emp_strt" />
+          <ScalarProperty Name="emp_nghbhd" ColumnName="emp_nghbhd" />
+          <ScalarProperty Name="emp_city" ColumnName="emp_city" />
+          <ScalarProperty Name="emp_province" ColumnName="emp_province" />
+          <ScalarProperty Name="emp_phone" ColumnName="emp_phone" />
+          <ScalarProperty Name="emp_mobile" ColumnName="emp_mobile" />
+          <ScalarProperty Name="emp_kin" ColumnName="emp_kin" />
+          <ScalarProperty Name="emp_kin_add" ColumnName="emp_kin_add" />
+          <ScalarProperty Name="emp_kin_ph" ColumnName="emp_kin_ph" />
+          <ScalarProperty Name="rel_id" ColumnName="rel_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblgrades">
+      <EntityTypeMapping TypeName="IsTypeOf(HRMModel.tblgrade)">
+        <MappingFragment StoreEntitySet="tblgrades">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Grade" ColumnName="Grade" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblPayMethods">
+      <EntityTypeMapping TypeName="IsTypeOf(HRMModel.tblPayMethod)">
+        <MappingFragment StoreEntitySet="tblPayMethods">
+          <ScalarProperty Name="pay_method_id" ColumnName="pay_method_id" />
+          <ScalarProperty Name="pay_title" ColumnName="pay_title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblPayrolls">
+      <EntityTypeMapping TypeName="IsTypeOf(HRMModel.tblPayroll)">
+        <MappingFragment StoreEntitySet="tblPayrolls">
+          <ScalarProperty Name="pay_id" ColumnName="pay_id" />
+          <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+          <ScalarProperty Name="emp_Salary" ColumnName="emp_Salary" />
+          <ScalarProperty Name="emp_bnk" ColumnName="emp_bnk" />
+          <ScalarProperty Name="emp_method" ColumnName="emp_method" />
+          <ScalarProperty Name="emp_acc_num" ColumnName="emp_acc_num" />
+          <ScalarProperty Name="pay_start_date" ColumnName="pay_start_date" />
+          <ScalarProperty Name="pay_end_date" ColumnName="pay_end_date" />
+          <ScalarProperty Name="pay_status" ColumnName="pay_status" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblSalutations">
+      <EntityTypeMapping TypeName="IsTypeOf(HRMModel.tblSalutation)">
+        <MappingFragment StoreEntitySet="tblSalutations">
+          <ScalarProperty Name="sal_id" ColumnName="sal_id" />
+          <ScalarProperty Name="sal_title" ColumnName="sal_title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblWkshftLinks">
+      <EntityTypeMapping TypeName="IsTypeOf(HRMModel.tblWkshftLink)">
+        <MappingFragment StoreEntitySet="tblWkshftLinks">
+          <ScalarProperty Name="wk_lnk_id" ColumnName="wk_lnk_id" />
+          <ScalarProperty Name="wkshft_id" ColumnName="wkshft_id" />
+          <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+          <ScalarProperty Name="wk_lnk_stDate" ColumnName="wk_lnk_stDate" />
+          <ScalarProperty Name="wk_lnk_eDate" ColumnName="wk_lnk_eDate" />
+          <ScalarProperty Name="wk_lnk_status" ColumnName="wk_lnk_status" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblWorkshifts">
+      <EntityTypeMapping TypeName="IsTypeOf(HRMModel.tblWorkshift)">
+        <MappingFragment StoreEntitySet="tblWorkshifts">
+          <ScalarProperty Name="wkshft_id" ColumnName="wkshft_id" />
+          <ScalarProperty Name="wkshft_title" ColumnName="wkshft_title" />
+          <ScalarProperty Name="wkshft_hrs" ColumnName="wkshft_hrs" />
+          <ScalarProperty Name="wkshft_from" ColumnName="wkshft_from" />
+          <ScalarProperty Name="wkshft_to" ColumnName="wkshft_to" />
+          <ScalarProperty Name="wkshft_lunch_from" ColumnName="wkshft_lunch_from" />
+          <ScalarProperty Name="wkshft_lunch_to" ColumnName="wkshft_lunch_to" />
+          <ScalarProperty Name="wkshft_brk_from" ColumnName="wkshft_brk_from" />
+          <ScalarProperty Name="wkshft_brk_to" ColumnName="wkshft_brk_to" />
+          <ScalarProperty Name="wkshft_xtrabrk_from" ColumnName="wkshft_xtrabrk_from" />
+          <ScalarProperty Name="wkshft_xtrabrk_to" ColumnName="wkshft_xtrabrk_to" />
+          <ScalarProperty Name="wkshft_notes" ColumnName="wkshft_notes" />
+          <ScalarProperty Name="inputter" ColumnName="inputter" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblRelationships">
+      <EntityTypeMapping TypeName="IsTypeOf(HRMModel.tblRelationship)">
+        <MappingFragment StoreEntitySet="tblRelationships">
+          <ScalarProperty Name="rel_id" ColumnName="rel_id" />
+          <ScalarProperty Name="rel_title" ColumnName="rel_title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCities">
+      <EntityTypeMapping TypeName="IsTypeOf(HRMModel.tblCity)">
+        <MappingFragment StoreEntitySet="tblCities">
+          <ScalarProperty Name="cty_id" ColumnName="cty_id" />
+          <ScalarProperty Name="cty_name" ColumnName="cty_name" />
+          <ScalarProperty Name="prov_id" ColumnName="prov_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProvinces">
+      <EntityTypeMapping TypeName="IsTypeOf(HRMModel.tblProvince)">
+        <MappingFragment StoreEntitySet="tblProvinces">
+          <ScalarProperty Name="prov_id" ColumnName="prov_id" />
+          <ScalarProperty Name="prov_name" ColumnName="prov_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+          <EntitySetMapping Name="tblCourses">
+            <EntityTypeMapping TypeName="HRMModel.tblCours">
+              <MappingFragment StoreEntitySet="tblCourses">
+                <ScalarProperty Name="type_id" ColumnName="type_id" />
+                <ScalarProperty Name="course_descr" ColumnName="course_descr" />
+                <ScalarProperty Name="course_dur" ColumnName="course_dur" />
+                <ScalarProperty Name="course_nm" ColumnName="course_nm" />
+                <ScalarProperty Name="course_id" ColumnName="course_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCourseTypes">
+            <EntityTypeMapping TypeName="HRMModel.tblCourseType">
+              <MappingFragment StoreEntitySet="tblCourseType">
+                <ScalarProperty Name="typ_descr" ColumnName="typ_descr" />
+                <ScalarProperty Name="type_name" ColumnName="type_name" />
+                <ScalarProperty Name="type_id" ColumnName="type_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTrainings">
+            <EntityTypeMapping TypeName="HRMModel.tblTraining">
+              <MappingFragment StoreEntitySet="tblTraining">
+                <ScalarProperty Name="tr_comments" ColumnName="tr_comments" />
+                <ScalarProperty Name="tr_score" ColumnName="tr_score" />
+                <ScalarProperty Name="tr_status" ColumnName="tr_status" />
+                <ScalarProperty Name="tr_edate" ColumnName="tr_edate" />
+                <ScalarProperty Name="tr_sdate" ColumnName="tr_sdate" />
+                <ScalarProperty Name="course_id" ColumnName="course_id" />
+                <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+                <ScalarProperty Name="tr_id" ColumnName="tr_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblDocuments">
+            <EntityTypeMapping TypeName="HRMModel.tblDocument">
+              <MappingFragment StoreEntitySet="tblDocuments">
+                <ScalarProperty Name="doc_type" ColumnName="doc_type" />
+                <ScalarProperty Name="doc_date" ColumnName="doc_date" />
+                <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+                <ScalarProperty Name="doc_path" ColumnName="doc_path" />
+                <ScalarProperty Name="doc_name" ColumnName="doc_name" />
+                <ScalarProperty Name="doc_id" ColumnName="doc_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblContractStates">
+            <EntityTypeMapping TypeName="HRMModel.tblContractState">
+              <MappingFragment StoreEntitySet="tblContractState">
+                <ScalarProperty Name="cntrct_st_desc" ColumnName="cntrct_st_desc" />
+                <ScalarProperty Name="cntrct_state" ColumnName="cntrct_state" />
+                <ScalarProperty Name="cntrct_st_id" ColumnName="cntrct_st_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblDependants">
+            <EntityTypeMapping TypeName="HRMModel.tblDependant">
+              <MappingFragment StoreEntitySet="tblDependants">
+                <ScalarProperty Name="dep_rltn" ColumnName="dep_rltn" />
+                <ScalarProperty Name="dep_dob" ColumnName="dep_dob" />
+                <ScalarProperty Name="dep_name" ColumnName="dep_name" />
+                <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+                <ScalarProperty Name="dep_id" ColumnName="dep_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblEducations">
+            <EntityTypeMapping TypeName="HRMModel.tblEducation">
+              <MappingFragment StoreEntitySet="tblEducation">
+                <ScalarProperty Name="edu_edate" ColumnName="edu_edate" />
+                <ScalarProperty Name="edu_sdate" ColumnName="edu_sdate" />
+                <ScalarProperty Name="edu_comment" ColumnName="edu_comment" />
+                <ScalarProperty Name="edu_score" ColumnName="edu_score" />
+                <ScalarProperty Name="edu_qlfcn" ColumnName="edu_qlfcn" />
+                <ScalarProperty Name="edu_name" ColumnName="edu_name" />
+                <ScalarProperty Name="edu_lvl_id" ColumnName="edu_lvl_id" />
+                <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+                <ScalarProperty Name="edu_id" ColumnName="edu_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblEduLevels">
+            <EntityTypeMapping TypeName="HRMModel.tblEduLevel">
+              <MappingFragment StoreEntitySet="tblEduLevel">
+                <ScalarProperty Name="edu_lv_name" ColumnName="edu_lv_name" />
+                <ScalarProperty Name="edu_lv_id" ColumnName="edu_lv_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblWorks">
+            <EntityTypeMapping TypeName="HRMModel.tblWork">
+              <MappingFragment StoreEntitySet="tblWork">
+                <ScalarProperty Name="wk_comment" ColumnName="wk_comment" />
+                <ScalarProperty Name="wk_desc" ColumnName="wk_desc" />
+                <ScalarProperty Name="wk_edate" ColumnName="wk_edate" />
+                <ScalarProperty Name="wk_sdate" ColumnName="wk_sdate" />
+                <ScalarProperty Name="wk_position" ColumnName="wk_position" />
+                <ScalarProperty Name="wk_company" ColumnName="wk_company" />
+                <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+                <ScalarProperty Name="wrk_id" ColumnName="wrk_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblAchievements">
+            <EntityTypeMapping TypeName="HRMModel.tblAchievement">
+              <MappingFragment StoreEntitySet="tblAchievement">
+                <ScalarProperty Name="achvt_comment" ColumnName="achvt_comment" />
+                <ScalarProperty Name="achvt_date" ColumnName="achvt_date" />
+                <ScalarProperty Name="achvt_name" ColumnName="achvt_name" />
+                <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+                <ScalarProperty Name="achvt_id" ColumnName="achvt_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblKPIs">
+            <EntityTypeMapping TypeName="HRMModel.tblKPI">
+              <MappingFragment StoreEntitySet="tblKPI">
+                <ScalarProperty Name="kpi_title" ColumnName="kpi_title" />
+                <ScalarProperty Name="kpi_comment" ColumnName="kpi_comment" />
+                <ScalarProperty Name="kpi_date" ColumnName="kpi_date" />
+                <ScalarProperty Name="kpi_prd" ColumnName="kpi_prd" />
+                <ScalarProperty Name="kpi_score" ColumnName="kpi_score" />
+                <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+                <ScalarProperty Name="kpi_id" ColumnName="kpi_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer>
+    <edmx:Connection>
+      <edmx:DesignerInfoPropertySet>
+        <edmx:DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </edmx:DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <edmx:DesignerInfoPropertySet>
+        <edmx:DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <edmx:DesignerProperty Name="EnablePluralization" Value="True" />
+        <edmx:DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <edmx:DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <edmx:DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </edmx:DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams />
+  </edmx:Designer>
+</edmx:Edmx>

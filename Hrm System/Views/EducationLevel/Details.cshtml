@@ -1,0 +1,26 @@
+﻿@model Hrm_System.Models.tblEduLevel
+
+@{
+    ViewBag.Title = "HRM - Education Level";
+}
+
+<h2>Education Level Details</h2>
+
+<div>
+    <h4></h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Education Level
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.edu_lv_name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.edu_lv_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

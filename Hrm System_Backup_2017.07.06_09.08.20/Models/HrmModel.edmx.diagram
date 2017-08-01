@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8a8b447835694759a0cb5c9a01f76198" Name="Diagram1">
+        <EntityTypeShape EntityType="HRMModel.tblBranch" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMModel.tblDepartment" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMModel.tblEmployee" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMModel.tblEmployeeStatu" Width="1.5" PointX="8.25" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMModel.tblJobLevel" Width="1.5" PointX="6.375" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMModel.tblOrganisation" Width="1.5" PointX="13" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMModel.tblPositionHistory" Width="1.5" PointX="5.25" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMModel.tblPosition" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMModel.tblUser" Width="1.5" PointX="10.625" PointY="0.625" IsExpanded="true" />
+        <AssociationConnector Association="HRMModel.FK_tblEmployees_tblBranch" ManuallyRouted="false" />
+        <AssociationConnector Association="HRMModel.FK_tblPositionHistory_tblBranch" ManuallyRouted="false" />
+        <AssociationConnector Association="HRMModel.FK_tblEmployees_tblDepartment" ManuallyRouted="false" />
+        <AssociationConnector Association="HRMModel.FK_tblPositionHistory_tblDepartment" ManuallyRouted="false" />
+        <AssociationConnector Association="HRMModel.FK_tblEmployees_tblEmployeeStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="HRMModel.FK_tblPositionHistory_tblEmployees" ManuallyRouted="false" />
+        <AssociationConnector Association="HRMModel.FK_tblUsers_tblEmployees" ManuallyRouted="false" />
+        <AssociationConnector Association="HRMModel.FK_tblPositionHistory_tblPositions" ManuallyRouted="false" />
+        <AssociationConnector Association="HRMModel.FK_tblPositions_tblJobLevels" />
+        <AssociationConnector Association="HRMModel.FK_tblEmployees_tblPositions" />
+        <EntityTypeShape EntityType="HRMModel.sysdiagram" Width="1.5" PointX="6.9883763841299231" PointY="5.8378718373542053" />
+        <AssociationConnector Association="HRMModel.FK_tblEmployees_tblEmployees" />
+        <EntityTypeShape EntityType="HRMModel.tblEmplStatu" Width="1.5" PointX="9.75" PointY="5.375" />
+        <AssociationConnector Association="HRMModel.FK_tblEmployees_tblEmplStatus" />
+        <EntityTypeShape EntityType="HRMModel.tblImage" Width="1.5" PointX="0.625" PointY="7.75" />
+        <AssociationConnector Association="HRMModel.FK_tblEmployees_tblImages" />
+        <EntityTypeShape EntityType="HRMModel.tblContract" Width="1.5" PointX="10.703081722698677" PointY="11.531160047059487" />
+        <EntityTypeShape EntityType="HRMModel.tblLeave" Width="1.5" PointX="0.5" PointY="16.25" />
+        <EntityTypeShape EntityType="HRMModel.tblLvType" Width="1.5" PointX="4.75" PointY="19.375" />
+        <EntityTypeShape EntityType="HRMModel.tblLvUsage" Width="1.5" PointX="8.875" PointY="16.5" />
+        <AssociationConnector Association="HRMModel.FK_tblLeave_tblEmployees" />
+        <AssociationConnector Association="HRMModel.FK_tblLvUsage_tblEmployees" />
+        <AssociationConnector Association="HRMModel.FK_tblLeave_tblLvType" />
+        <AssociationConnector Association="HRMModel.FK_tblLvUsage_tblLeave" />
+        <EntityTypeShape EntityType="HRMModel.tblMarital" Width="1.5" PointX="4.4238750210143047" PointY="29.460970579395521" />
+        <AssociationConnector Association="HRMModel.FK_tblEmployees_tblMarital" />
+        <EntityTypeShape EntityType="HRMModel.tblGender" Width="1.5" PointX="7.5" PointY="3" />
+        <AssociationConnector Association="HRMModel.FK_tblEmployees_tblGender" />
+        <AssociationConnector Association="HRMModel.FK_tblContracts_tblEmployees" />
+        <EntityTypeShape EntityType="HRMModel.tblAllowanceLnk" Width="1.5" PointX="7.8073936457780162" PointY="5.4427009846282663" />
+        <EntityTypeShape EntityType="HRMModel.tblAllowance" Width="1.5" PointX="10.174111045046761" PointY="10.145385761812975" />
+        <EntityTypeShape EntityType="HRMModel.tblBank" Width="1.5" PointX="12.375" PointY="9.625" />
+        <EntityTypeShape EntityType="HRMModel.tblContractType" Width="1.5" PointX="4.8053221408302536" PointY="31.520165070667939" />
+        <EntityTypeShape EntityType="HRMModel.tblDeductionLnk" Width="1.5" PointX="10.560445373207537" PointY="3.3042331055292085" />
+        <EntityTypeShape EntityType="HRMModel.tblDeduction" Width="1.5" PointX="2.8292312858762365" PointY="31.834883108658197" />
+        <EntityTypeShape EntityType="HRMModel.tblEmployeeContact" Width="1.5" PointX="7.6592095045648563" PointY="26.598322701919042" />
+        <EntityTypeShape EntityType="HRMModel.tblgrade" Width="1.5" PointX="2.7990160001437254" PointY="15.42244411232995" />
+        <EntityTypeShape EntityType="HRMModel.tblPayMethod" Width="1.5" PointX="5.75" PointY="25.875" />
+        <EntityTypeShape EntityType="HRMModel.tblPayroll" Width="1.5" PointX="10.122132784743855" PointY="16.206834428108685" />
+        <EntityTypeShape EntityType="HRMModel.tblSalutation" Width="1.5" PointX="1.632059930652408" PointY="21.338603744906653" />
+        <EntityTypeShape EntityType="HRMModel.tblWkshftLink" Width="1.5" PointX="3.173693565266996" PointY="12.273822656028822" />
+        <EntityTypeShape EntityType="HRMModel.tblWorkshift" Width="1.5" PointX="11.906125981316961" PointY="25.262900036416436" />
+        <AssociationConnector Association="HRMModel.FK_tblAllowanceLnk_tblAllowances" />
+        <AssociationConnector Association="HRMModel.FK_tblAllowanceLnk_tblEmployees" />
+        <AssociationConnector Association="HRMModel.FK_tblPayroll_tblBanks" />
+        <AssociationConnector Association="HRMModel.FK_tblContracts_tblContractTypes" />
+        <AssociationConnector Association="HRMModel.FK_tblDeductionLnk_tblDeductions" />
+        <AssociationConnector Association="HRMModel.FK_tblDeductionLnk_tblEmployees" />
+        <AssociationConnector Association="HRMModel.FK_EmployeeContacts_tblEmployees1" />
+        <AssociationConnector Association="HRMModel.FK_tblEmployees_tblSalutation" />
+        <AssociationConnector Association="HRMModel.FK_tblPayroll_tblEmployees" />
+        <AssociationConnector Association="HRMModel.FK_tblWkshftLink_tblEmployees" />
+        <AssociationConnector Association="HRMModel.FK_tblPayroll_tblPayMethod" />
+        <AssociationConnector Association="HRMModel.FK_tblWkshftLink_tblWorkshifts" />
+        <EntityTypeShape EntityType="HRMModel.tblRelationship" Width="1.5" PointX="2.6171073664990754" PointY="31.893533989737524" />
+        <AssociationConnector Association="HRMModel.FK_tblEmployeeContacts_tblRelationships" />
+        <EntityTypeShape EntityType="HRMModel.tblCity" Width="1.5" PointX="2.4334934793568648" PointY="25.383074906367376" />
+        <AssociationConnector Association="HRMModel.FK_tblEmployeeContacts_tblCity" />
+        <EntityTypeShape EntityType="HRMModel.tblProvince" Width="1.5" PointX="5.6015588648624526" PointY="20.7766939349364" />
+        <AssociationConnector Association="HRMModel.FK_tblCity_tblProvince" />
+        <AssociationConnector Association="HRMModel.FK_tblPositions_tblDepartments" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

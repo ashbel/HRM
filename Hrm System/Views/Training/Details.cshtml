@@ -1,0 +1,74 @@
+﻿@model Hrm_System.Models.tblTraining
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tblTraining</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.tr_sdate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tr_sdate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tr_edate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tr_edate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tr_status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tr_status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tr_score)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tr_score)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tr_comments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tr_comments)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblCours.course_nm)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblCours.course_nm)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblEmployee.emp_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblEmployee.emp_name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.tr_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

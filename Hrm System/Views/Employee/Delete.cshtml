@@ -1,0 +1,89 @@
+﻿@model Hrm_System.Models.tblEmployee
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>tblEmployee</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.emp_id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.emp_id)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.emp_name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.emp_name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.emp_lname)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.emp_lname)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.emp_email)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.emp_email)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.tblBranch.br_name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.tblBranch.br_name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.tblDepartment.dpt_name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.tblDepartment.dpt_name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.tblEmployeeStatu.empst_title)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.tblEmployeeStatu.empst_title)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.emp_bDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.emp_bDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.emp_jDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.emp_jDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.emp_cDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.emp_cDate)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

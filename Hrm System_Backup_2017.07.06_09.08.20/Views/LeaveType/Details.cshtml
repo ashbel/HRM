@@ -1,0 +1,36 @@
+﻿@model Hrm_System.Models.tblLvType
+
+@{
+    ViewBag.Title = "Leave Type Details";
+}
+
+<h2>Leave Type Details</h2>
+
+<fieldset>
+    <legend>Leave Types</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.lvtyp_id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.lvtyp_id)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.lvtyp_title)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.lvtyp_title)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.lvtyp_num)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.lvtyp_num)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.lvtyp_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

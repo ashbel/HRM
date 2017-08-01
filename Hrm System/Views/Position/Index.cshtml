@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Hrm_System.Models.tblPosition>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-striped table-hover table-bordered table-condensed" >
+    <tr>
+
+        <th>
+            Title
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Level
+        </th>
+        <th>
+            Department
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.pos_title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pos_desc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tblJobLevel.lvl_title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tblDepartment.dpt_id)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.pos_id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.pos_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.pos_id })
+        </td>
+    </tr>
+}
+
+</table>

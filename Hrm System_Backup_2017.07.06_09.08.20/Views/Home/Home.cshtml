@@ -1,0 +1,509 @@
+﻿@{
+    ViewBag.Title = "Dashboard - Home";
+}
+
+<style>
+    #chart {
+        background: center no-repeat url('@Url.Content("~/Content/shared/world-map.png")')
+    }
+    #table1 tr td th thead {height:20px; border:1px; }
+    thead {background-color:#a7cad5;}
+    tr{border-bottom:1pt solid #4e8cb1;}
+    tr:nth-child(even){background-color: #f0f5f7}
+   #foot {
+    text-align:center;
+    position: absolute;
+    bottom: 0px;
+    font-size: .80em;
+    padding-left:10px;
+    width: 100%;
+</style>
+
+<style>
+        #gauge-container {
+            background: transparent url(@Url.Content("~/Content/dataviz/gauge/gauge-container.png")) no-repeat 50% 50%;
+            width:auto;
+            height: auto;
+            text-align: center;
+            margin: 0 auto 30px auto;
+        }
+
+        #gauge {
+            width: auto;
+            height: auto;
+            margin: 0 auto 0;
+        }
+</style>
+<div id="container" style="width:100%;">
+    <h1>My Dashboard</h1> 
+    <hr class="featurette-divider" /> 
+    <div id="left" style="float:left; width:10%; height:100%; padding: 10px 10px 10px 10px">
+        @{
+            if (ViewBag.url != null)
+            {
+                <img src="data:image;base64,@System.Convert.ToBase64String(ViewBag.url)" width="140" height="140" />
+            }
+            else
+            {
+                <img src="" width="140" height="140" />
+            }
+        }
+
+        <b>@ViewBag.Name</b> 
+        <hr class="featurette-divider" /> 
+        My Alerts
+        <ul>
+            <li>
+                <a href="">Approve Loans</a>
+            </li>
+            <li>
+                <a href="">3 New Messages</a>
+            </li>
+            <li>
+                <a href="">Approve Leave</a>
+            </li>
+        </ul>
+        <hr class="featurette-divider" />
+        Quick Links        
+        <ul>
+            <li>
+               <a href="">Apply Leave</a> 
+            </li>
+            <li>
+                <a href="">Approve Leave</a>
+            </li>
+            <li>
+                <a href="">Apply Loan</a>
+            </li>
+            <li>
+                <a href="">Approve Loan</a>
+            </li>
+        </ul>
+        <hr class="featurette-divider" />
+        Activity Logs
+        <ul>
+            <li>
+                <a href="">Leave Approved</a>
+            </li>
+            <li>
+                <a href="">Loan Approved</a>
+            </li>
+            <li>
+                <a href="">Employee Created</a>
+            </li>
+            <li>
+                <a href="">Employee Resigned</a>
+            </li>
+        </ul>
+        <hr class="featurette-divider" />
+    </div>
+    <div id="right" style="float:right; width:90%;">
+        <div class="panel panel-info">
+            <div class="panel-body">
+                <h4>Organisation Overview</h4>
+                <hr  /> 
+                <div class="row">
+                    <div class="col-sm-12 col-md-3">
+                        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                        <script type="text/javascript">
+                                  google.charts.load('current', {'packages':['corechart']});
+                                  google.charts.setOnLoadCallback(drawChart);
+
+                                function drawChart() {
+
+                            var data = google.visualization.arrayToDataTable([
+                                      ['Gender', 'Number of Employees'],
+                                      ['Male',     11],
+                                      ['Female',    2]
+                                     ]);
+
+                         var options = {  title: 'Male To Female Employees' };
+
+                         var chart = new google.visualization.PieChart(document.getElementById('piechart')); chart.draw(data, options); }
+                        </script>
+                        <div id="piechart" style="width: 400px; height: 250px;"></div>
+                    </div>
+                    <div class="col-sm-12 col-md-3">
+                        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                        <script type="text/javascript">
+                                  google.charts.load('current', {'packages':['corechart']});
+                                  google.charts.setOnLoadCallback(drawChart);
+
+                                function drawChart() {
+
+                            var data = google.visualization.arrayToDataTable([
+                                      ['Age', 'Number Of Employees'],
+                                      ['20-30', 11],
+                                      ['31-40', 21],
+                                      ['41-50', 12],
+                                      ['51-60', 2]
+                                     ]);
+
+                         var options = {  title: 'Employees By Age Groups' };
+
+                         var chart = new google.visualization.PieChart(document.getElementById('piechart1')); chart.draw(data, options); }
+                        </script>
+                        <div id="piechart1" style="width: 400px; height: 250px;"></div>
+                    </div>
+                    <div class="col-sm-12 col-md-3">
+                        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                        <script type="text/javascript">
+                                  google.charts.load('current', {'packages':['corechart']});
+                                  google.charts.setOnLoadCallback(drawChart);
+
+                                function drawChart() {
+
+                            var data = google.visualization.arrayToDataTable([
+                                      ['Type', 'Number of Employees'],
+                                      ['Permanent',11],
+                                      ['Contract', 70],
+                                      ['Casual',   3],
+                                      ['Students', 6]
+                                     ]);
+
+                         var options = {  title: 'Employees By Type' };
+
+                         var chart = new google.visualization.PieChart(document.getElementById('piechart2')); chart.draw(data, options); }
+                        </script>
+                        <div id="piechart2" style="width: 400px; height: 250px;"></div>
+                    </div>
+                    <div class="col-sm-12 col-md-3">
+                        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                        <script type="text/javascript">
+                                  google.charts.load('current', {'packages':['corechart']});
+                                  google.charts.setOnLoadCallback(drawChart);
+
+                                function drawChart() {
+
+                            var data = google.visualization.arrayToDataTable([
+                                      ['Category', 'Number of Empoyees'],
+                                      ['Managerial',     11],
+                                      ['Officers',      80],
+                                      ['Executive',  2]
+                                     ]);
+
+                         var options = {  title: 'Employees By Category' };
+
+                         var chart = new google.visualization.PieChart(document.getElementById('piechart3')); chart.draw(data, options); }
+                        </script>
+                        <div id="piechart3" style="width: 400px; height: 250px;"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div> 
+        <div class="panel panel-info">
+            <div class="panel-body">
+                <h4>Employee Activities</h4>
+                <hr /> 
+                <div class="row">
+                    <div class="col-sm-12 col-md-2">
+                        <div class="thumbnail">
+                            <div class="caption">
+
+                                <p>
+                                    <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;">80%</div>
+                                    <h4 style="text-align:center;" >Employee Productivity</h4>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-2">
+                        <div class="thumbnail">
+                            <div class="caption">
+
+                                <p>
+                                    <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;">10%</div>
+                                    <h4 style="text-align:center;">Employees On Leave</h4>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-2">
+                        <div class="thumbnail">
+                            <div class="caption">
+
+                                <p>
+                                    <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;">5%</div>
+                                    <h4 style="text-align:center;">Positions Vacant</h4>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-2">
+                        <div class="thumbnail">
+                            <div class="caption">
+
+                                <p>
+                                    <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;">5</div>
+                                    <h4 style="text-align:center;">Average Perfomance Rating</h4>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-2">
+                        <div class="thumbnail">
+                            <div class="caption">
+
+                                <p>
+                                    <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;">3%</div>
+                                    <h4 style="text-align:center;">Eligible for Retirement</h4><p style="text-align:center;">(In the next 5 years)</p>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-2">
+                        <div class="thumbnail">
+                            <div class="caption">
+
+                                <p>
+                                    <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;">90%</div>
+                                    <h4 style="text-align:center;">Empoyee Retention</h4>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-2">
+                        <div class="thumbnail">
+                            <div class="caption">
+
+                                <p>
+                                    <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;">$100.50</div>
+                                    <h4 style="text-align:center;">Training Cost/Employee (Avg.)</h4>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-2">
+                        <div class="thumbnail">
+                            <div class="caption">
+
+                                <p>
+                                    <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;">13.6 Years</div>
+                                    <h4 style="text-align:center;">Employee Tenure (Avg.)</h4>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-2">
+                        <div class="thumbnail">
+                            <div class="caption">
+
+                                <p>
+                                    <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;">$1235.45</div>
+                                    <h4 style="text-align:center;">Revenue/Employee</h4>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-2">
+                        <div class="thumbnail">
+                            <div class="caption">
+
+                                <p>
+                                    <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;">5503</div>
+                                    <h4 style="text-align:center;">Number Of Employees</h4>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-2">
+                        <div class="thumbnail">
+                            <div class="caption">
+
+                                <p>
+                                    <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;">4 Months</div>
+                                    <h4 style="text-align:center;">Hiring Cycle (Avg)</h4>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-2">
+                        <div class="thumbnail">
+                            <div class="caption">
+
+                                <p>
+                                    <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;">$615.46</div>
+                                    <h4 style="text-align:center;">Avg. Salary</h4>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             </div>
+            </div>
+        <div class="panel panel-info">
+            <div class="panel-body">
+                <h4>Other Metrics</h4>
+                <hr /> 
+                <div class="row">
+                    <div class="col-sm-12 col-md-2">
+                        <div class="thumbnail">
+                            <div class="caption">
+
+                                <p>
+                                    <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;"></div>
+                                    <h3 style="text-align:center;">Wallet Balance</h3>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-2">
+                        <div class="thumbnail">
+                            <div class="caption">
+
+                                <p>
+                                    <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;"></div>
+                                    <h3 style="text-align:center;">Wallet Balance</h3>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-2">
+                        <div class="thumbnail">
+                            <div class="caption">
+
+                                <p>
+                                    <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;"></div>
+                                    <h3 style="text-align:center;">Wallet Balance</h3>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-2">
+                        <div class="thumbnail">
+                            <div class="caption">
+
+                                <p>
+                                    <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;"></div>
+                                    <h3 style="text-align:center;">Wallet Balance</h3>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-2">
+                        <div class="thumbnail">
+                            <div class="caption">
+
+                                <p>
+                                    <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;"></div>
+                                    <h3 style="text-align:center;">Wallet Balance</h3>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-2">
+                        <div class="thumbnail">
+                            <div class="caption">
+
+                                <p>
+                                    <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;"></div>
+                                    <h3 style="text-align:center;">Wallet Balance</h3>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-2">
+                        <div class="thumbnail">
+                            <div class="caption">
+
+                                <p>
+                                    <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;"></div>
+                                    <h3 style="text-align:center;">Wallet Balance</h3>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-2">
+                        <div class="thumbnail">
+                            <div class="caption">
+
+                                <p>
+                                    <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;"></div>
+                                    <h3 style="text-align:center;">Wallet Balance</h3>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-2">
+                        <div class="thumbnail">
+                            <div class="caption">
+
+                                <p>
+                                    <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;"></div>
+                                    <h3 style="text-align:center;">Wallet Balance</h3>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-2">
+                        <div class="thumbnail">
+                            <div class="caption">
+
+                                <p>
+                                    <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;"></div>
+                                    <h3 style="text-align:center;">Wallet Balance</h3>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-2">
+                        <div class="thumbnail">
+                            <div class="caption">
+
+                                <p>
+                                    <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;"></div>
+                                    <h3 style="text-align:center;">Wallet Balance</h3>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-2">
+                        <div class="thumbnail">
+                            <div class="caption">
+
+                                <p>
+                                    <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;"></div>
+                                    <h3 style="text-align:center;">Wallet Balance</h3>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</div>
+</div>  
+
+<hr />
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".box").bind("change", refresh);
+
+        window.configuredRanges = $("#gauge").data("kendoRadialGauge").options.scale.ranges;
+    });
+
+    function refresh() {
+        var gauge = $("#gauge").data("kendoRadialGauge"),
+            showLabels = $("#labels").prop("checked"),
+            showRanges = $("#ranges").prop("checked"),
+            positionInputs = $("input[name='labels-position']"),
+            labelsPosition = positionInputs.filter(":checked").val(),
+            options = gauge.options;
+
+        options.transitions = false;
+        options.scale.labels = options.scale.labels || {};
+        options.scale.labels.visible = showLabels;
+        options.scale.labels.position = labelsPosition;
+        options.scale.ranges = showRanges ? window.configuredRanges : [];
+
+        gauge.redraw();
+    }
+</script>

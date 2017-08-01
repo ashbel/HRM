@@ -1,0 +1,44 @@
+﻿@model Hrm_System.Models.tblEmplStatu
+
+@{
+    ViewBag.Title = "Employee Status";
+}
+
+<h2>Create Status</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend></legend>
+
+        <div class="editor-label">
+           Employee State
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.stat_name)
+            @Html.ValidationMessageFor(model => model.stat_name)
+        </div>
+
+        <div class="editor-label">
+            Description
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.stat_desc)
+            @Html.ValidationMessageFor(model => model.stat_desc)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

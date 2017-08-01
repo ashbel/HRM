@@ -1,0 +1,1716 @@
+﻿@model Hrm_System.Models.EmployeeModelView
+
+@{
+    ViewBag.Title = " HRM - Employee Details";
+}
+<h3> @Html.DisplayFor(model => model.emp_name) @Html.DisplayFor(model => model.emp_lname) </h3> 
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#home"><b>Employee Details</b></a></li>
+  <li><a data-toggle="tab" href="#menu1"><b>Contract Information</b></a></li>
+  <li><a data-toggle="tab" href="#menu2"><b>Education</b></a></li>
+  <li><a data-toggle="tab" href="#menu3"><b>Work Experience</b></a></li>
+  <li><a data-toggle="tab" href="#menu4"><b>Trainings</b></a></li>
+  <li><a data-toggle="tab" href="#menu5"><b>Achievements</b></a></li>
+  <li><a data-toggle="tab" href="#menu6"><b>Performance Evaluation</b></a></li>
+  <li><a data-toggle="tab" href="#menu9"><b>Documents</b></a></li>
+  <li><a data-toggle="tab" href="#menu11"><b>Leave Days</b></a></li>
+  <li><a data-toggle="tab" href="#menu12"><b>Payroll</b></a></li>
+</ul>
+
+<div class="tab-content">
+  <div id="home" class="tab-pane fade in active">
+   <fieldset>
+<div class="row">
+  <div class="col-xs-12 col-md-1">
+   <div class="btn-group btn-group-xs">
+       <br />
+      <a  data-toggle="modal" href="#uploadModal">
+          @{if (@ViewBag.url != null) {
+          <img class="img-responsive" src="data:image;base64,@System.Convert.ToBase64String(ViewBag.url)" width ="140" height="140" />
+              }
+              else {
+          <img class="img-responsive" src="" width="140" height="140" />
+                  }
+              }
+      </a>
+   </div>    
+  </div>
+  <div class="col-xs-12 col-md-4">
+    <h3>Basic Information</h3>
+    <hr />
+        <div class="row">
+            <div class="col-xs-6 col-md-6"><b> Employee Id:</b></div>
+            <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.emp_id)</div>
+        </div>
+        <div class="row">
+           <div class="col-xs-6 col-md-6"><b>Employee Name:</b></div> 
+           <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.emp_name) @Html.DisplayFor(model => model.emp_lname)</div>
+         </div>
+        <div class="row">
+            <div class="col-xs-6 col-md-6"><b>ID Number:</b></div>
+            <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.emp_id_num)</div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6 col-md-6"><b>Nationality:</b></div>
+           <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.emp_nation)</div>
+         </div>
+        <div class="row">
+          <div class="col-xs-6 col-md-6"><b>Date of Birth:</b></div>
+           <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.emp_bDate)</div>
+         </div>
+    <hr />
+    <h3>Employment Information</h3>
+        <div class="row">
+            <div class="col-xs-6 col-md-6"><b> EC Number:</b></div>
+            <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.emp_ec_num)</div>
+        </div>
+        <div class="row">
+           <div class="col-xs-6 col-md-6"><b>Branch:</b></div> 
+           <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.emp_branch)</div>
+         </div>
+        <div class="row">
+            <div class="col-xs-6 col-md-6"><b>Department:</b></div>
+            <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.emp_dpt)</div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6 col-md-6"><b>Employment Type</b></div>
+           <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.emp_status)</div>
+         </div>
+        <div class="row">
+            <div class="col-xs-6 col-md-6"><b>Position:</b></div>
+            <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.emp_pos_id)</div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6 col-md-6"><b>Employee Start Date:</b></div>
+          <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.emp_jDate)</div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6 col-md-6"><b>Employee Status:</b></div>
+          <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.emp_state)</div>
+        </div>
+    <hr />
+    <h3>Contact Information</h3>
+        <div class="row">
+            <div class="col-xs-6 col-md-6"><b> Email Address:</b></div>
+            <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.emp_email)</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6 col-md-6"><b>Street Address:</b></div> 
+            <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.emp_strt)</div>
+            </div>
+        <div class="row">
+            <div class="col-xs-6 col-md-6"><b>Surburb:</b></div>
+            <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.emp_nghbhd)</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6 col-md-6"><b>City:</b></div>
+            <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.emp_city)</div>
+            </div>
+        <div class="row">
+            <div class="col-xs-6 col-md-6"><b>Province:</b></div>
+            <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.emp_province)</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6 col-md-6"><b>Phone Number:</b></div>
+            <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.emp_phone)</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6 col-md-6"><b>Mobile Phone:</b></div>
+            <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.emp_mobile)</div>
+        </div>
+    <hr />
+    <h3>Other Information</h3>
+        <div class="row">
+            <div class="col-xs-6 col-md-6"><b>Next Of Kin:</b></div>
+            <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.emp_kin)</div>
+            </div>
+        <div class="row">
+            <div class="col-xs-6 col-md-6"><b>Next Of Kin Address:</b></div>
+            <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.emp_kin_add)</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6 col-md-6"><b>Nex of Kin Phone Number:</b></div>
+            <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.emp_kin_ph)</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6 col-md-6"><b>Relationship:</b></div>
+            <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.emp_kin_rel)</div>
+        </div>
+    <hr />
+    <h3>Additional Information</h3>
+    <div class="row">
+        <div class="col-xs-6 col-md-6"><b>Create Date:</b></div>
+        <div class="col-xs-6 col-md-6">@Html.DisplayFor(model => model.emp_cDate)</div>
+    </div>
+    <hr />
+  </div>
+  <div class="col-xs-12 col-md-7">
+  <h3>User Activity</h3>
+    <hr />
+ <div class="row">
+  <div class="col-sm-12 col-md-3">
+    <div class="thumbnail thumbnail-info">
+        <h5 class="text-center">Duration of Employment</h5>
+        <h2 class="text-center">@ViewBag.Duration</h2>
+    </div>
+  </div>
+  <div class="col-sm-12 col-md-3">
+    <div class="thumbnail">
+        <h5 class="text-center">Loans Balance</h5>
+        <h2 class="text-center">$1200.50</h2>
+    </div>
+    </div>
+  <div class="col-sm-12 col-md-3">
+    <div class="thumbnail">
+        <h5 class="text-center">YTD Earnings</h5>
+        <h2 class="text-center">$8546.50</h2>
+    </div>
+    </div>
+  <div class="col-sm-12 col-md-3">
+    <div class="thumbnail thumbnail-info">
+        <h5 class="text-center">Leave Days Balance</h5>
+        <h2 class="text-center">12 Days</h2>
+    </div>
+  </div>
+ </div>
+</div>
+</div>
+
+</fieldset>
+  </div>
+  <div id="menu1" class="tab-pane fade">
+      <h3>All Contracts</h3>
+      <div class="btn-group btn-group-xs">
+          <button class="btn btn-default btn-xs" data-toggle="modal" href="#addContract">Add Contracts</button>
+      </div>
+      <br /><p></p>
+      <table class="table table-striped table-hover table-bordered table-condensed" id="table2" >
+        <thead>
+          <tr>
+        <th>
+           <label class="text-right">Title</label> 
+        </th>
+        <th>
+           Start Date
+        </th>
+        <th>
+           End Date
+        </th>
+        <th>
+           State
+        </th>
+              <th>
+                  Branch 
+              </th>
+              <th>
+                  Department
+              </th>
+              <th>
+                  Position
+              </th>
+
+     </tr>
+        </thead>
+        @{ if (ViewBag.Contracts != null)
+            {
+
+                foreach (var item in ViewBag.Contracts)
+                {
+         <tr>
+        <td>
+            <span data-placement="left" data-toggle="tooltip" title="Edit">
+                <a href="#editContract" class="editContract" data-toggle="modal" data-id='["@item.cntrct_title","@item.cntrct_sdate","@item.cntrct_edate","@item.cntrct_state","@item.cntrct_desc","@item.dpt_id","@item.br_id","@item.pos_id"]'> <span class="glyphicon glyphicon-pencil"></span></a>
+            </span>
+            <span data-placement="left" data-toggle="tooltip" title="View">
+                <a href="#viewContract" class="viewContract" data-toggle="modal" data-id='["@item.cntrct_title","@item.cntrct_sdate","@item.cntrct_edate","@item.tblContractState.cntrct_state","@item.cntrct_desc","@item.tblDepartment.dpt_name","@item.tblBranch.br_name","@item.tblPosition.pos_title"]'> <span class="glyphicon glyphicon-check"> </span></a>
+            </span>
+            <span data-placement="left" data-toggle="tooltip" title="Delete">
+                <a href="#deleteContract" class="deleteContract" data-toggle="modal" data-id='["@item.cntrct_title","@item.cntrct_id","@item.tblPosition.pos_title"]'> <span class="glyphicon glyphicon-trash"></span> </a>
+            </span>
+                @item.cntrct_title
+</td>
+        <td>
+             @String.Format("{0:dd-MMM-yyyy}", item.cntrct_sdate)
+        </td>
+        <td>
+            @{ try { String.Format("{0:dd-MMM-yyyy}", item.cntrct_edate); } catch { } }
+        </td>
+        <td>
+             @item.tblContractState.cntrct_state
+        </td>
+             <td>
+                 @item.tblBranch.br_name
+             </td>
+             <td>
+                 @item.tblDepartment.dpt_name
+             </td>
+             <td>
+                 @item.tblPosition.pos_title 
+             </td>
+    </tr>
+                       
+          }
+               
+           }
+        }
+        </table>
+  </div>
+  <div id="menu2" class="tab-pane fade">
+      <h3>Education</h3>
+      <div class="btn-group btn-group-xs">
+          <button class="btn btn-default btn-xs" data-toggle="modal" href="#addEducation" >Add Qualifications</button>
+      </div>
+      <br /><p></p>
+
+      <table class="table table-striped table-hover table-bordered table-condensed" id="table1" >
+        <thead>
+          <tr>
+        <th>
+           Institution Name
+        </th>
+        <th>
+            Level 
+        </th>
+        <th>
+           Qualifications
+        </th>
+        <th>
+           Score
+        </th>
+              <th>
+                  Start Date
+              </th>
+              <th>
+                 End Date
+              </th>
+     </tr>
+        </thead>
+        @{ if(ViewBag.education != null){
+
+                foreach(var item in ViewBag.education)
+                {
+         <tr>
+        <td>
+            <a href="#editContract" data-toggle="modal" data-id=""> <span class="glyphicon glyphicon-pencil"></span></a>
+            <a href="#viewContract" class="viewContract" data-toggle="modal" data-id=""> <span class="glyphicon glyphicon-check"> </span></a>
+            <a href="#deleteContract" class="deleteContract" data-toggle="modal" data-id=""> <span class="glyphicon glyphicon-trash"></span> </a>
+            @item.edu_name
+        </td>
+        <td>
+            @item.tblEduLevel.edu_lv_name
+        </td>
+        <td>
+             @item.edu_qlfcn
+        </td>
+        <td>
+            @item.edu_score
+        </td>
+@try
+{
+    <td>
+        @String.Format("{0:dd-MMM-yyyy}", item.edu_sdate)
+    </td>
+}
+catch
+{
+     }
+@try
+{
+    <td>
+        @String.Format("{0:dd-MMM-yyyy}", item.edu_edate)
+    </td>
+}
+catch
+{
+            }
+
+    </tr>
+                       
+          }
+               
+           }
+        }
+        </table>
+  </div>
+  <div id="menu3" class="tab-pane fade">
+      <h3>Work Experience</h3>
+      <div class="btn-group btn-group-xs">
+          <button class="btn btn-default btn-xs" data-toggle="modal" href="#addWork">Add Work Experience</button>
+      </div>
+      <br /><p></p>
+      <table class="table table-striped table-hover table-bordered table-condensed" id="table1" >
+        <thead>
+          <tr>
+        <th>
+           Company Name
+        </th>
+        <th>
+            Position
+        </th>
+        <th>
+           Start Date
+        </th>
+        <th>
+           End Date
+        </th>
+     </tr>
+        </thead>
+        @{ if(ViewBag.work!=null){
+               
+          foreach(var item in ViewBag.work)
+          { 
+         <tr>
+        <td>
+            <a href="#editContract" data-toggle="modal" data-id=""> <span class="glyphicon glyphicon-pencil"></span></a>
+            <a href="#viewContract" class="viewContract" data-toggle="modal" data-id=""> <span class="glyphicon glyphicon-check"> </span></a>
+            <a href="#deleteContract" class="deleteContract" data-toggle="modal" data-id=""> <span class="glyphicon glyphicon-trash"></span> </a>
+            @item.wk_company
+        </td>
+        <td>
+            @item.wk_position
+        </td>
+        @try
+        {
+        <td>
+          @String.Format("{0:dd-MMM-yyyy}", item.wk_sdate)
+        </td>
+        }
+        catch
+        {
+             }
+        @try
+        {
+        <td>
+            @String.Format("{0:dd-MMM-yyyy}", item.wk_edate)
+        </td>
+        }
+        catch { }
+
+    </tr>
+                       
+          }
+               
+           }
+        }
+        </table>
+  </div>
+  <div id="menu4" class="tab-pane fade">
+    <h4>Training Schedule</h4>
+      <div class="row">
+          <div class="col-md-6">
+              <div class="panel panel-info">
+                  <h4>Available Courses</h4>
+                  <div class="panel-body">
+                      <table class="table table-striped table-hover table-bordered table-condensed" id="table1">
+                          <thead>
+                              <tr>
+                                  <th>
+                                      Course Name
+                                  </th>
+
+                              </tr>
+                          </thead>
+                          @{ if (ViewBag.Courses != null)
+                        {
+
+                            foreach (var item in ViewBag.Courses)
+                            {
+                                      <tr>
+                                          <td>
+                                              <div class="row">
+                                                  <div class="col-md-9 col-sm-12">
+                                                      <img src="~/Content/cssimages/documents.png" width="30" height="30" />&nbsp;&nbsp; <b>@item.course_nm </b>
+                                          </div>
+                                          <div class="col-md-3 col-sm-12">
+                                              <div class="btn-group btn-group-sm">
+                                                  <a class="btn btn-default identifyingClass" data-id='["@item.course_nm","@item.course_id"]' data-toggle="modal" href="#enrolCourse" ><div style="color:#2facc2">Enroll</div></a>
+                                              </div>
+                                              <div class="btn-group btn-group-sm">
+                                                  <a class="btn btn-default viewCourse" data-id='["@item.course_nm","@item.tblCourseType.type_name","@item.course_dur","@item.course_descr"]' data-toggle="modal" href="#viewCourse"><div style="color:#2facc2">View Details</div></a>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </td>
+
+
+                              </tr>
+
+                            }
+
+                        }
+                          }
+                      </table>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-6">
+            <div class="panel panel-info">
+                <h4>Courses Enrolled</h4>
+                <div class="panel-body">
+                    <table class="table table-striped table-hover table-bordered table-condensed" id="table1">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Course Name
+                                </th>
+
+                            </tr>
+                        </thead>
+                        @{ if (ViewBag.Courses_Enrolled != null)
+                            {
+
+                                foreach (var item in ViewBag.Courses_Enrolled)
+                                {
+                                    <tr>
+                                        <td>
+                                            <div class="row">
+                                                <div class="col-md-8 col-sm-12">
+                                                    <img src="~/Content/cssimages/documents.png" width="30" height="30" />&nbsp;&nbsp; <b>@item.tblCours.course_nm </b>                                                    
+                                                </div>
+                                                <div class="col-md-1 col-sm-12">
+                                                    <b>@item.tr_status </b>
+                                                </div>
+                                                <div class="col-md-3 col-sm-12">
+                                                    <div class="btn-group btn-group-sm">
+                                                        <a class="btn btn-default identifyingClass" data-id="" data-toggle="modal" href="#enrolCourse"><div style="color:#2facc2">Un-Enroll</div></a>
+                                                        </div>
+                                                        <div class="btn-group btn-group-sm">
+                                                            <a class="btn btn-default viewTraining" data-id='["@item.tblCours.course_nm","@item.tr_status","@item.tr_score.","@String.Format("{0:dd-MMM-yyyy}",item.tr_sdate)","@String.Format("{0:dd-MMM-yyyy}",item.tr_edate)","@item.tr_comments"]' data-toggle="modal" href="#viewTraining"><div style="color:#2facc2">View Details</div></a>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                        </td>
+
+
+                                    </tr>
+
+                                }
+
+                            }
+                        }
+                    </table>
+                </div>
+            </div>
+          </div>
+      </div>
+  </div>
+  <div id="menu5" class="tab-pane fade">
+      <h3>Achievements</h3>
+      <div class="btn-group btn-group-xs">
+          <button class="btn btn-default btn-xs" data-toggle="modal" href="#addAchievement">Add Achievement</button>
+      </div>
+      <br /><p></p>
+      <table class="table table-striped table-hover table-bordered table-condensed" id="table1">
+          <thead>
+              <tr>
+                  <th>
+                      Achievement Name
+                  </th>
+                  <th>
+                      Achievement Date
+                  </th>
+              </tr>
+          </thead>
+          @{ if (ViewBag.Achievement != null)
+              {
+
+                  foreach (var item in ViewBag.Achievement)
+                  {
+                      <tr>
+                          <td>
+                              <a href="#editContract" data-toggle="modal" data-id=""> <span class="glyphicon glyphicon-pencil"></span></a>
+                              <a href="#viewContract" class="viewContract" data-toggle="modal" data-id=""> <span class="glyphicon glyphicon-check"> </span></a>
+                              <a href="#deleteContract" class="deleteContract" data-toggle="modal" data-id=""> <span class="glyphicon glyphicon-trash"></span> </a>
+                              @item.achvt_name
+                          </td>
+                          @try
+                          {
+                              <td>
+                                  @String.Format("{0:dd-MMM-yyyy}", item.achvt_date)
+                              </td>
+                          }
+                          catch
+                          {
+                          }
+
+                      </tr>
+
+                  }
+
+              }
+          }
+      </table>
+  </div>
+  <div id="menu6" class="tab-pane fade">
+      <h3>Perfomance Evaluation</h3>
+      <div class="btn-group btn-group-xs">
+          <button class="btn btn-default btn-xs" data-toggle="modal" href="#addPerfomance">Perfomance Review</button>
+      </div>
+      <br /><p></p>
+      <table class="table table-striped table-hover table-bordered table-condensed" id="table1">
+          <thead>
+              <tr>
+                  <th>
+                      KPI Title
+                  </th>
+                  <th>
+                      Period
+                  </th>
+                  <th>
+                      Score
+                  </th>
+                  <th>
+                      Date
+                  </th>
+              </tr>
+          </thead>
+          @{ if (ViewBag.KPI != null)
+              {
+
+                  foreach (var item in ViewBag.KPI)
+                  {
+                      <tr>
+                          <td>
+                              <a href="#editContract" data-toggle="modal" data-id=""> <span class="glyphicon glyphicon-pencil"></span></a>
+                              <a href="#viewContract" class="viewContract" data-toggle="modal" data-id=""> <span class="glyphicon glyphicon-check"> </span></a>
+                              <a href="#deleteContract" class="deleteContract" data-toggle="modal" data-id=""> <span class="glyphicon glyphicon-trash"></span> </a>
+                              @item.kpi_title
+                          </td>
+                          <td>
+                              @item.kpi_prd
+                          </td>
+                          <td>
+                              @item.kpi_score
+                          </td>
+                          @try
+                          {
+                              <td>
+                                  @String.Format("{0:dd-MMM-yyyy}", item.kpi_date)
+                              </td>
+                          }
+                          catch { }
+
+                      </tr>
+
+                  }
+
+              }
+          }
+      </table>
+  </div>
+  <div id="menu9" class="tab-pane fade">
+      <h3>All Documents</h3>
+      <div class="btn-group btn-group-xs">
+          <button class="btn btn-default btn-xs" data-toggle="modal" href="#uploadDocument">Upload Documents</button>
+      </div>
+      <br /><p></p>
+      <table class="table table-striped table-hover table-bordered table-condensed" id="table1">
+          <thead>
+              <tr>
+                  <th>
+                      Document Name
+                  </th>
+                  
+              </tr>
+          </thead>
+          @{ if (ViewBag.Documents != null)
+              {
+
+                  foreach (var item in ViewBag.Documents)
+                  {
+                      <tr>
+                          <td>
+                              <div class="row">
+                                  <div class="col-md-10 col-sm-12">
+                                      <img src="~/Content/cssimages/documents.png" width="30" height="30" />&nbsp;&nbsp; <b>@item.doc_name </b>
+                                  </div> 
+                                  <div class="col-md-2 col-sm-12">
+                                      <div class="btn-group btn-group-sm">
+                                          <a class="btn btn-default" href="@Url.Action("DownloadDocument", new {id = item.doc_id })"><div style="color:#2facc2">Download</div></a>
+                                      </div>
+                                      <div class="btn-group btn-group-sm">
+                                          <a class="btn btn-default" href="@Url.Action("DeleteDocument", new {id = item.doc_id })"><div style="color:#2facc2">Delete</div></a>
+                                      </div>
+                                  </div>
+                              </div>    
+                          </td>
+                         
+
+                      </tr>
+
+                  }
+
+              }
+          }
+      </table>
+  </div>
+  <div id="menu11" class="tab-pane fade">
+        <h3>Leave Days</h3>
+        <p>All other information</p>
+  </div>
+  <div id="menu12" class="tab-pane fade">
+        <h3>Payroll Information</h3>
+        <p>All other information</p>
+  </div>
+    <hr />
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.emp_id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p> 
+    <nav>
+        <ul class="pager">
+            @{if (ViewBag.Last != 0)
+                {
+                    <li class="previous"><a href="/Employee/Details?id=@ViewBag.Last"><span aria-hidden="true">&larr;</span> Last</a></li>
+
+                }
+            }
+
+            @{if (ViewBag.Next != 0)
+                {
+                    <li class="next"><a href="/Employee/Details?id=@ViewBag.Next"> Next<span aria-hidden="true">&rarr;</span></a></li>
+
+                }
+
+            }
+        </ul>
+    </nav>   
+</div>
+
+<div id="uploadModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Upload Image</h4>
+            </div>
+            <div class="modal-body">
+    @using (Html.BeginForm("UploadFile", "Employee", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+         @Html.HiddenFor(model => model.emp_id)
+          <fieldset>
+            <legend></legend>
+             <label class="btn btn-primary" for="my-file-selector">
+                    <input id="uploadFile" type="file" name="uploadFile"  class="form-control" >
+                         Choose File
+             </label>
+                <span class='label label-info' id="upload-file-info"></span>
+           <hr class="featurette-divider" />
+                <input type="submit" class="btn btn-primary btn-sm" value ="Upload" />
+					 <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
+    </fieldset>  
+    }         
+            </div>
+        </div>
+        </div>
+ </div>
+
+<div id="uploadDocument" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Upload Documents</h4>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("UploadDocuments", "Employee", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    @Html.HiddenFor(model => model.emp_id)
+                    <div class="form-group form-group-sm">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12">
+
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <label for="sdate">Document Name:</label>
+                                        <input type="text" class="form-control" id="doc_name" name="doc_name" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <label for="ecnum">Document:</label>
+                                        <input type="file" class="form-control" id="other_doc" name="other_doc">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <br />
+                                        <input type="submit" class="btn btn-primary btn-sm form-control" value="Upload">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                }
+                <legend></legend>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="enrolCourse" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Enroll Course</h4>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("EnrolCourse", "Employee", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    @Html.HiddenFor(model => model.emp_id)
+                    <div class="form-group form-group-sm">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12">
+
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <label for="sdate">Course Name:</label>
+                                        <input type="text" class="form-control" id="cs_name" name="cs_name" value="" />
+                                        <input type="hidden" class="form-control" id="cs_id" name="cs_id" value="" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <label for="sdate">Start Date:</label>
+                                        <input type="date" class="form-control" id="cs_start" name="cs_start" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <label for="sdate">End Date:</label>
+                                        <input type="date" class="form-control" id="cs_end" name="cs_end" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <label for="sdate">Comments:</label>
+                                        <textarea class="form-control" rows="5" id="cs_cmnt" name="cs_cmnt"></textarea>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <br />
+                                        <input type="submit" class="btn btn-primary btn-sm form-control" value="Enroll">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                }
+                <legend></legend>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="viewCourse" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Course Details</h4>
+            </div>
+            <div class="modal-body">
+                    <div class="form-group form-group-sm">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12">
+
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <label for="sdate">Course Name:</label>
+                                        <input type="text" class="form-control" id="cs_name" name="cs_name" value="" readonly/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <label for="sdate">Course Duration:</label>
+                                        <input type="text" class="form-control" id="cs_duration" name="cs_duration" value="" readonly/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <label for="sdate">Course Category:</label>
+                                        <input type="text" class="form-control" id="cs_category" name="cs_category" value="" readonly/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <label for="sdate">Course Description:</label>
+                                        <textarea class="form-control" rows="5" id="cs_description" name="cs_description" value="" readonly></textarea>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <br />
+                                        <input data-dismiss="modal" class="btn btn-success btn-sm form-control" value="Close ">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                <legend></legend>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="viewTraining" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Enroll Course</h4>
+            </div>
+            <div class="modal-body">
+                    <div class="form-group form-group-sm">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12">
+
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <label for="sdate">Course Name:</label>
+                                        <input type="text" class="form-control" id="cs_name" name="cs_name" value="" readonly/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <label for="sdate">Course Status:</label>
+                                        <input type="text" class="form-control" id="cs_status" name="cs_status" readonly />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <label for="sdate">Course Score:</label>
+                                        <input type="text" class="form-control" id="cs_score" name="cs_score" readonly />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <label for="sdate">Start Date:</label>
+                                        <input type="text" class="form-control" id="cs_start" name="cs_start" readonly />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <label for="sdate">End Date:</label>
+                                        <input type="text" class="form-control" id="cs_end" name="cs_end" readonly/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <label for="sdate">Comments:</label>
+                                        <textarea class="form-control" rows="5" id="cs_description" name="cs_description" readonly></textarea>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <br />
+                                        <input type="button" class="btn btn-success btn-sm form-control" data-dismiss="modal" value="Close">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                <legend></legend>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="addContract" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Contract</h4>
+            </div>
+            <div class="modal-body">
+@using (Html.BeginForm("AddContract", "Employee", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.emp_id)
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <label for="kinaddress">Contract Title:</label>
+                            <input type="text" class="form-control" id="cntrct_title" name="cntrct_title">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <label for="contract">Contract Type</label>
+                            <select class="form-control" id="cntrct_state" name="cntrct_state">
+                                @{ if (ViewBag.emp_state != null)
+                                    {
+                                        foreach (var i in ViewBag.emp_state)
+                                        {
+                                            <option value="@i.stat_id">@i.stat_name</option>
+                                        }
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <label for="contract">Contract Status</label>
+                            <select class="form-control" id="cntrct_status" name="cntrct_status">
+                                @{ if (ViewBag.Contract_state != null)
+                                    {
+                                        foreach (var i in ViewBag.Contract_state)
+                                        {
+                                            <option value="@i.cntrct_st_id">@i.cntrct_state</option>
+                                        }
+                                    }
+                                }
+                            </select>
+                        </div>
+                        </div>
+
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <label for="contract">Department</label>
+                            <select class="form-control" id="cntrct_dpt" name="cntrct_dpt">
+                                @{ if (ViewBag.emp_dpt != null)
+                                    {
+                                        foreach (var i in ViewBag.emp_dpt)
+                                        {
+                                            <option value="@i.dpt_id">@i.dpt_name</option>
+                                        }
+                                    }
+                                }
+                            </select>
+                        </div>  
+                        <div class="col-sm-12 col-md-6">
+                            <label for="contract">Position</label>
+                            <select class="form-control" id="cntrct_position" name="cntrct_position">
+                                @{ if (ViewBag.emp_pos_ID != null)
+                                    {
+                                        foreach (var i in ViewBag.emp_pos_ID)
+                                        {
+                                            <option value="@i.pos_id">@i.pos_title</option>
+                                        }
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <label for="contract">Branch</label>
+                            <select class="form-control" id="cntrct_branch" name="cntrct_branch">
+                                @{ if (ViewBag.emp_branch != null)
+                                    {
+                                        foreach (var i in ViewBag.emp_branch)
+                                        {
+                                            <option value="@i.br_id">@i.br_name</option>
+                                        }
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <label for="kin_phone">Start Date:</label>
+                            <input type="date" class="form-control" id="cntrct_sdate" name="cntrct_sdate">
+                        </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12">
+                                <label for="kin_rel">End Date:</label>
+                                <input type="date" class="form-control" id="cntrct_edate" name="cntrct_edate">
+
+                            </div>
+                        </div>
+                </div>
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <label for="cntrct_desc">Contract Additional Information:</label>
+                            <textarea class="form-control" rows="5" id="cntrct_desc" name="cntrct_desc"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-12">
+                        <br />
+                        <input  type="submit" class="btn btn-success btn-sm form-control" value="Save">
+                    </div>
+                </div>
+                                    }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="editContract" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Edit Contract</h4>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("EditContract", "Employee", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    @Html.HiddenFor(model => model.emp_id)
+                    <div class="form-group form-group-sm">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12">
+                                <label for="kinaddress">Contract Title:</label>
+                                <input type="text" class="form-control" id="cntrct_title" name="cntrct_title">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <label for="contract">Contract Type</label>
+                                <select class="form-control" id="cntrct_type" name="cntrct_type">
+                                    @{ if (ViewBag.emp_state != null)
+                                        {
+                                            foreach (var i in ViewBag.emp_state)
+                                            {
+                                                <option value="@i.stat_id">@i.stat_name</option>
+                                            }
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="contract">Contract Status</label>
+                                <select class="form-control" id="cntrct_state" name="cntrct_state">
+                                    @{ if (ViewBag.Contract_state != null)
+                                        {
+                                            foreach (var i in ViewBag.Contract_state)
+                                            {
+                                                <option value="@i.cntrct_st_id">@i.cntrct_state</option>
+                                            }
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <label for="contract">Department</label>
+                                <select class="form-control" id="cntrct_dpt" name="cntrct_dpt">
+                                    @{ if (ViewBag.emp_dpt != null)
+                                        {
+                                            foreach (var i in ViewBag.emp_dpt)
+                                            {
+                                                <option value="@i.dpt_id">@i.dpt_name</option>
+                                            }
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="contract">Position</label>
+                                <select class="form-control" id="cntrct_position" name="cntrct_position">
+                                    @{ if (ViewBag.emp_pos_ID != null)
+                                        {
+                                            foreach (var i in ViewBag.emp_pos_ID)
+                                            {
+                                                <option value="@i.pos_id">@i.pos_title</option>
+                                            }
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12">
+                                <label for="contract">Branch</label>
+                                <select class="form-control" id="cntrct_branch" name="cntrct_branch">
+                                    @{ if (ViewBag.emp_branch != null)
+                                        {
+                                            foreach (var i in ViewBag.emp_branch)
+                                            {
+                                                <option value="@i.br_id">@i.br_name</option>
+                                            }
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-sm">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12">
+                                <label for="kin_phone">Start Date:</label>
+                                <input type="date" class="form-control" id="cntrct_sdate" name="cntrct_sdate">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12">
+                                <label for="kin_rel">End Date:</label>
+                                <input type="date" class="form-control" id="cntrct_edate" name="cntrct_edate">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-sm">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12">
+                                <label for="cntrct_desc">Contract Additional Information:</label>
+                                <textarea class="form-control" rows="5" id="cntrct_desc" name="cntrct_desc"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <br />
+                            <input type="submit" class="btn btn-success btn-sm form-control" value="Save">
+                        </div>
+                    </div>
+                                        }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="viewContract" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Contract Details</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <label for="kinaddress">Contract Title:</label>
+                            <input type="text" class="form-control" id="cntrct_title" name="cntrct_title" value="" readonly>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <label for="contract">Contract Type</label>
+                            <input type="text" class="form-control" id="cntrct_status" name="cntrct_status" value="" readonly>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <label for="contract">Contract Status</label>
+                            <input type="text" class="form-control" id="cntrct_state" name="cntrct_state" value="" readonly>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <label for="contract">Department</label>
+                            <input type="text" class="form-control" id="cntrct_dpt" name="cntrct_dpt" value="" readonly>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <label for="contract">Position</label>
+                           <input type="text" class="form-control" id="cntrct_position" name="cntrct_position" value="" readonly>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <label for="contract">Branch</label>
+                            <input type="text" class="form-control" id="cntrct_branch" name="cntrct_branch" value="" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <label for="kin_phone">Start Date:</label>
+                            <input type="text" class="form-control" id="cntrct_sdate" name="cntrct_sdate" readonly>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <label for="kin_rel">End Date:</label>
+                            <input type="text" class="form-control" id="cntrct_edate" name="cntrct_edate" readonly>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <label for="cntrct_desc">Contract Additional Information:</label>
+                            <textarea class="form-control" rows="5" id="cntrct_desc" name="cntrct_desc" readonly></textarea>
+                        </div>
+                    </div>
+                </div>
+                <legend></legend>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="deleteContract" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Are You Sure You want to Delete this?</h4>
+            </div>
+            <div class="modal-body">
+            @using (Html.BeginForm("DeleteContract", "Employee", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(model => model.emp_id)
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <label for="kinaddress">Contract Title:</label>
+                            <input type="text" class="form-control" id="cntrct_title" name="cntrct_title" value="" readonly>
+                            <input type="hidden" class="form-control" id="cntrct_id" name="cntrct_id" value="" />
+                      </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <label for="contract">Position</label>
+                            <input type="text" class="form-control" id="cntrct_position" name="cntrct_position" value="" readonly>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="row">
+                        <br />
+                        <div class="col-sm-12 col-md-12">
+                            <input type="submit" class="btn btn-success btn-sm form-control" value="Delete">
+                        </div>
+                    </div>
+            }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="addAchievement" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Achievement</h4>
+            </div>
+            <div class="modal-body">
+        @using (Html.BeginForm("AddAchievement", "Employee", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.emp_id)
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12">
+                                    <label for="sdate">Achievement Name:</label>
+                                    <input type="text" class="form-control" id="achvt_name" name="achvt_name"  />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12">
+                                    <label for="sdate">Achievement Date:</label>
+                                    <input type="date" class="form-control" id="achvt_date" name="achvt_date"  />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12">
+                                    <label for="sdate">Comments:</label>
+                                    <textarea class="form-control" rows="5" id="achvt_comment" name="achvt_comment" ></textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12">
+                                    <br />
+                                    <input type="submit" class="btn btn-success btn-sm form-control"  value="Save">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+}
+                <legend></legend>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="addPerfomance" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Enroll Course</h4>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("AddPerfomance", "Employee", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    @Html.HiddenFor(model => model.emp_id)
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12">
+                                    <label for="sdate">KPI Title:</label>
+                                    <input type="text" class="form-control" id="kpi_title" name="kpi_title"  />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12">
+                                    <label for="sdate">KPI Period:</label>
+                                    <input type="text" class="form-control" id="kpi_prd" name="kpi_prd"  />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12">
+                                    <label for="sdate">KPI Score:</label>
+                                    <input type="text" class="form-control" id="kpi_score" name="kpi_score"  />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12">
+                                    <label for="sdate">KPI Date:</label>
+                                    <input type="date" class="form-control" id="kpi_date" name="kpi_date"  />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12">
+                                    <label for="sdate">KPI Comments:</label>
+                                    <textarea class="form-control" rows="5" id="kpi_comment" name="kpi_comment" ></textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12">
+                                    <br />
+                                    <input type="submit" class="btn btn-success btn-sm form-control"  value="Save">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                }
+                <legend></legend>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="addLeave" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Enroll Course</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12">
+                                    <label for="sdate">Course Name:</label>
+                                    <input type="text" class="form-control" id="cs_name" name="cs_name" value="" readonly />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12">
+                                    <label for="sdate">Course Status:</label>
+                                    <input type="text" class="form-control" id="cs_status" name="cs_status" readonly />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12">
+                                    <label for="sdate">Course Score:</label>
+                                    <input type="text" class="form-control" id="cs_score" name="cs_score" readonly />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12">
+                                    <label for="sdate">Start Date:</label>
+                                    <input type="text" class="form-control" id="cs_start" name="cs_start" readonly />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12">
+                                    <label for="sdate">End Date:</label>
+                                    <input type="text" class="form-control" id="cs_end" name="cs_end" readonly />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12">
+                                    <label for="sdate">Comments:</label>
+                                    <textarea class="form-control" rows="5" id="cs_description" name="cs_description" readonly></textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12">
+                                    <br />
+                                    <input type="button" class="btn btn-success btn-sm form-control" data-dismiss="modal" value="Close">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <legend></legend>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="addEducation" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Education</h4>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("AddEducation", "Employee", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    @Html.HiddenFor(model => model.emp_id)
+                    <div class="form-group form-group-sm">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12">
+                                <label for="kinaddress">Institution/School:</label>
+                                <input type="text" class="form-control" id="edu_school" name="edu_school">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12">
+                                <label for="contract">Education Level</label>
+                                <select class="form-control" id="edu_level" name="edu_level">
+                                    @{ if (ViewBag.edu_level != null)
+                                        {
+                                            foreach (var i in ViewBag.edu_level)
+                                            {
+                                                <option value="@i.edu_lv_id">@i.edu_lv_name</option>
+                                            }
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-sm">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12">
+                                <label for="kin_phone">Qualification:</label>
+                                <input type="text" class="form-control" id="edu_qn" name="edu_qn">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12">
+                                <label for="kin_rel">Score:</label>
+                                <input type="text" class="form-control" id="edu_score" name="edu_score">
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12">
+                                <label for="kin_rel">Start Date:</label>
+                                <input type="date" class="form-control" id="edu_sdate" name="edu_sdate">
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12">
+                                <label for="kin_rel">End Date:</label>
+                                <input type="date" class="form-control" id="edu_edate" name="edu_edate">
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12">
+                                <label for="kin_rel">Education Comments:</label>
+                                <input type="text" class="form-control" id="edu_comments" name="edu_comments">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <br />
+                            <input type="submit" class="btn btn-success btn-sm form-control" value="Save">
+                        </div>
+                    </div>
+                                        }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="addWork" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Experience</h4>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("AddWork", "Employee", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    @Html.HiddenFor(model => model.emp_id)
+                    <div class="form-group form-group-sm">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12">
+                                <label for="kinaddress">Company Name:</label>
+                                <input type="text" class="form-control" id="wk_org" name="wk_org">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12">
+                                <label for="contract">Position</label>
+                                <input type="text" class="form-control" id="wk_pos" name="wk_pos">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12">
+                                <label for="kin_rel">Start Date:</label>
+                                <input type="date" class="form-control" id="wk_sdate" name="wk_sdate">
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12">
+                                <label for="kin_rel">End Date:</label>
+                                <input type="date" class="form-control" id="wk_edate" name="wk_edate">
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12">
+                                <label for="kin_rel">Job Description:</label>
+                                <textarea type="text" class="form-control" id="wk_jd" name="wk_jd" rows="4"></textarea>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12">
+                                <label for="kin_rel">Comments:</label>
+                                <textarea type="text" class="form-control" id="wk_comments" name="wk_comments" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12">
+                                <br />
+                                <input type="submit" class="btn btn-success btn-sm form-control" value="Save">
+                            </div>
+                        </div>
+                    </div>
+                }
+            
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+
+    function popup() {
+        $("#uploadModal").modal()
+    }
+
+    $(function () {
+        $(".identifyingClass").click(function () {
+            var my_id_value = $(this).data('id');
+            $("#enrolCourse").find('input[name="cs_name"]').val(my_id_value[0]);
+            $("#enrolCourse").find('input[name="cs_id"]').val(my_id_value[1]);
+        })
+    });
+
+    $(function () {
+        $(".viewCourse").click(function () {
+            var my_id_value = $(this).data('id');
+            $("#viewCourse").find('input[name="cs_name"]').val(my_id_value[0]);
+            $("#viewCourse").find('input[name="cs_category"]').val(my_id_value[1]);
+            $("#viewCourse").find('input[name="cs_duration"]').val(my_id_value[2]);
+            $("#viewCourse").find('textarea[name="cs_description"]').val(my_id_value[3]);
+        })
+    });
+
+    $(function () {
+        $(".viewTraining").click(function () {
+            var my_id_value = $(this).data('id');
+            $("#viewTraining").find('input[name="cs_name"]').val(my_id_value[0]);
+            $("#viewTraining").find('input[name="cs_status"]').val(my_id_value[1]);
+            $("#viewTraining").find('input[name="cs_score"]').val(my_id_value[2]);
+            $("#viewTraining").find('input[name="cs_start"]').val(my_id_value[3]);
+            $("#viewTraining").find('input[name="cs_end"]').val(my_id_value[4]);
+            $("#viewTraining").find('textarea[name="cs_description"]').val(my_id_value[5]);
+        })
+    });
+
+    $(function () {
+        $(".viewContract").click(function () {
+            var my_id_value = $(this).data('id');
+            $("#viewContract").find('input[name="cntrct_title"]').val(my_id_value[0]);
+            $("#viewContract").find('input[name="cntrct_state"]').val(my_id_value[3]);
+            $("#viewContract").find('input[name="cntrct_dpt"]').val(my_id_value[5]);
+            $("#viewContract").find('input[name="cntrct_position"]').val(my_id_value[7]);
+            $("#viewContract").find('input[name="cntrct_branch"]').val(my_id_value[6]);
+            $("#viewContract").find('input[name="cntrct_sdate"]').val(my_id_value[1]);
+            $("#viewContract").find('input[name="cntrct_edate"]').val(my_id_value[2]);
+            $("#viewContract").find('textarea[name="cntrct_desc"]').val(my_id_value[4]);
+        })
+    });
+    $(function () {
+        $(".editContract").click(function () {
+            var my_id_value = $(this).data('id');
+            alert("I am here");
+            $("#editContract").find('input[name="cntrct_title"]').val(my_id_value[0]);
+            $("#editContract").find('select[name="cntrct_state"]').val(my_id_value[3]);
+            $("#editContract").find('select[name="cntrct_dpt"]').val(my_id_value[5]);
+            $("#editContract").find('select[name="cntrct_position"]').val(my_id_value[7]);
+            $("#editContract").find('select[name="cntrct_branch"]').val(my_id_value[6]);
+            $("#editContract").find('input[name="cntrct_sdate"]').val(my_id_value[1]);
+            $("#editContract").find('input[name="cntrct_edate"]').val(my_id_value[2]);
+            $("#editContract").find('textarea[name="cntrct_desc"]').val(my_id_value[4]);
+        })
+    });
+    $(function () {
+        $(".deleteContract").click(function () {
+            var my_id_value = $(this).data('id');
+            $("#deleteContract").find('input[name="cntrct_title"]').val(my_id_value[0]);
+            $("#deleteContract").find('input[name="cntrct_position"]').val(my_id_value[2]);
+            $("#deleteContract").find('input[name="cntrct_id"]').val(my_id_value[1]);
+        })
+    });
+
+</script>

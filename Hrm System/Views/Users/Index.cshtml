@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Hrm_System.Models.tblUser>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-striped table-hover table-bordered table-condensed" >
+    <tr>
+        <th>
+            Username
+        </th>
+        <th>
+            User Role
+        </th>
+        <th>
+            Employee Id
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.user_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.user_role)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tblEmployee.emp_id)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.emp_id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.emp_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.emp_id })
+        </td>
+    </tr>
+}
+
+</table>

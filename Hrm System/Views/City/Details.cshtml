@@ -1,0 +1,36 @@
+﻿@model Hrm_System.Models.tblCity
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>tblCity</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.cty_id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.cty_id)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.cty_name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.cty_name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.tblProvince.prov_name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.tblProvince.prov_name)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

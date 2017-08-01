@@ -1,0 +1,21 @@
+﻿@model Hrm_System.Models.tblGender
+
+@{
+    ViewBag.Title = "Gender";
+}
+
+<h2>Gender</h2>
+
+<fieldset>
+    <legend></legend>
+    <div class="display-label">
+         Gender
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.emp_sex)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.emp_sx_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
