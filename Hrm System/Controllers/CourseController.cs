@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Hrm_System.Models;
+using PagedList;
 
 namespace Hrm_System.Controllers
 {
@@ -15,10 +16,10 @@ namespace Hrm_System.Controllers
         private HRMEntities db = new HRMEntities();
 
         // GET: Course
-        public ActionResult Index()
+        public ActionResult Index(int page=1)
         {
             var tblCourses = db.tblCourses.Include(t => t.tblCourseType);
-            return View(tblCourses.ToList());
+            return View(tblCourses.OrderBy(c => c.course_id).ToPagedList(page, 50));
         }
 
         // GET: Course/Details/5

@@ -329,6 +329,9 @@
     <Compile Include="Models\tblTraining.cs">
       <DependentUpon>HrmModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tblTrainingSession.cs">
+      <DependentUpon>HrmModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tblUser.cs">
       <DependentUpon>HrmModel.tt</DependentUpon>
     </Compile>
@@ -694,6 +697,7 @@
     <Content Include="Content\kendo\2015.2.902\Uniform\sprite_kpi_2x.png" />
     <Content Include="Content\LoginStyle.css" />
     <Content Include="Content\mystyle.css" />
+    <Content Include="Content\NavBar.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
@@ -744,6 +748,7 @@
       <LastGenOutput>HrmModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <Content Include="Content\cssimages\DSC_0010.JPG" />
+    <Content Include="images\employees.png" />
     <Content Include="images\eullen.jpg" />
     <Content Include="images\ash.jpg" />
     <Content Include="images\ashbel.jpg" />
@@ -1952,6 +1957,7 @@
     <Content Include="Views\EducationLevel\Details.cshtml" />
     <Content Include="Views\EducationLevel\Edit.cshtml" />
     <Content Include="Views\EducationLevel\Index.cshtml" />
+    <Content Include="Views\Course\CoursesPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

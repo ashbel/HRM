@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Hrm_System.Models;
+using System.Collections;
 
 namespace Hrm_System.Controllers
 {
@@ -18,7 +19,55 @@ namespace Hrm_System.Controllers
 
         public ActionResult Index()
         {
+            List<String[]> p = new List<String[]>();
+            ArrayList types = new ArrayList();
+            ArrayList add = new ArrayList();
             var tblleaves = db.tblLeaves.Include(t => t.tblEmployee).Include(t => t.tblLvType);
+            var leavetypes = db.tblLvTypes;
+           
+            foreach(var item in leavetypes)
+            {
+                types.Add(item.lvtyp_title);
+            }
+
+            var employees = db.tblEmployees;
+            foreach (var emp in employees)
+            {
+                String employee = emp.emp_name+" "+emp.emp_lname;
+                String date = "";
+                Decimal bal = 0;
+                var leaves = db.tblLeaves.Where(c => c.emp_id==emp.emp_id);
+                foreach (var item in leaves)
+                {
+                    date = "," + item.lv_period;
+                    add.Add(item.tblLvType.lvtyp_title);
+                    foreach (var y in types)
+                    {
+                            if (y.ToString() == item.tblLvType.lvtyp_title)
+                            {
+                                bal = item.lv_bal ?? 0;
+                                employee = employee + "," + bal;
+                            }
+                    }
+
+                }
+                foreach (var y in types)
+                {
+                    if (add.Contains(y.ToString())) {   }
+                    else
+                    {
+                        bal = 0;
+                        employee = employee + "," + bal;
+                    }
+                }
+                employee = employee + date;
+                String[] emp_array = employee.Split(',');
+                p.Add(emp_array);
+            }
+            var leave_groups = db.tblLeaves.GroupBy(c=>c.tblLvType.lvtyp_title);
+            var leave_list = db.LeaveList();
+            ViewBag.LeaveGroup = leavetypes;
+            ViewBag.LeaveTypes = p;
             return View(tblleaves.ToList());
         }
 

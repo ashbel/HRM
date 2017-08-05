@@ -1,0 +1,48 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@model IPagedList<Hrm_System.Models.tblCours>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                Course Name
+            </th>
+            <th>
+                Duration
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Type
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.course_nm)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.course_dur)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.course_descr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tblCourseType.type_name)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.course_id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.course_id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.course_id })
+                </td>
+            </tr>
+        }
+
+    </table>

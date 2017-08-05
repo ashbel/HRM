@@ -7,76 +7,148 @@
     }
 
     <h2>Employees</h2>
-
-    <div style="float:right; width:20%;text-align:right;">
-        @using (
-        Html.BeginForm("Index", "DebitOrder"))
-        {@Html.AntiForgeryToken()
-        <div class="input-group input-group-sm">
-            <input id="SearchBox" type="text" name="name" class="form-control" placeholder="User Id...">
-            <span class="input-group-btn">
-                <button class="btn btn-default" type="submit" id="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-            </span>
-        </div>
-        }
-    </div>
-    <div style="float:left;width:80%">
-        <div class="btn-group btn-group-xs">
-            <a class="btn btn-default" href="@Url.Action("Create")"><div style="color:#2facc2">New Employee</div></a>
-            @*<button type="button" class="btn btn-default "> @Html.ActionLink("Create New", "Create")</button>*@
-        </div>
-    </div>
+    <ul class="nav nav-pills pills-secondary">
+        <li class="active"><a data-toggle="tab" href="#home"><b>Dashboard</b></a></li>
+        <li><a data-toggle="tab" href="#menu1"><b>Employee List</b></a></li>
+        <li><a data-toggle="tab" href="#menu2"><b>Employee History</b></a></li>
+        <li><a data-toggle="tab" href="#menu3"><b>Employee Type</b></a></li>
+    </ul>
     <hr />
-    <table class="table table-striped table-hover table-bordered table-condensed " id="table1">
-        <thead>
-            <tr>
-                <th>
-                    Name
-                </th>
-                <th>
-                    Branch
-                </th>
-                <th>
-                    Department
-                </th>
-                <th>
-                    Title
-                </th>
-                <th>
-                    Status
-                </th>
-            </tr>
-        </thead>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.emp_name)
-
-                    @Html.DisplayFor(modelItem => item.emp_lname)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.tblBranch.br_name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.tblDepartment.dpt_name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.tblPosition.pos_title)
-                    <a href=" @item.emp_id "></a>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.tblEmployeeStatu.empst_title)
-                </td>
-            </tr>
-        }
-
-    </table>
-    <hr class="featurette-divider" />
-                     <div class="pagination">
-                         @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), PagedListRenderOptions.PageNumbersOnly)
+    <div class="tab-content">
+        <div id="home" class="tab-pane fade in active">
+         
+         <div class="row">
+             <div class="col-md-2">
+                 <div class="thumbnail">
+                     <div class="caption">
+                         <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;">@ViewBag.Active</div>
+                         <h4 style="text-align:center;">Employees</h4>
                      </div>
+                 </div>
+                 </div>
+             <div class="col-md-2">
+                 <div class="thumbnail">
+                     <img class="img-responsive" src="~/images/employees.png"  width="150" height="150"/>
+                     <div class="caption">
+                         <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;">@ViewBag.Departments</div>
+                         <h4 style="text-align:center;">Departments</h4>
+                     </div>
+                 </div>
+             </div>
+             <div class="col-md-2">
+                 <div class="thumbnail">
+                     <div class="caption">
+                         <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;">@ViewBag.Positions</div>
+                         <h4 style="text-align:center;">Positions</h4>
+                     </div>
+                 </div>
+             </div>
+             <div class="col-md-2">
+                 <div class="thumbnail">
+                     <div class="caption">
+                         <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;">@ViewBag.AverageAge</div>
+                         <h4 style="text-align:center;">Average Age</h4>
+                     </div>
+                 </div>
+             </div>
+             <div class="col-md-2">
+                 <div class="thumbnail">
+                     <div class="caption">
+                         <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;">@ViewBag.AverageWork</div>
+                         <h4 style="text-align:center;">Average Work</h4>
+                     </div>
+                 </div>
+             </div>
+             <div class="col-md-2">
+                 <div class="thumbnail">
+                     <div class="caption">
+                         <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;">80%</div>
+                         <h4 style="text-align:center;">Employee Productivity</h4>
+                     </div>
+                 </div>
+             </div>
+         </div>
+        </div>
+        <div id="menu1" class="tab-pane fade">
+            <div style="float:right; width:20%;text-align:right;">
+                @using (
+               Html.BeginForm("Index", "DebitOrder"))
+                {@Html.AntiForgeryToken()
+                    <div class="input-group input-group-sm">
+                        <input id="SearchBox" type="text" name="name" class="form-control" placeholder="User Id...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit" id="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                        </span>
+                    </div>
+                }
+            </div>
+            <div style="float:left;width:80%">
+                <div class="btn-group btn-group-xs">
+                    <a class="btn btn-default" href="@Url.Action("Create")"><div style="color:#2facc2">New Employee</div></a>
+                    @*<button type="button" class="btn btn-default "> @Html.ActionLink("Create New", "Create")</button>*@
+                </div>
+            </div>
+            <table class="table table-striped table-hover table-bordered table-condensed " id="table1">
+                <thead>
+                    <tr>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Branch
+                        </th>
+                        <th>
+                            Department
+                        </th>
+                        <th>
+                            Title
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                    </tr>
+                </thead>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.emp_name)
+
+                            @Html.DisplayFor(modelItem => item.emp_lname)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tblBranch.br_name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tblDepartment.dpt_name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tblPosition.pos_title)
+                            <a href=" @item.emp_id "></a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tblEmployeeStatu.empst_title)
+                        </td>
+                    </tr>
+                }
+
+            </table>
+            <div class="pagination">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), PagedListRenderOptions.PageNumbersOnly)
+            </div>
+        </div>
+        <div id="menu2" class="tab-pane fade">
+            <h3>Education</h3>
+        </div>
+        <div id="menu3" class="tab-pane fade">
+            <h3>Work Experience</h3>
+        </div>
+      <hr />
+    </div>
+
+    <hr class="featurette-divider" />
+
 
     <script>
         $(function () {
@@ -116,4 +188,6 @@
                 window.location = "/Employee/Details?id=" + href;
             }
         });
-    </script>
+
+
+ </script>

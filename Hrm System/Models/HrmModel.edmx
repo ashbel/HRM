@@ -434,6 +434,19 @@
           <Property Name="tr_status" Type="varchar" MaxLength="50" />
           <Property Name="tr_score" Type="varchar" MaxLength="50" />
           <Property Name="tr_comments" Type="varchar" MaxLength="500" />
+          <Property Name="tr_sess_id" Type="int" />
+        </EntityType>
+        <EntityType Name="tblTrainingSession">
+          <Key>
+            <PropertyRef Name="tr_sess_id" />
+          </Key>
+          <Property Name="tr_sess_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="course_id" Type="int" />
+          <Property Name="tr_sdate" Type="date" />
+          <Property Name="tr_edate" Type="date" />
+          <Property Name="tr_sess_name" Type="varchar" MaxLength="50" />
+          <Property Name="tr_sess_desc" Type="varchar(max)" />
+          <Property Name="tr_sess_status" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="tblUsers">
           <Key>
@@ -1053,6 +1066,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblTraining_tblTrainingSession">
+          <End Role="tblTrainingSession" Type="Self.tblTrainingSession" Multiplicity="0..1" />
+          <End Role="tblTraining" Type="Self.tblTraining" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTrainingSession">
+              <PropertyRef Name="tr_sess_id" />
+            </Principal>
+            <Dependent Role="tblTraining">
+              <PropertyRef Name="tr_sess_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTrainingSession_tblCourses">
+          <End Role="tblCourses" Type="Self.tblCourses" Multiplicity="0..1" />
+          <End Role="tblTrainingSession" Type="Self.tblTrainingSession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCourses">
+              <PropertyRef Name="course_id" />
+            </Principal>
+            <Dependent Role="tblTrainingSession">
+              <PropertyRef Name="course_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblUsers_tblEmployees">
           <End Role="tblEmployees" Type="Self.tblEmployees" Multiplicity="0..1" />
           <End Role="tblUsers" Type="Self.tblUsers" Multiplicity="*" />
@@ -1101,6 +1138,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="LeaveList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="HRMModelStoreContainer">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblAchievement" EntityType="Self.tblAchievement" Schema="dbo" store:Type="Tables" />
@@ -1143,6 +1181,7 @@
           <EntitySet Name="tblRelationships" EntityType="Self.tblRelationships" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblSalutations" EntityType="Self.tblSalutations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblTraining" EntityType="Self.tblTraining" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTrainingSession" EntityType="Self.tblTrainingSession" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblUsers" EntityType="Self.tblUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblWkshftLinks" EntityType="Self.tblWkshftLinks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblWork" EntityType="Self.tblWork" Schema="dbo" store:Type="Tables" />
@@ -1334,6 +1373,14 @@
           <AssociationSet Name="FK_tblTraining_tblEmployees" Association="Self.FK_tblTraining_tblEmployees">
             <End Role="tblEmployees" EntitySet="tblEmployees" />
             <End Role="tblTraining" EntitySet="tblTraining" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTraining_tblTrainingSession" Association="Self.FK_tblTraining_tblTrainingSession">
+            <End Role="tblTrainingSession" EntitySet="tblTrainingSession" />
+            <End Role="tblTraining" EntitySet="tblTraining" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTrainingSession_tblCourses" Association="Self.FK_tblTrainingSession_tblCourses">
+            <End Role="tblCourses" EntitySet="tblCourses" />
+            <End Role="tblTrainingSession" EntitySet="tblTrainingSession" />
           </AssociationSet>
           <AssociationSet Name="FK_tblUsers_tblEmployees" Association="Self.FK_tblUsers_tblEmployees">
             <End Role="tblEmployees" EntitySet="tblEmployees" />
@@ -1606,6 +1653,17 @@
             <End Role="tblEmployee" EntitySet="tblEmployees" />
             <End Role="tblKPI" EntitySet="tblKPIs" />
           </AssociationSet>
+          <EntitySet Name="tblTrainingSessions" EntityType="HRMModel.tblTrainingSession" />
+          <AssociationSet Name="FK_tblTrainingSession_tblCourses" Association="HRMModel.FK_tblTrainingSession_tblCourses">
+            <End Role="tblCours" EntitySet="tblCourses" />
+            <End Role="tblTrainingSession" EntitySet="tblTrainingSessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTraining_tblTrainingSession" Association="HRMModel.FK_tblTraining_tblTrainingSession">
+            <End Role="tblTrainingSession" EntitySet="tblTrainingSessions" />
+            <End Role="tblTraining" EntitySet="tblTrainings" />
+          </AssociationSet>
+          <FunctionImport Name="LeaveList" />
+          <FunctionImport Name="LeaveLists" />
         </EntityContainer>
         <EntityType Name="tblBranch">
           <Key>
@@ -2506,6 +2564,7 @@
           <Property Name="type_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tblCourseType" Relationship="HRMModel.FK_tblCourses_tblCourseType" FromRole="tblCours" ToRole="tblCourseType" />
           <NavigationProperty Name="tblTrainings" Relationship="HRMModel.FK_tblTraining_tblCourses" FromRole="tblCours" ToRole="tblTraining" />
+          <NavigationProperty Name="tblTrainingSessions" Relationship="HRMModel.FK_tblTrainingSession_tblCourses" FromRole="tblCours" ToRole="tblTrainingSession" />
         </EntityType>
         <EntityType Name="tblCourseType">
           <Key>
@@ -2530,6 +2589,8 @@
           <Property Name="tr_status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="tr_score" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="tr_comments" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="tr_sess_id" Type="Int32" />
+          <NavigationProperty Name="tblTrainingSession" Relationship="HRMModel.FK_tblTraining_tblTrainingSession" FromRole="tblTraining" ToRole="tblTrainingSession" />
         </EntityType>
         <Association Name="FK_tblCourses_tblCourseType">
           <End Type="HRMModel.tblCourseType" Role="tblCourseType" Multiplicity="1" />
@@ -2802,6 +2863,44 @@
             </Principal>
             <Dependent Role="tblKPI">
               <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblTrainingSession">
+          <Key>
+            <PropertyRef Name="tr_sess_id" />
+          </Key>
+          <Property Name="tr_sess_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="course_id" Type="Int32" />
+          <Property Name="tr_sdate" Type="DateTime" Precision="0" />
+          <Property Name="tr_edate" Type="DateTime" Precision="0" />
+          <Property Name="tr_sess_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tr_sess_desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblCours" Relationship="HRMModel.FK_tblTrainingSession_tblCourses" FromRole="tblTrainingSession" ToRole="tblCours" />
+          <NavigationProperty Name="tblTrainings" Relationship="HRMModel.FK_tblTraining_tblTrainingSession" FromRole="tblTrainingSession" ToRole="tblTraining" />
+          <Property Name="tr_sess_status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_tblTrainingSession_tblCourses">
+          <End Type="HRMModel.tblCours" Role="tblCours" Multiplicity="0..1" />
+          <End Type="HRMModel.tblTrainingSession" Role="tblTrainingSession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCours">
+              <PropertyRef Name="course_id" />
+            </Principal>
+            <Dependent Role="tblTrainingSession">
+              <PropertyRef Name="course_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTraining_tblTrainingSession">
+          <End Type="HRMModel.tblTrainingSession" Role="tblTrainingSession" Multiplicity="0..1" />
+          <End Type="HRMModel.tblTraining" Role="tblTraining" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTrainingSession">
+              <PropertyRef Name="tr_sess_id" />
+            </Principal>
+            <Dependent Role="tblTraining">
+              <PropertyRef Name="tr_sess_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3236,6 +3335,7 @@
           <EntitySetMapping Name="tblTrainings">
             <EntityTypeMapping TypeName="HRMModel.tblTraining">
               <MappingFragment StoreEntitySet="tblTraining">
+                <ScalarProperty Name="tr_sess_id" ColumnName="tr_sess_id" />
                 <ScalarProperty Name="tr_comments" ColumnName="tr_comments" />
                 <ScalarProperty Name="tr_score" ColumnName="tr_score" />
                 <ScalarProperty Name="tr_status" ColumnName="tr_status" />
@@ -3340,6 +3440,21 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tblTrainingSessions">
+            <EntityTypeMapping TypeName="HRMModel.tblTrainingSession">
+              <MappingFragment StoreEntitySet="tblTrainingSession">
+                <ScalarProperty Name="tr_sess_status" ColumnName="tr_sess_status" />
+                <ScalarProperty Name="tr_sess_desc" ColumnName="tr_sess_desc" />
+                <ScalarProperty Name="tr_sess_name" ColumnName="tr_sess_name" />
+                <ScalarProperty Name="tr_edate" ColumnName="tr_edate" />
+                <ScalarProperty Name="tr_sdate" ColumnName="tr_sdate" />
+                <ScalarProperty Name="course_id" ColumnName="course_id" />
+                <ScalarProperty Name="tr_sess_id" ColumnName="tr_sess_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="LeaveList" FunctionName="HRMModel.Store.LeaveList" />
+          <FunctionImportMapping FunctionImportName="LeaveLists" FunctionName="HRMModel.Store.LeaveList" />
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

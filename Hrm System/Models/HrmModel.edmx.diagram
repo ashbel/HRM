@@ -101,6 +101,9 @@
         <EntityTypeShape EntityType="HRMModel.tblKPI" Width="1.5" PointX="5.25" PointY="48.5" />
         <AssociationConnector Association="HRMModel.FK_tblAchievement_tblEmployees" />
         <AssociationConnector Association="HRMModel.FK_tblKPI_tblEmployees" />
+        <EntityTypeShape EntityType="HRMModel.tblTrainingSession" Width="1.5" PointX="6.25" PointY="34.375" />
+        <AssociationConnector Association="HRMModel.FK_tblTrainingSession_tblCourses" />
+        <AssociationConnector Association="HRMModel.FK_tblTraining_tblTrainingSession" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

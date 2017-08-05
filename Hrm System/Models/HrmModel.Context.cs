@@ -12,6 +12,7 @@ namespace Hrm_System.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Linq;
     
     public partial class HRMEntities : DbContext
     {
@@ -70,5 +71,16 @@ namespace Hrm_System.Models
         public DbSet<tblWork> tblWorks { get; set; }
         public DbSet<tblAchievement> tblAchievements { get; set; }
         public DbSet<tblKPI> tblKPIs { get; set; }
+        public DbSet<tblTrainingSession> tblTrainingSessions { get; set; }
+    
+        public virtual int LeaveList()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("LeaveList");
+        }
+    
+        public virtual int LeaveLists()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("LeaveLists");
+        }
     }
 }

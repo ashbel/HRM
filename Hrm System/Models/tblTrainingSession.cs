@@ -12,22 +12,22 @@ namespace Hrm_System.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tblCours
+    public partial class tblTrainingSession
     {
-        public tblCours()
+        public tblTrainingSession()
         {
             this.tblTrainings = new HashSet<tblTraining>();
-            this.tblTrainingSessions = new HashSet<tblTrainingSession>();
         }
     
-        public int course_id { get; set; }
-        public string course_nm { get; set; }
-        public string course_dur { get; set; }
-        public string course_descr { get; set; }
-        public int type_id { get; set; }
+        public int tr_sess_id { get; set; }
+        public Nullable<int> course_id { get; set; }
+        public Nullable<System.DateTime> tr_sdate { get; set; }
+        public Nullable<System.DateTime> tr_edate { get; set; }
+        public string tr_sess_name { get; set; }
+        public string tr_sess_desc { get; set; }
+        public string tr_sess_status { get; set; }
     
-        public virtual tblCourseType tblCourseType { get; set; }
+        public virtual tblCours tblCours { get; set; }
         public virtual ICollection<tblTraining> tblTrainings { get; set; }
-        public virtual ICollection<tblTrainingSession> tblTrainingSessions { get; set; }
     }
 }

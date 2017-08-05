@@ -22,8 +22,10 @@ namespace Hrm_System.Models
         public string tr_status { get; set; }
         public string tr_score { get; set; }
         public string tr_comments { get; set; }
+        public Nullable<int> tr_sess_id { get; set; }
     
         public virtual tblCours tblCours { get; set; }
         public virtual tblEmployee tblEmployee { get; set; }
+        public virtual tblTrainingSession tblTrainingSession { get; set; }
     }
 }

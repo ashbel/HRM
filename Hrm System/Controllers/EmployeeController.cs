@@ -23,7 +23,24 @@ namespace Hrm_System.Controllers
         public ActionResult Index(int page = 1)
         {
             var tblemployees = db.tblEmployees.Include(t => t.tblBranch).Include(t => t.tblDepartment).Include(t => t.tblEmployeeStatu).Include(t => t.tblPosition);
+
+            int count = db.tblEmployees.Where(c => c.tblEmployeeStatu.empst_title == "Active").Count();
+            ViewBag.Active = count;
+            ViewBag.Departments = db.tblEmployees.GroupBy(c => c.emp_dpt).Count();
+            ViewBag.Positions = db.tblEmployees.GroupBy(c => c.emp_pos_id).Count();
+            Double years = 0;
+            Double months = 0;
+            var active_employees = db.tblEmployees.Where(c => c.tblEmployeeStatu.empst_title == "Active");
+            foreach (var i in active_employees)
+            {
+                years = years + (DateTime.Now.Year - i.emp_bDate.Value.Year);
+                months = months + (((DateTime.Now.Year - i.emp_jDate.Value.Year) * 12) + (DateTime.Now.Month - i.emp_jDate.Value.Month));
+            }
+            ViewBag.AverageAge = (years / count).ToString("0");
+            ViewBag.AverageWork = ((months / count) / 12).ToString("0.00");
+
             return View(tblemployees.OrderBy(c => c.emp_id).ToPagedList(page, 50));
+
         }
       
         

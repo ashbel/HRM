@@ -23,13 +23,16 @@ namespace Hrm_System.Controllers
         {
             tblUser tblusers = db.tblUsers.FirstOrDefault(c => c.user_name == User.Identity.Name);
             ViewBag.Name = tblusers.tblEmployee.emp_name + " " + tblusers.tblEmployee.emp_lname;
+            
             if (tblusers.tblEmployee.img_id == null)
             {
                 var picture = db.tblImages.Find(1);
                 ViewBag.url = null;
+                Session["UserImage"] = null;
             }
             else
             {
+                Session["UserImage"] = Convert.ToBase64String(tblusers.tblEmployee.tblImage.img_data);
                 ViewBag.url = tblusers.tblEmployee.tblImage.img_data;
             }
             return View();
@@ -131,8 +134,9 @@ namespace Hrm_System.Controllers
             if (userValid)
             {
                 int? usrId = db.tblUsers.SingleOrDefault(c => c.user_name == username).user_id;
-               // Log(DateTime.Now, "LOGGIN_SUCCESS", usrId, "SUCCESS");
+                tblUser tblusers = db.tblUsers.Find(usrId);
                 FormsAuthentication.SetAuthCookie(username, false);
+                Session["Name"] = tblusers.tblEmployee.emp_name + " " + tblusers.tblEmployee.emp_lname;
                 if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
                     && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
                 {
