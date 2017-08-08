@@ -1,0 +1,1029 @@
+﻿@model IEnumerable<Hrm_System.Models.tblContract>
+
+    @{
+        ViewBag.Title = "Contracts Management";
+    }
+
+    <h2>Contracts</h2>
+
+            <ul class="nav nav-pills pills-secondary">
+                <li class="active"><a data-toggle="tab" href="#home"><b>Dashboard</b></a></li>
+                <li><a data-toggle="tab" href="#menu1"><b>Contracts</b></a></li>
+                <li><a data-toggle="tab" href="#menu2"><b>Contract History</b></a></li>
+                <li><a data-toggle="tab" href="#menu3"><b>Contract Types</b></a></li>
+                <li><a data-toggle="tab" href="#menu4"><b>Contract States</b></a></li>
+            </ul>
+            <hr />
+            <div class="tab-content">
+                <div class="tab-pane fade in active" id="home">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <canvas id="barChart" width="400" height="150"></canvas>
+                        </div>
+                        <div class="col-md-6">                                
+                          <canvas id="LineChart" width="400" height="150"></canvas>      
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                           @* <canvas id="DonutChart" width="400" height="150"></canvas>*@ 
+                        </div>
+                        <div class="col-md-6">
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="menu1">
+                    <div class="btn-group btn-group-xs">
+                        <button class="btn btn-default btn-xs" data-toggle="modal" href="#addContract">Add Contract</button>
+                    </div>
+                    <br /><p></p>
+                    <table class="table table-striped table-hover table-bordered table-condensed" id="table1">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Contract Title
+                                </th>
+                                <th>
+                                    Start Date
+                                </th>
+                                <th>
+                                    Expiry Date
+                                </th>
+                                <th>
+                                    Employee Name
+                                </th>
+                                <th>
+                                    Contract Type
+                                </th>
+                                <th>
+                                    Contract State
+                                </th>
+                                <th>
+                                    Branch
+                                </th>
+                                <th>
+                                    Department
+                                </th>
+                                <th>
+                                    Job Title
+                                </th>
+                            </tr>
+                        </thead>
+                        @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    <span data-placement="left" data-toggle="tooltip" title="Edit">
+                        <a href="#editContract" class="editContract" data-toggle="modal" data-id='["@item.cntrct_title","@item.cntrct_sdate.Value.ToString("yyyy-MM-dd")","@item.cntrct_edate.Value.ToString("yyyy-MM-dd")","@item.cntrct_state","@item.cntrct_desc","@item.dpt_id","@item.br_id","@item.pos_id","@item.emp_id","@item.cntrct_id"]'> <span class="glyphicon glyphicon-pencil"></span></a>
+                    </span>
+                    <span data-placement="left" data-toggle="tooltip" title="View">
+                        <a href="#viewContract" class="viewContract" data-toggle="modal" data-id='["@item.cntrct_title","@item.cntrct_sdate.Value.ToString("yyyy-MM-dd")","@item.cntrct_edate.Value.ToString("yyyy-MM-dd")","@item.tblContractState.cntrct_state","@item.cntrct_desc","@item.tblDepartment.dpt_name","@item.tblBranch.br_name","@item.tblPosition.pos_title","@item.tblEmployee.emp_name @item.tblEmployee.emp_lname"]'> <span class="glyphicon glyphicon-check"> </span></a>
+                    </span>
+                    <span data-placement="left" data-toggle="tooltip" title="Delete">
+                        <a href="#deleteContract" class="deleteContract" data-toggle="modal" data-id='["@item.cntrct_title","@item.cntrct_id","@item.tblPosition.pos_title","@item.tblEmployee.emp_name @item.tblEmployee.emp_lname"]'> <span class="glyphicon glyphicon-trash"></span> </a>
+                    </span>
+                    @Html.DisplayFor(modelItem => item.cntrct_title)
+                </td>
+                <td>
+                    @item.cntrct_sdate.Value.ToString("dd-MMM-yyyy")
+                </td>
+                <td>
+                    @item.cntrct_edate.Value.ToString("dd-MMM-yyyy")
+                </td>
+                <td>
+                    @item.tblEmployee.emp_name @item.tblEmployee.emp_lname
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tblContractType.cntrct_typ)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tblContractState.cntrct_state)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tblBranch.br_name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tblDepartment.dpt_name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tblPosition.pos_title)
+                </td>
+            </tr>
+                }
+
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="menu2"></div>
+                <div class="tab-pane fade" id="menu3">
+                    <div class="btn-group btn-group-xs">
+                        <button class="btn btn-default btn-xs" data-toggle="modal" href="#addType">Add Contract Type</button>
+                    </div>
+                    <br /><p></p>
+
+                    <table class="table table-striped table-hover table-bordered table-condensed" id="table1">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Contract Type
+                                </th>
+                                <th>
+                                    Description
+                                </th>
+                            </tr>
+                        </thead>
+                        @{ if (ViewBag.ContractTypes != null)
+                {
+
+                    foreach (var item in ViewBag.ContractTypes)
+                    {
+            <tr>
+                <td>
+                    <a href="#editType" class="editType" data-toggle="modal" data-id='["@item.cntcrt_typ_id","@item.cntrct_typ","@item.cntrct_desc"]'> <span class="glyphicon glyphicon-pencil"></span></a>
+                    <a href="#viewType" class="viewType" data-toggle="modal" data-id='["@item.cntcrt_typ_id","@item.cntrct_typ","@item.cntrct_desc"]'> <span class="glyphicon glyphicon-check"> </span></a>
+                    <a href="#deleteType" class="deleteType" data-toggle="modal" data-id='["@item.cntcrt_typ_id","@item.cntrct_typ","@item.cntrct_desc"]'> <span class="glyphicon glyphicon-trash"></span> </a>
+                    @item.cntrct_typ
+                </td>
+                <td>
+                    @item.cntrct_desc
+                </td>
+            </tr>
+
+                    }
+
+                }
+                        }
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="menu4">
+                    <div class="btn-group btn-group-xs">
+                        <button class="btn btn-default btn-xs" data-toggle="modal" href="#addState">Add Contract State</button>
+                    </div>
+                    <br /><p></p>
+
+                    <table class="table table-striped table-hover table-bordered table-condensed" id="table1">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Contract State
+                                </th>
+                                <th>
+                                    Description
+                                </th>
+                            </tr>
+                        </thead>
+                        @{ if (ViewBag.ContractState != null)
+                {
+
+                    foreach (var item in ViewBag.ContractState)
+                    {
+            <tr>
+                <td>
+                    <a href="#editState" class="editState" data-toggle="modal" data-id='["@item.cntrct_st_id","@item.cntrct_state","@item.cntrct_st_desc"]'> <span class="glyphicon glyphicon-pencil"></span></a>
+                    <a href="#viewState" class="viewState" data-toggle="modal" data-id='["@item.cntrct_st_id","@item.cntrct_state","@item.cntrct_st_desc"]'> <span class="glyphicon glyphicon-check"> </span></a>
+                    <a href="#deleteState" class="deleteState" data-toggle="modal" data-id='["@item.cntrct_st_id","@item.cntrct_state","@item.cntrct_st_desc"]'> <span class="glyphicon glyphicon-trash"></span> </a>
+                    @item.cntrct_state
+                </td>
+                <td>
+                    @item.cntrct_st_desc
+                </td>
+
+            </tr>
+
+                    }
+
+                }
+                        }
+                    </table>
+                </div>
+            </div>
+
+            <div id="addContract" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Add Contract</h4>
+                        </div>
+                        <div class="modal-body">
+                            @using (Html.BeginForm("AddContract", "Contracts", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <label for="kinaddress">Employee Name:</label>
+                            <select class="form-control" id="emp_id" name="emp_id">
+                                @{ if (ViewBag.Employees != null)
+                                    {
+                                        foreach (var i in ViewBag.Employees)
+                                        {
+                                <option value="@i.emp_id">@i.emp_name @i.emp_lname</option>
+                                        }
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <label for="kinaddress">Contract Title:</label>
+                            <input type="text" class="form-control" id="cntrct_title" name="cntrct_title">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <label for="contract">Contract Type</label>
+                            <select class="form-control" id="cntrct_state" name="cntrct_state">
+                                @{ if (ViewBag.ContractTypes != null)
+                                    {
+                                        foreach (var i in ViewBag.ContractTypes)
+                                        {
+                                <option value="@i.cntcrt_typ_id">@i.cntrct_typ</option>
+                                        }
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <label for="contract">Contract Status</label>
+                            <select class="form-control" id="cntrct_status" name="cntrct_status">
+                                @{ if (ViewBag.ContractState != null)
+                                    {
+                                        foreach (var i in ViewBag.ContractState)
+                                        {
+                                <option value="@i.cntrct_st_id">@i.cntrct_state</option>
+                                        }
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <label for="contract">Department</label>
+                            <select class="form-control" id="cntrct_dpt" name="cntrct_dpt">
+                                @{ if (ViewBag.Department != null)
+                                    {
+                                        foreach (var i in ViewBag.Department)
+                                        {
+                                <option value="@i.dpt_id">@i.dpt_name</option>
+                                        }
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <label for="contract">Position</label>
+                            <select class="form-control" id="cntrct_position" name="cntrct_position">
+                                @{ if (ViewBag.Position != null)
+                                    {
+                                        foreach (var i in ViewBag.Position)
+                                        {
+                                <option value="@i.pos_id">@i.pos_title</option>
+                                        }
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <label for="contract">Branch</label>
+                            <select class="form-control" id="cntrct_branch" name="cntrct_branch">
+                                @{ if (ViewBag.Branch != null)
+                                    {
+                                        foreach (var i in ViewBag.Branch)
+                                        {
+                                <option value="@i.br_id">@i.br_name</option>
+                                        }
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <label for="kin_phone">Start Date:</label>
+                            <input type="date" class="form-control" id="cntrct_sdate" name="cntrct_sdate">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <label for="kin_rel">End Date:</label>
+                            <input type="date" class="form-control" id="cntrct_edate" name="cntrct_edate">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <label for="cntrct_desc">Contract Additional Information:</label>
+                            <textarea class="form-control" rows="5" id="cntrct_desc" name="cntrct_desc"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-12">
+                        <br />
+                        <input type="submit" class="btn btn-success btn-sm form-control" value="Save">
+                    </div>
+                </div>
+                                    }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="editContract" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Edit Contract</h4>
+                        </div>
+                        <div class="modal-body">
+                            @using (Html.BeginForm("EditContract", "Contracts", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <label for="kinaddress">Employee Name:</label>
+                            <select class="form-control" id="emp_id" name="emp_id">
+                                @{ if (ViewBag.Employees != null)
+                                        {
+                                            foreach (var i in ViewBag.Employees)
+                                            {
+                                    <option value="@i.emp_id">@i.emp_name @i.emp_lname</option>
+                                            }
+                                        }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <label for="kinaddress">Contract Title:</label>
+                            <input type="text" class="form-control" id="cntrct_title" name="cntrct_title">
+                            <input type="hidden" class="form-control " id="cntrct_id" name="cntrct_id">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <label for="contract">Contract Type</label>
+                            <select class="form-control" id="cntrct_type" name="cntrct_type">
+                                @{ if (ViewBag.ContractTypes != null)
+                                        {
+                                            foreach (var i in ViewBag.ContractTypes)
+                                            {
+                                    <option value="@i.cntcrt_typ_id">@i.cntrct_typ</option>
+                                            }
+                                        }
+                                }
+                            </select>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <label for="contract">Contract Status</label>
+                            <select class="form-control" id="cntrct_state" name="cntrct_state">
+                                @{ if (ViewBag.ContractState != null)
+                                        {
+                                            foreach (var i in ViewBag.ContractState)
+                                            {
+                                    <option value="@i.cntrct_st_id">@i.cntrct_state</option>
+                                            }
+                                        }
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <label for="contract">Department</label>
+                            <select class="form-control" id="cntrct_dpt" name="cntrct_dpt">
+                                @{ if (ViewBag.Department != null)
+                                        {
+                                            foreach (var i in ViewBag.Department)
+                                            {
+                                    <option value="@i.dpt_id">@i.dpt_name</option>
+                                            }
+                                        }
+                                }
+                            </select>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <label for="contract">Position</label>
+                            <select class="form-control" id="cntrct_position" name="cntrct_position">
+                                @{ if (ViewBag.Position != null)
+                                        {
+                                            foreach (var i in ViewBag.Position)
+                                            {
+                                    <option value="@i.pos_id">@i.pos_title</option>
+                                            }
+                                        }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <label for="contract">Branch</label>
+                            <select class="form-control" id="cntrct_branch" name="cntrct_branch">
+                                @{ if (ViewBag.Branch != null)
+                                        {
+                                            foreach (var i in ViewBag.Branch)
+                                            {
+                                    <option value="@i.br_id">@i.br_name</option>
+                                            }
+                                        }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <label for="kin_phone">Start Date:</label>
+                            <input type="date" class="form-control" id="cntrct_sdate" name="cntrct_sdate">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <label for="kin_rel">End Date:</label>
+                            <input type="date" class="form-control" id="cntrct_edate" name="cntrct_edate">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <label for="cntrct_desc">Contract Additional Information:</label>
+                            <textarea class="form-control" rows="5" id="cntrct_desc" name="cntrct_desc"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-12">
+                        <br />
+                        <input type="submit" class="btn btn-success btn-sm form-control" value="Save">
+                    </div>
+                </div>
+                                        }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="viewContract" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Contract Details</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group form-group-sm">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <label for="kinaddress">Employee:</label>
+                                        <input type="text" class="form-control" id="emp_id" name="emp_id" value="" readonly>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <label for="kinaddress">Contract Title:</label>
+                                        <input type="text" class="form-control" id="cntrct_title" name="cntrct_title" value="" readonly>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6">
+                                        <label for="contract">Contract Type</label>
+                                        <input type="text" class="form-control" id="cntrct_status" name="cntrct_status" value="" readonly>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <label for="contract">Contract Status</label>
+                                        <input type="text" class="form-control" id="cntrct_state" name="cntrct_state" value="" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6">
+                                        <label for="contract">Department</label>
+                                        <input type="text" class="form-control" id="cntrct_dpt" name="cntrct_dpt" value="" readonly>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <label for="contract">Position</label>
+                                        <input type="text" class="form-control" id="cntrct_position" name="cntrct_position" value="" readonly>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <label for="contract">Branch</label>
+                                        <input type="text" class="form-control" id="cntrct_branch" name="cntrct_branch" value="" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <label for="kin_phone">Start Date:</label>
+                                        <input type="text" class="form-control" id="cntrct_sdate" name="cntrct_sdate" readonly>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <label for="kin_rel">End Date:</label>
+                                        <input type="text" class="form-control" id="cntrct_edate" name="cntrct_edate" readonly>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <label for="cntrct_desc">Contract Additional Information:</label>
+                                        <textarea class="form-control" rows="5" id="cntrct_desc" name="cntrct_desc" readonly></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <legend></legend>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="deleteContract" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Are You Sure You want to Delete this?</h4>
+                        </div>
+                        <div class="modal-body">
+                            @using (Html.BeginForm("DeleteContract", "Contracts", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <label for="kinaddress">Employee:</label>
+                            <input type="text" class="form-control" id="emp_id" name="emp_id" value="" readonly>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <label for="kinaddress">Contract Title:</label>
+                            <input type="text" class="form-control" id="cntrct_title" name="cntrct_title" value="" readonly>
+                            <input type="hidden" class="form-control" id="cntrct_id" name="cntrct_id" value="" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <label for="contract">Position</label>
+                            <input type="text" class="form-control" id="cntrct_position" name="cntrct_position" value="" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <br />
+                    <div class="col-sm-12 col-md-12">
+                        <input type="submit" class="btn btn-success btn-sm form-control" value="Delete">
+                    </div>
+                </div>
+            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="addType" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Add Contract Type</h4>
+                        </div>
+                        <div class="modal-body">
+                            @using (Html.BeginForm("AddType", "Contracts", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <label for="kinaddress">Title:</label>
+                            <input type="text" class="form-control" id="type_title" name="type_title">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <label for="cntrct_desc">Description:</label>
+                            <textarea class="form-control" rows="5" id="type_desc" name="type_desc"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-12">
+                        <br />
+                        <input type="submit" class="btn btn-success btn-sm form-control" value="Save">
+                    </div>
+                </div>
+                                    }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="editType" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Edit Contract Type</h4>
+                        </div>
+                        <div class="modal-body">
+                            @using (Html.BeginForm("EditType", "Contracts", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <label for="kinaddress">Type Title:</label>
+                            <input type="text" class="form-control" id="type_title" name="type_title">
+                            <input type="text" class="form-control hidden" id="type_id" name="type_id">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <label for="cntrct_desc">Description:</label>
+                            <textarea class="form-control" rows="5" id="type_desc" name="type_desc"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-12">
+                        <br />
+                        <input type="submit" class="btn btn-success btn-sm form-control" value="Save">
+                    </div>
+                </div>
+                                        }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="viewType" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Contract Type Details</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group form-group-sm">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <label for="kinaddress">Type Title:</label>
+                                        <input type="text" class="form-control" id="type_title" name="type_title" value="" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <label for="cntrct_desc">Description:</label>
+                                        <textarea class="form-control" rows="5" id="type_desc" name="type_desc" readonly></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <legend></legend>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="deleteType" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Are You Sure You want to Delete this?</h4>
+                        </div>
+                        <div class="modal-body">
+                            @using (Html.BeginForm("DeleteType", "Contracts", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <label for="kinaddress">Type Title:</label>
+                            <input type="text" class="form-control" id="type_title" name="type_title" value="" readonly>
+                            <input type="hidden" class="form-control" id="type_id" name="type_id" value="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <br />
+                    <div class="col-sm-12 col-md-12">
+                        <input type="submit" class="btn btn-success btn-sm form-control" value="Delete">
+                    </div>
+                </div>
+            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="addState" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Add Contract State</h4>
+                        </div>
+                        <div class="modal-body">
+                            @using (Html.BeginForm("AddState", "Contracts", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <label for="kinaddress">State:</label>
+                            <input type="text" class="form-control" id="state_title" name="state_title">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <label for="cntrct_desc">Description:</label>
+                            <textarea class="form-control" rows="5" id="state_desc" name="state_desc"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-12">
+                        <br />
+                        <input type="submit" class="btn btn-success btn-sm form-control" value="Save">
+                    </div>
+                </div>
+                                    }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="editState" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Edit Contract State</h4>
+                        </div>
+                        <div class="modal-body">
+                            @using (Html.BeginForm("EditState", "Contracts", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <label for="kinaddress">State Title:</label>
+                            <input type="text" class="form-control" id="state_title" name="state_title">
+                            <input type="hidden" class="form-control" id="state_id" name="state_id">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <label for="cntrct_desc">Description:</label>
+                            <textarea class="form-control" rows="5" id="state_desc" name="state_desc"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-12">
+                        <br />
+                        <input type="submit" class="btn btn-success btn-sm form-control" value="Save">
+                    </div>
+                </div>
+                                        }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="viewState" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Contract State Details</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group form-group-sm">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <label for="kinaddress">State Title:</label>
+                                        <input type="text" class="form-control" id="state_title" name="state_title" value="" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <label for="cntrct_desc">Description:</label>
+                                        <textarea class="form-control" rows="5" id="state_desc" name="state_desc" readonly></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <legend></legend>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="deleteState" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Are You Sure You want to Delete this?</h4>
+                        </div>
+                        <div class="modal-body">
+                            @using (Html.BeginForm("DeleteState", "Contracts", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <label for="kinaddress">State Title:</label>
+                            <input type="text" class="form-control" id="state_title" name="state_title" value="" readonly>
+                            <input type="hidden" class="form-control" id="state_id" name="state_id" value="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <br />
+                    <div class="col-sm-12 col-md-12">
+                        <input type="submit" class="btn btn-success btn-sm form-control" value="Delete">
+                    </div>
+                </div>
+            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @section scripts {
+                <script src="~/Scripts/Chart.js"></script>
+                <script src="~/Scripts/Common.js"></script>
+
+                <script>
+                    $(function () {
+                        $(".viewContract").click(function () {
+                            var my_id_value = $(this).data('id');
+                            $("#viewContract").find('input[name="cntrct_title"]').val(my_id_value[0]);
+                            $("#viewContract").find('input[name="cntrct_state"]').val(my_id_value[3]);
+                            $("#viewContract").find('input[name="cntrct_dpt"]').val(my_id_value[5]);
+                            $("#viewContract").find('input[name="cntrct_position"]').val(my_id_value[7]);
+                            $("#viewContract").find('input[name="cntrct_branch"]').val(my_id_value[6]);
+                            $("#viewContract").find('input[name="cntrct_sdate"]').val(my_id_value[1]);
+                            $("#viewContract").find('input[name="cntrct_edate"]').val(my_id_value[2]);
+                            $("#viewContract").find('textarea[name="cntrct_desc"]').val(my_id_value[4]);
+                            $("#viewContract").find('input[name="emp_id"]').val(my_id_value[8]);
+                        })
+                    });
+                    $(function () {
+                        $(".editContract").click(function () {
+                            var my_id_value = $(this).data('id');
+                            $("#editContract").find('input[name="cntrct_title"]').val(my_id_value[0]);
+                            $("#editContract").find('select[name="cntrct_state"]').val(my_id_value[3]);
+                            $("#editContract").find('select[name="cntrct_dpt"]').val(my_id_value[5]);
+                            $("#editContract").find('select[name="cntrct_position"]').val(my_id_value[7]);
+                            $("#editContract").find('select[name="cntrct_branch"]').val(my_id_value[6]);
+                            $("#editContract").find('input[name="cntrct_sdate"]').val(my_id_value[1]);
+                            $("#editContract").find('input[name="cntrct_edate"]').val(my_id_value[2]);
+                            $("#editContract").find('textarea[name="cntrct_desc"]').val(my_id_value[4]);
+                            $("#editContract").find('select[name="emp_id"]').val(my_id_value[8]);
+                            $("#editContract").find('input[name="cntrct_id"]').val(my_id_value[9]);
+                        })
+                    });
+                    $(function () {
+                        $(".deleteContract").click(function () {
+                            var my_id_value = $(this).data('id');
+                            $("#deleteContract").find('input[name="emp_id"]').val(my_id_value[3]);
+                            $("#deleteContract").find('input[name="cntrct_title"]').val(my_id_value[0]);
+                            $("#deleteContract").find('input[name="cntrct_position"]').val(my_id_value[2]);
+                            $("#deleteContract").find('input[name="cntrct_id"]').val(my_id_value[1]);
+                        })
+                    });
+
+                    $(function () {
+                        $(".viewType").click(function () {
+                            var my_id_value = $(this).data('id');
+                            $("#viewType").find('input[name="type_title"]').val(my_id_value[1]);
+                            $("#viewType").find('textarea[name="type_desc"]').val(my_id_value[2]);
+                        })
+                    });
+                    $(function () {
+                        $(".editType").click(function () {
+                            var my_id_value = $(this).data('id');
+                            $("#editType").find('input[name="type_title"]').val(my_id_value[1]);
+                            $("#editType").find('input[name="type_id"]').val(my_id_value[0]);
+                            $("#editType").find('textarea[name="type_desc"]').val(my_id_value[2]);
+                        })
+                    });
+                    $(function () {
+                        $(".deleteType").click(function () {
+                            var my_id_value = $(this).data('id');
+                            $("#deleteType").find('input[name="type_title"]').val(my_id_value[1]);
+                            $("#deleteType").find('input[name="type_id"]').val(my_id_value[0]);
+                        })
+                    });
+
+                    $(function () {
+                        $(".viewState").click(function () {
+                            var my_id_value = $(this).data('id');
+                            $("#viewState").find('input[name="state_title"]').val(my_id_value[1]);
+                            $("#viewState").find('textarea[name="state_desc"]').val(my_id_value[2]);
+                        })
+                    });
+                    $(function () {
+                        $(".editState").click(function () {
+                            var my_id_value = $(this).data('id');
+                            alert(my_id_value[0])
+                            $("#editState").find('input[name="state_title"]').val(my_id_value[1]);
+                            $("#editState").find('input[name="state_id"]').val(my_id_value[0]);
+                            $("#editState").find('textarea[name="state_desc"]').val(my_id_value[2]);
+                        })
+                    });
+                    $(function () {
+                        $(".deleteState").click(function () {
+                            var my_id_value = $(this).data('id');
+                            $("#deleteState").find('input[name="state_title"]').val(my_id_value[1]);
+                            $("#deleteState").find('input[name="state_id"]').val(my_id_value[0]);
+                        })
+                    });
+                </script>
+
+                <script>
+                //-----Single Bar --------------
+                var c = document.getElementById("barChart");
+                var ctx = c.getContext("2d");
+                var tData = $.getValues("/Contracts/BarChartData");
+                var myBarChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: tData
+                });
+                //----Donut Chart---------
+                //var c = document.getElementById("DonutChart");
+                //var ctx = c.getContext("2d");
+                //var tData = $.getValues("/Contracts/DonutChartData");
+                //var myPieChart = new Chart(ctx, {
+                //    type: 'doughnut',
+                //    data: tData,
+                //});
+                //----Line Chart---------
+                var c = document.getElementById("LineChart");
+                var ctx = c.getContext("2d");
+                var tData = $.getValues("/Contracts/LineChartData");
+                var myLineChart = new Chart(ctx, {
+                    type: 'line',
+                    data: tData
+                });
+                </script>
+            }

@@ -1,0 +1,188 @@
+﻿@model IEnumerable<Hrm_System.Models.tblKPI>
+
+@{
+    ViewBag.Title = "Perfomance Management";
+}
+
+<h2>Perfomance</h2>
+<ul class="nav nav-pills pills-secondary">
+    <li class="active"><a data-toggle="tab" href="#home"><b>Dashboard</b></a></li>
+    <li><a data-toggle="tab" href="#menu1"><b>Perfomance Reviews</b></a></li>
+    <li><a data-toggle="tab" href="#menu2"><b>History</b></a></li>
+</ul>
+<hr />
+<div class="tab-content">
+    <div class="tab-pane fade in active" id="home">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;">@ViewBag.Active</div>
+                        <h4 style="text-align:center;">Employees</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="thumbnail">
+                    <img class="img-responsive" src="~/images/employees.png" width="150" height="150" />
+                    <div class="caption">
+                        <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;"></div>
+                        <h4 style="text-align:center;">Departments</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;"></div>
+                        <h4 style="text-align:center;">Positions</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;">@ViewBag.AverageAge</div>
+                        <h4 style="text-align:center;">Average Age</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;">@ViewBag.AverageWork</div>
+                        <h4 style="text-align:center;">Average Work</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;">80%</div>
+                        <h4 style="text-align:center;">Employee Productivity</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="menu1">
+        <table class="table table-striped table-hover table-bordered table-condensed" id="table1">
+            <thead>
+                <tr>
+                    <th>
+                        Employee Name
+                    </th>
+                    <th>
+                        Review Period
+                    </th>
+                    <th>
+                        Score
+                    </th>
+                    <th>
+                       Title
+                    </th>
+                    <th>
+                        Review Date
+                    </th>                    
+                </tr>
+           </thead>
+              @foreach (var item in Model)
+              {
+                  <tr>
+                        <td>
+                            <span data-placement="left" data-toggle="tooltip" title="Edit">
+                                <a href="#editContract" class="editContract" data-toggle="modal" data-id=''> <span class="glyphicon glyphicon-pencil"></span></a>
+                            </span>
+                            <span data-placement="left" data-toggle="tooltip" title="View">
+                                <a class="viewCourse" data-id='' data-toggle="modal" href="#viewCourse"> <span class="glyphicon glyphicon-check"> </span></a>
+                            </span>
+                            <span data-placement="left" data-toggle="tooltip" title="Delete">
+                                <a href="#deleteContract" class="deleteContract" data-toggle="modal" data-id=''> <span class="glyphicon glyphicon-trash"></span> </a>
+                            </span>
+                            @item.tblEmployee.emp_name @item.tblEmployee.emp_lname
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.kpi_prd)
+                        </td>
+                        <td>
+                           @Html.DisplayFor(modelItem => item.kpi_score)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.kpi_title)
+                        </td>
+                        <td>
+                            @item.kpi_date.Value.ToString("dd-MMM-yyyy")
+                        </td>
+                    </tr>
+              }
+
+        </table>
+    </div>
+    <div class="tab-pane fade" id="menu2"></div>
+ </div>
+
+<div id="addPerfomance" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Enroll Course</h4>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("AddPerfomance", "Employee", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    @Html.HiddenFor(model => model.emp_id)
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12">
+                                    <label for="sdate">KPI Title:</label>
+                                    <input type="text" class="form-control" id="kpi_title" name="kpi_title"  />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12">
+                                    <label for="sdate">KPI Period:</label>
+                                    <input type="text" class="form-control" id="kpi_prd" name="kpi_prd"  />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12">
+                                    <label for="sdate">KPI Score:</label>
+                                    <input type="text" class="form-control" id="kpi_score" name="kpi_score"  />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12">
+                                    <label for="sdate">KPI Date:</label>
+                                    <input type="date" class="form-control" id="kpi_date" name="kpi_date"  />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12">
+                                    <label for="sdate">KPI Comments:</label>
+                                    <textarea class="form-control" rows="5" id="kpi_comment" name="kpi_comment" ></textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12">
+                                    <br />
+                                    <input type="submit" class="btn btn-success btn-sm form-control"  value="Save">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                }
+                <legend></legend>
+            </div>
+        </div>
+    </div>
+</div>
+

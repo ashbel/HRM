@@ -18,7 +18,18 @@
         <div id="home" class="tab-pane fade in active">
          
          <div class="row">
-             <div class="col-md-2">
+             <div class="col-md-4">
+                 <canvas id="barChart" width="400" height="150"></canvas>
+                 </div>
+             <div class="col-md-4">
+                 <canvas id="LineChart" width="400" height="150"></canvas>
+             </div>
+             <div class="col-md-4">
+                 
+             </div>
+         </div>
+         <div class="row">
+             <div class="col-md-4">
                  <div class="thumbnail">
                      <div class="caption">
                          <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;">@ViewBag.Active</div>
@@ -26,7 +37,7 @@
                      </div>
                  </div>
                  </div>
-             <div class="col-md-2">
+             <div class="col-md-4">
                  <div class="thumbnail">
                      <img class="img-responsive" src="~/images/employees.png"  width="150" height="150"/>
                      <div class="caption">
@@ -35,35 +46,11 @@
                      </div>
                  </div>
              </div>
-             <div class="col-md-2">
+             <div class="col-md-4">
                  <div class="thumbnail">
                      <div class="caption">
                          <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;">@ViewBag.Positions</div>
                          <h4 style="text-align:center;">Positions</h4>
-                     </div>
-                 </div>
-             </div>
-             <div class="col-md-2">
-                 <div class="thumbnail">
-                     <div class="caption">
-                         <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;">@ViewBag.AverageAge</div>
-                         <h4 style="text-align:center;">Average Age</h4>
-                     </div>
-                 </div>
-             </div>
-             <div class="col-md-2">
-                 <div class="thumbnail">
-                     <div class="caption">
-                         <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;">@ViewBag.AverageWork</div>
-                         <h4 style="text-align:center;">Average Work</h4>
-                     </div>
-                 </div>
-             </div>
-             <div class="col-md-2">
-                 <div class="thumbnail">
-                     <div class="caption">
-                         <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;">80%</div>
-                         <h4 style="text-align:center;">Employee Productivity</h4>
                      </div>
                  </div>
              </div>
@@ -191,3 +178,29 @@
 
 
  </script>
+                     <script>
+                //-----Single Bar --------------
+                var c = document.getElementById("barChart");
+                var ctx = c.getContext("2d");
+                var tData = $.getValues("/Employee/BarChartData");
+                var myBarChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: tData
+                });
+                //----Donut Chart---------
+                //var c = document.getElementById("DonutChart");
+                //var ctx = c.getContext("2d");
+                //var tData = $.getValues("/Employee/DonutChartData");
+                //var myPieChart = new Chart(ctx, {
+                //    type: 'pie',
+                //    data: tData,
+                //});
+                //----Line Chart---------
+                var c = document.getElementById("LineChart");
+                var ctx = c.getContext("2d");
+                var tData = $.getValues("/Employee/LineChartData");
+                var myLineChart = new Chart(ctx, {
+                    type: 'line',
+                    data: tData
+                });
+                     </script>
