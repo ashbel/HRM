@@ -18,7 +18,7 @@ namespace Hrm_System.Controllers
         {
             return View();
         }
-
+        [CustomAuthorize]
         public ActionResult Home()
         {
             tblUser tblusers = db.tblUsers.FirstOrDefault(c => c.user_name == User.Identity.Name);

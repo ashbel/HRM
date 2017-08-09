@@ -9,6 +9,7 @@ using Hrm_System.Models;
 
 namespace Hrm_System.Controllers
 {
+    [CustomAuthorize(Roles = "Admin")]
     public class OrganisationController : Controller
     {
         private HRMEntities db = new HRMEntities();

@@ -11,6 +11,7 @@ using Hrm_System.Models;
 
 namespace Hrm_System.Controllers
 {
+    [CustomAuthorize]
     public class ContractsController : Controller
     {
         private HRMEntities db = new HRMEntities();

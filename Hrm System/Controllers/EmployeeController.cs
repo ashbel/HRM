@@ -13,6 +13,7 @@ using PagedList;
 
 namespace Hrm_System.Controllers
 {
+    [CustomAuthorize]
     public class EmployeeController : Controller
     {
         private HRMEntities db = new HRMEntities();
@@ -26,8 +27,12 @@ namespace Hrm_System.Controllers
 
             int count = db.tblEmployees.Where(c => c.tblEmployeeStatu.empst_title == "Active").Count();
             ViewBag.Active = count;
+            ViewBag.Positions = db.tblPositions.ToList();
+            ViewBag.Levels = db.tblJobLevels.ToList();
+            ViewBag.Branch = db.tblBranches;
+            ViewBag.Department = db.tblDepartments;
             ViewBag.Departments = db.tblEmployees.GroupBy(c => c.emp_dpt).Count();
-            ViewBag.Positions = db.tblEmployees.GroupBy(c => c.emp_pos_id).Count();
+            //ViewBag.Positions = db.tblEmployees.GroupBy(c => c.emp_pos_id).Count();
             Double years = 0;
             Double months = 0;
             var active_employees = db.tblEmployees.Where(c => c.tblEmployeeStatu.empst_title == "Active");
@@ -160,6 +165,7 @@ namespace Hrm_System.Controllers
             ViewBag.emp_prv = db.tblProvinces.ToList();//, "prov_id", "prov_name");
             ViewBag.Contract_state = db.tblContractStates.ToList();
             ViewBag.Marital_state = db.tblMaritals.ToList();
+            ViewBag.Contract_type = db.tblContractTypes.ToList();
             return View();
         }
 
@@ -204,6 +210,7 @@ namespace Hrm_System.Controllers
             int emp_sex = Convert.ToInt32(form["sex"]);
             int emp_state = Convert.ToInt32(form["province"]);
             int emp_status = Convert.ToInt32(form["estatus"]);
+            int contract_type = Convert.ToInt32(form["contract_type"]);
             ev.emp_strt = form["home"];
             ev.cntrct_desc = form["cntrct_desc"];
             try
@@ -271,6 +278,7 @@ namespace Hrm_System.Controllers
                 tblcontract.cntrct_sdate = ev.cntrct_sdate;
                 tblcontract.cntrct_state =  cntrct_state;
                 tblcontract.cntrct_title = ev.cntrct_title;
+                tblcontract.cntcrt_typ_id = contract_type;
                 tblcontract.emp_id = tblemployee.emp_id;
                 tblcontract.br_id = emp_branch;
                 tblcontract.dpt_id = emp_dpt;
@@ -904,14 +912,91 @@ namespace Hrm_System.Controllers
 
         public JsonResult BarChartData()
         {
+            var employees = db.tblEmployees;
+            int count_total = 0;
+            List<int> new_employees = new List<int>();
+            List<int> all_employees = new List<int>();
+            int jan = 0, feb = 0, mar = 0, apr = 0, may = 0, jun = 0, jul = 0, aug = 0, sept = 0, oct = 0, nov = 0, dec = 0;
+            int year = DateTime.Now.Year;
+            foreach(var employee in employees)
+            {
+                if (employee.emp_jDate.Value.Year < year)
+                {
+                    count_total++;
+                }
+                if(employee.emp_jDate.Value.Year == year)
+                {
+                    if(employee.emp_jDate.Value.Month == 1)
+                    {
+                        jan++;
+                    }
+                    if (employee.emp_jDate.Value.Month == 2)
+                    {
+                        feb++;
+                    }
+                    if (employee.emp_jDate.Value.Month == 3)
+                    {
+                        mar++;
+                    }
+                    if (employee.emp_jDate.Value.Month == 4)
+                    {
+                        apr++;
+                    }
+                    if (employee.emp_jDate.Value.Month == 5)
+                    {
+                        may++;
+                    }
+                    if (employee.emp_jDate.Value.Month == 6)
+                    {
+                        jun++;
+                    }
+                    if (employee.emp_jDate.Value.Month == 7)
+                    {
+                        jul++;
+                    }
+                    if (employee.emp_jDate.Value.Month == 8)
+                    {
+                        aug++;
+                    }
+                    if (employee.emp_jDate.Value.Month == 9)
+                    {
+                        sept++;
+                    }
+                    if (employee.emp_jDate.Value.Month == 10)
+                    {
+                        oct++;
+                    }
+                    if (employee.emp_jDate.Value.Month == 11)
+                    {
+                        nov++;
+                    }
+                    if (employee.emp_jDate.Value.Month == 12)
+                    {
+                        dec++;
+                    }
+                }
+                
+            }
+            new_employees.Add(jan);
+            new_employees.Add(feb);
+            new_employees.Add(mar);
+            new_employees.Add(apr);
+            new_employees.Add(may);
+            new_employees.Add(jun);
+            new_employees.Add(jul);
+            new_employees.Add(aug);
+            new_employees.Add(sept);
+            new_employees.Add(oct);
+            new_employees.Add(nov);
+            new_employees.Add(dec);
             Models.Chart _chart = new Models.Chart();
             _chart.labels = new string[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "Novemeber", "December" };
             _chart.datasets = new List<Datasets>();
             List<Datasets> _dataSet = new List<Datasets>();
             _dataSet.Add(new Datasets()
             {
-                label = "Current Year",
-                data = new int[] { 28, 48, 40, 19, 86, 27, 90, 20, 45, 65, 34, 22 },
+                label = "New Employees",
+                data = new_employees.ToArray(),
                 backgroundColor = new string[] { "rgba(255, 99, 132, 0.2)", "rgba(54, 162, 235, 0.2)", "rgba(255, 206, 86, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(255, 159, 64, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(54, 162, 235, 0.2)", "rgba(255, 206, 86, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(255, 159, 64, 0.2)" },
                 borderColor = new string[] { "rgba(255,99,132,1)", "rgba(54, 162, 235, 1)", "rgba(255, 206, 86, 1)", "rgba(75, 192, 192, 1)", "rgba(153, 102, 255, 1)", "rgba(255, 159, 64, 1)", "rgba(255,99,132,1)", "rgba(54, 162, 235, 1)", "rgba(255, 206, 86, 1)", "rgba(75, 192, 192, 1)", "rgba(153, 102, 255, 1)", "rgba(255, 159, 64, 1)" },
                 borderWidth = "1"
@@ -920,16 +1005,28 @@ namespace Hrm_System.Controllers
             return Json(_chart, JsonRequestBehavior.AllowGet);
         }
 
+
         public JsonResult DonutChartData()
         {
+            var departments = from c in db.tblEmployees
+                              group c by c.tblDepartment.dpt_name into grp
+                              select new { key = grp.Key, cnt = grp.Count() };
+            List<string> labels = new List<string>();
+            List<int> data = new List<int>();
+            foreach (var dpt in departments)
+            {
+                labels.Add(dpt.key);
+                data.Add(dpt.cnt);
+            }
+
             Models.Chart _chart = new Models.Chart();
-            _chart.labels = new string[] { "January", "February", "March", "April", "May", "June", "July" };
+            _chart.labels = labels.ToArray();
             _chart.datasets = new List<Datasets>();
             List<Datasets> _dataSet = new List<Datasets>();
             _dataSet.Add(new Datasets()
             {
-                label = "Current Year",
-                data = new int[] { 28, 48, 40, 19, 86, 27, 90 },
+                label = "Departments",
+                data = data.ToArray(),
                 backgroundColor = new string[] { "rgba(255, 99, 132, 0.2)", "rgba(54, 162, 235, 0.2)", "rgba(255, 206, 86, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(255, 159, 64, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(54, 162, 235, 0.2)", "rgba(255, 206, 86, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(255, 159, 64, 0.2)" },
                 borderColor = new string[] { "rgba(255,99,132,1)", "rgba(54, 162, 235, 1)", "rgba(255, 206, 86, 1)", "rgba(75, 192, 192, 1)", "rgba(153, 102, 255, 1)", "rgba(255, 159, 64, 1)", "rgba(255,99,132,1)", "rgba(54, 162, 235, 1)", "rgba(255, 206, 86, 1)", "rgba(75, 192, 192, 1)", "rgba(153, 102, 255, 1)", "rgba(255, 159, 64, 1)" },
                 borderWidth = "1"
@@ -940,19 +1037,352 @@ namespace Hrm_System.Controllers
 
         public JsonResult LineChartData()
         {
+            var employees = db.tblEmployees;
+            int count_total = 0;
+            List<int> new_employees = new List<int>();
+            List<int> all_employees = new List<int>();
+            int jan = 0, feb = 0, mar = 0, apr = 0, may = 0, jun = 0, jul = 0, aug = 0, sept = 0, oct = 0, nov = 0, dec = 0;
+            int year = DateTime.Now.Year;
+            foreach (var employee in employees)
+            {
+                if (employee.emp_jDate.Value.Year < year)
+                {
+                    count_total++;
+                }
+                if (employee.emp_jDate.Value.Year == year)
+                {
+                    if (employee.emp_jDate.Value.Month == 1)
+                    {
+                        jan++;
+                    }
+                    if (employee.emp_jDate.Value.Month == 2)
+                    {
+                        feb++;
+                    }
+                    if (employee.emp_jDate.Value.Month == 3)
+                    {
+                        mar++;
+                    }
+                    if (employee.emp_jDate.Value.Month == 4)
+                    {
+                        apr++;
+                    }
+                    if (employee.emp_jDate.Value.Month == 5)
+                    {
+                        may++;
+                    }
+                    if (employee.emp_jDate.Value.Month == 6)
+                    {
+                        jun++;
+                    }
+                    if (employee.emp_jDate.Value.Month == 7)
+                    {
+                        jul++;
+                    }
+                    if (employee.emp_jDate.Value.Month == 8)
+                    {
+                        aug++;
+                    }
+                    if (employee.emp_jDate.Value.Month == 9)
+                    {
+                        sept++;
+                    }
+                    if (employee.emp_jDate.Value.Month == 10)
+                    {
+                        oct++;
+                    }
+                    if (employee.emp_jDate.Value.Month == 11)
+                    {
+                        nov++;
+                    }
+                    if (employee.emp_jDate.Value.Month == 12)
+                    {
+                        dec++;
+                    }
+                }
+
+            }
+            new_employees.Add(count_total + jan);
+            new_employees.Add(count_total + feb + jan);
+            new_employees.Add(count_total + mar + feb + jan);
+            new_employees.Add(count_total + apr + mar + feb + jan);
+            new_employees.Add(count_total + may + apr + mar + feb + jan);
+            new_employees.Add(count_total + jun + may + apr + mar + feb + jan);
+            new_employees.Add(count_total + jul + jun + may + apr + mar + feb + jan);
+            new_employees.Add(count_total + aug + jul + jun + may + apr + mar + feb + jan);
+            new_employees.Add(count_total + sept + aug + jul + jun + may + apr + mar + feb + jan);
+            new_employees.Add(count_total + oct + sept + aug + jul + jun + may + apr + mar + feb + jan);
+            new_employees.Add(count_total + nov + oct + sept + aug + jul + jun + may + apr + mar + feb + jan);
+            new_employees.Add(count_total + dec + nov + oct + sept + aug + jul + jun + may + apr + mar + feb + jan);
+
             Models.Chart _chart = new Models.Chart();
             _chart.labels = new string[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "Novemeber", "December" };
             _chart.datasets = new List<Datasets>();
             List<Datasets> _dataSet = new List<Datasets>();
             _dataSet.Add(new Datasets()
             {
-                label = "Current Year",
-                data = new int[] { 28, 48, 40, 19, 86, 27, 90, 20, 45, 65, 34, 22 },
+                label = "Employees",
+                data = new_employees.ToArray(),
                 borderColor = new string[] { "#800080" },
                 borderWidth = "1"
             });
             _chart.datasets = _dataSet;
             return Json(_chart, JsonRequestBehavior.AllowGet);
+        }
+
+
+        [HttpPost]
+        public ActionResult AddPosition(FormCollection formCollection)
+        {
+            if (Request != null)
+            {
+                var dp_id = Convert.ToInt32(formCollection["pos_dpt"]);
+                var lvl_id = Convert.ToInt32(formCollection["lvl_id"]);
+                var pos_desc = formCollection["pos_desc"];
+                var pos_title = formCollection["pos_title"];
+
+
+                tblPosition tblposition = new tblPosition();
+                tblposition.lvl_id = lvl_id;
+                tblposition.dp_id = dp_id;
+                tblposition.pos_desc = pos_desc;
+                tblposition.pos_title = pos_title;
+                db.tblPositions.Add(tblposition);
+                db.SaveChanges();
+
+                return RedirectToAction("Index", "Employee");
+
+            }
+            return RedirectToAction("Home", "Home");
+        }
+
+        [HttpPost]
+        public ActionResult EditPosition(FormCollection formCollection)
+        {
+            if (Request != null)
+            {
+                var dp_id = Convert.ToInt32(formCollection["pos_dpt"]);
+                var lvl_id = Convert.ToInt32(formCollection["lvl_id"]);
+                var pos_desc = formCollection["pos_desc"];
+                var pos_title = formCollection["pos_title"];
+                var pos_id = Convert.ToInt32(formCollection["pos_id"]);
+
+                tblPosition tblposition = db.tblPositions.Find(pos_id);
+                tblposition.lvl_id = lvl_id;
+                tblposition.dp_id = dp_id;
+                tblposition.pos_desc = pos_desc;
+                tblposition.pos_title = pos_title;
+                db.Entry(tblposition).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return RedirectToAction("Index", "Employee");
+
+            }
+            return RedirectToAction("Home", "Home");
+        }
+
+        [HttpPost]
+        public ActionResult DeletePosition(FormCollection formCollection)
+        {
+            if (Request != null)
+            {
+                var pos_id = Convert.ToInt32(formCollection["pos_id"]);
+
+                tblPosition tblposition = db.tblPositions.Find(pos_id);
+                db.tblPositions.Remove(tblposition);
+                db.SaveChanges();
+
+                return RedirectToAction("Index", "Employee");
+
+            }
+            return RedirectToAction("Home", "Home");
+        }
+
+
+        [HttpPost]
+        public ActionResult AddBranch(FormCollection formCollection)
+        {
+            if (Request != null)
+            {
+                var br_name = formCollection["br_name"];
+                var br_address = formCollection["br_address"];
+                var br_contact = formCollection["br_contact"];
+                var br_desc = formCollection["br_desc"];
+               
+
+                tblBranch tblbranch = new tblBranch();
+                tblbranch.br_name = br_name;
+                tblbranch.br_address = br_address;
+                tblbranch.br_contact = br_contact;
+                tblbranch.br_descr = br_desc;
+                db.tblBranches.Add(tblbranch);
+                db.SaveChanges();
+
+                return RedirectToAction("Index", "Employee");
+
+            }
+            return RedirectToAction("Home", "Home");
+        }
+
+        [HttpPost]
+        public ActionResult EditBranch(FormCollection formCollection)
+        {
+            if (Request != null)
+            {
+                var br_name = formCollection["br_name"];
+                var br_address = formCollection["br_address"];
+                var br_contact = formCollection["br_contact"];
+                var br_desc = formCollection["br_desc"];
+                var id = Convert.ToInt32(formCollection["br_id"]);
+
+
+                tblBranch tblbranch = db.tblBranches.Find(id);
+                tblbranch.br_name = br_name;
+                tblbranch.br_address = br_address;
+                tblbranch.br_contact = br_contact;
+                tblbranch.br_descr = br_desc;
+                db.Entry(tblbranch).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return RedirectToAction("Index", "Employee");
+
+            }
+            return RedirectToAction("Home", "Home");
+        }
+
+        [HttpPost]
+        public ActionResult DeleteBranch(FormCollection formCollection)
+        {
+            if (Request != null)
+            {
+
+                var id = Convert.ToInt32(formCollection["br_id"]);
+
+
+                tblBranch tblbranch = db.tblBranches.Find(id);
+                db.tblBranches.Remove(tblbranch);
+                db.SaveChanges();
+
+                return RedirectToAction("Index", "Employee");
+
+            }
+            return RedirectToAction("Home", "Home");
+        }
+
+        [HttpPost]
+        public ActionResult AddLevel(FormCollection formCollection)
+        {
+            if (Request != null)
+            {
+                var lvl_title = formCollection["lvl_title"];
+                var lvl_desc = formCollection["lvl_desc"];
+
+                tblJobLevel tbllevel = new tblJobLevel();
+                tbllevel.lvl_title = lvl_title;
+                tbllevel.lvl_desc = lvl_desc;
+                db.tblJobLevels.Add(tbllevel);
+                db.SaveChanges();
+
+                return RedirectToAction("Index", "Employee");
+
+            }
+            return RedirectToAction("Home", "Home");
+        }
+
+        [HttpPost]
+        public ActionResult EditLevel(FormCollection formCollection)
+        {
+            if (Request != null)
+            {
+                var lvl_title = formCollection["lvl_title"];
+                var lvl_desc = formCollection["lvl_desc"];
+                var id = Convert.ToInt32(formCollection["lvl_id"]);
+
+                tblJobLevel tbllevel = db.tblJobLevels.Find(id);
+                tbllevel.lvl_title = lvl_title;
+                tbllevel.lvl_desc = lvl_desc;
+                db.Entry(tbllevel).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return RedirectToAction("Index", "Employee");
+
+            }
+            return RedirectToAction("Home", "Home");
+        }
+
+        [HttpPost]
+        public ActionResult DeleteLevel(FormCollection formCollection)
+        {
+            if (Request != null)
+            {
+                var id = Convert.ToInt32(formCollection["lvl_id"]);
+
+                tblJobLevel tbllevel = db.tblJobLevels.Find(id);
+                db.tblJobLevels.Remove(tbllevel);
+                db.SaveChanges();
+
+                return RedirectToAction("Index", "Employee");
+
+            }
+            return RedirectToAction("Home", "Home");
+        }
+
+        [HttpPost]
+        public ActionResult AddDepartment(FormCollection formCollection)
+        {
+            if (Request != null)
+            {
+                var dpt_title = formCollection["dpt_title"];
+                var dpt_desc = formCollection["dpt_desc"];
+
+                tblDepartment tbldpt = new tblDepartment();
+                tbldpt.dpt_name = dpt_title;
+                tbldpt.dpt_desc = dpt_desc;
+                db.tblDepartments.Add(tbldpt);
+                db.SaveChanges();
+
+                return RedirectToAction("Index", "Employee");
+
+            }
+            return RedirectToAction("Home", "Home");
+        }
+
+        [HttpPost]
+        public ActionResult EditDepartment(FormCollection formCollection)
+        {
+            if (Request != null)
+            {
+                var dpt_title = formCollection["dpt_title"];
+                var dpt_desc = formCollection["dpt_desc"];
+                var id = Convert.ToInt32(formCollection["dpt_id"]);
+
+                tblDepartment tbldpt = db.tblDepartments.Find(id);
+                tbldpt.dpt_name = dpt_title;
+                tbldpt.dpt_desc = dpt_desc;
+                db.Entry(tbldpt).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return RedirectToAction("Index", "Employee");
+
+            }
+            return RedirectToAction("Home", "Home");
+        }
+
+        [HttpPost]
+        public ActionResult DeleteDepartment(FormCollection formCollection)
+        {
+            if (Request != null)
+            {
+                var id = Convert.ToInt32(formCollection["dpt_id"]);
+
+                tblDepartment tbldpt = db.tblDepartments.Find(id);
+                db.tblDepartments.Remove(tbldpt);
+                db.SaveChanges();
+
+                return RedirectToAction("Index", "Employee");
+
+            }
+            return RedirectToAction("Home", "Home");
         }
 
     }

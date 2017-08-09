@@ -11,6 +11,7 @@ using Kendo.Mvc.Extensions;
 
 namespace Hrm_System.Controllers
 {
+    [CustomAuthorize]
     public class BranchController : Controller
     {
         private HRMEntities db = new HRMEntities();

@@ -10,6 +10,7 @@ using System.Collections;
 
 namespace Hrm_System.Controllers
 {
+    [CustomAuthorize]
     public class LeavesController : Controller
     {
         private HRMEntities db = new HRMEntities();
@@ -21,7 +22,7 @@ namespace Hrm_System.Controllers
         {
             List<String[]> p = new List<String[]>();
             ArrayList types = new ArrayList();
-            ArrayList add = new ArrayList();
+           
             var tblleaves = db.tblLeaves.Include(t => t.tblEmployee).Include(t => t.tblLvType);
             var leavetypes = db.tblLvTypes;
            
@@ -33,13 +34,14 @@ namespace Hrm_System.Controllers
             var employees = db.tblEmployees;
             foreach (var emp in employees)
             {
+                ArrayList add = new ArrayList();
                 String employee = emp.emp_name+" "+emp.emp_lname;
                 String date = "";
                 Decimal bal = 0;
                 var leaves = db.tblLeaves.Where(c => c.emp_id==emp.emp_id);
                 foreach (var item in leaves)
                 {
-                    date = "," + item.lv_period;
+                    date = "," + item.lv_period.Value.Year;
                     add.Add(item.tblLvType.lvtyp_title);
                     foreach (var y in types)
                     {
@@ -60,6 +62,7 @@ namespace Hrm_System.Controllers
                         employee = employee + "," + bal;
                     }
                 }
+                if (String.IsNullOrEmpty(date)) { date = "," + DateTime.Now.Year; }
                 employee = employee + date;
                 String[] emp_array = employee.Split(',');
                 p.Add(emp_array);

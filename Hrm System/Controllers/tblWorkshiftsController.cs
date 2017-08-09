@@ -10,6 +10,7 @@ using Hrm_System.Models;
 
 namespace Hrm_System.Controllers
 {
+    [CustomAuthorize]
     public class tblWorkshiftsController : Controller
     {
         private HRMEntities db = new HRMEntities();

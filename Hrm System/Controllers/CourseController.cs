@@ -11,6 +11,7 @@ using PagedList;
 
 namespace Hrm_System.Controllers
 {
+    [CustomAuthorize]
     public class CourseController : Controller
     {
         private HRMEntities db = new HRMEntities();
