@@ -1,0 +1,36 @@
+﻿@model Hrm_SystemCore.Models.tblJobLevel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>tblJobLevel</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.lvl_id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.lvl_id)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.lvl_title)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.lvl_title)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.lvl_desc)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.lvl_desc)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

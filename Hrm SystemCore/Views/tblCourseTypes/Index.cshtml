@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Hrm_SystemCore.Models.tblCourseType>
+
+    @{
+        ViewBag.Title = "HRM - Course Types";
+    }
+
+    <h2>Course Types</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table table-striped table-hover table-bordered table-condensed " id="table1">
+        <thead>
+            <tr>
+                <th>
+                    Course Name
+                </th>
+                <th>
+                    Course Description
+                </th>
+                <th></th>
+            </tr>
+</thead>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.type_name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.typ_descr)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.type_id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.type_id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.type_id })
+                    </td>
+                </tr>
+            }
+
+    </table>

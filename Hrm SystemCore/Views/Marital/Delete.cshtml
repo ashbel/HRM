@@ -1,0 +1,33 @@
+﻿@model Hrm_SystemCore.Models.tblMarital
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>tblMarital</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.marital_id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.marital_id)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.marital_status)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.marital_status)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

@@ -1,0 +1,169 @@
+﻿@model IEnumerable<Hrm_SystemCore.Models.tblLeave>
+
+@{
+    ViewBag.Title = "Leave Management ";
+}
+
+<h2>Leave</h2>
+<ul class="nav nav-pills pills-secondary">
+    <li class="active"><a data-toggle="tab" href="#home"><b>Dashboard</b></a></li>
+    <li><a data-toggle="tab" href="#menu1"><b>Leave Balance</b></a></li>
+    <li><a data-toggle="tab" href="#menu2"><b>Leave Requests</b></a></li>
+    <li><a data-toggle="tab" href="#menu3"><b>Leave Usage</b></a></li>
+    <li><a data-toggle="tab" href="#menu4"><b>Leave Types</b></a></li>
+</ul>
+<hr />
+<div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;">@ViewBag.Active</div>
+                        <h4 style="text-align:center;">Employees</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="thumbnail">
+                    <img class="img-responsive" src="~/images/employees.png" width="150" height="150" />
+                    <div class="caption">
+                        <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;"></div>
+                        <h4 style="text-align:center;">Departments</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;"></div>
+                        <h4 style="text-align:center;">Positions</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;">@ViewBag.AverageAge</div>
+                        <h4 style="text-align:center;">Average Age</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;">@ViewBag.AverageWork</div>
+                        <h4 style="text-align:center;">Average Work</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;">80%</div>
+                        <h4 style="text-align:center;">Employee Productivity</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="menu1" class="tab-pane fade">
+
+        <p></p>
+        <table class="table table-striped table-hover table-bordered table-condensed" id="table1">
+            <thead>
+                <tr>
+                @{ if (ViewBag.LeaveGroup != null) {
+                    <th>
+                        Employee Name
+                    </th>
+                        foreach (var item in ViewBag.LeaveGroup)
+                        {
+                            <th>
+                                @item.lvtyp_title
+                            </th>
+
+                        }
+                        <th>
+                            Leave Period
+                        </th>
+                    }
+                }
+                </tr>
+            </thead>
+            @{ if (ViewBag.LeaveTypes != null)
+                {
+
+                    foreach (var item in ViewBag.LeaveTypes)
+                    {
+                        <tr>
+                            @{foreach (var i in item)
+                                {
+                            <td>
+                                @i
+                            </td>
+                                }}
+                        </tr>
+                                
+
+                    }
+
+                }
+            }
+        </table>
+
+    </div>
+    <div id="menu2" class="tab-pane fade">
+    </div>
+    <div id="menu3" class="tab-pane fade">
+       
+    </div>
+    <div id="menu4" class="tab-pane fade">
+        <div class="btn-group btn-group-xs">
+            <button class="btn btn-default btn-xs" data-toggle="modal" href="#addContract">Add Leave Type</button>
+        </div>
+        <p></p>
+        <table class="table table-striped table-hover table-bordered table-condensed" id="table2">
+            <thead>
+                <tr>
+                    <th>
+                        <label class="text-right">Title</label>
+                    </th>
+                    <th>
+                        Entitlement
+                    </th>
+                </tr>
+            </thead>
+            @{ if (ViewBag.LeaveGroup != null)
+            {
+
+                foreach (var item in ViewBag.LeaveGroup)
+                {
+                        <tr>
+                            <td>
+                                <span data-placement="left" data-toggle="tooltip" title="Edit">
+                                    <a href="#editContract" class="editContract" data-toggle="modal" data-id=''> <span class="glyphicon glyphicon-pencil"></span></a>
+                                </span>
+                                <span data-placement="left" data-toggle="tooltip" title="View">
+                                    <a href="#viewContract" class="viewContract" data-toggle="modal" data-id=''> <span class="glyphicon glyphicon-check"> </span></a>
+                                </span>
+                                <span data-placement="left" data-toggle="tooltip" title="Delete">
+                                    <a href="#deleteContract" class="deleteContract" data-toggle="modal" data-id=''> <span class="glyphicon glyphicon-trash"></span> </a>
+                                </span>
+                                @item.lvtyp_title
+                            </td>
+                            <td>
+                                @item.lvtyp_num
+                            </td>
+                        </tr>
+
+                                        }
+
+                                    }
+            }
+        </table>
+    </div>
+                          <hr />
+                      </div>
+
+

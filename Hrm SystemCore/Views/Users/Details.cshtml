@@ -1,0 +1,50 @@
+﻿@model Hrm_SystemCore.Models.tblUser
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>tblUser</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.user_id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.user_id)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.user_name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.user_name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.user_password)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.user_password)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.user_role)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.user_role)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.tblEmployee.emp_name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.tblEmployee.emp_name)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

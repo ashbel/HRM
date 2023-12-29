@@ -1,0 +1,29 @@
+﻿@model Hrm_SystemCore.Models.tblMarital
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>tblMarital</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.marital_id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.marital_id)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.marital_status)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.marital_status)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

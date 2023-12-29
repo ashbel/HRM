@@ -1,0 +1,42 @@
+@model Hrm_SystemCore.Models.tblLvType
+
+@{
+    ViewBag.Title = "Leave Type";
+}
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Leave Type</legend>
+
+        <div class="editor-label">
+           <b>Title</b> 
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.lvtyp_title)
+            @Html.ValidationMessageFor(model => model.lvtyp_title)
+        </div>
+
+        <div class="editor-label">
+           <b>Leave Type Number</b>
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.lvtyp_num)
+            @Html.ValidationMessageFor(model => model.lvtyp_num)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @*@Scripts.Render("~/bundles/jqueryval")*@
+}

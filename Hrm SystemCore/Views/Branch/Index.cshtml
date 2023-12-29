@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "Branches";
+}
+
+<h2>Branches</h2>
+
+@* @(Html.Kendo().Grid<Hrm_SystemCore.Models.BranchModelView>()
+    .Name("grid")
+    .Columns(columns =>
+    {
+        //Create a column bound to the ProductName property.
+        columns.Bound(b => b.BranchName).Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false)));
+        //Create a column bound to the UnitsInStock property.
+        columns.Bound(b => b.BranchAddress).Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false)));
+        columns.Bound(b => b.BranchContact).Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false)));
+        //Create a column bound to the UnitsInStock property.
+        columns.Bound(b => b.BranchDescription).Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false)));
+        columns.Command(command => { command.Edit(); command.Destroy(); }).Width(250);
+    })
+    .ToolBar(toolbar => toolbar.Create())
+    .ToolBar(tools => tools.Excel())
+    .Editable(editable => editable.Mode(GridEditMode.PopUp))
+    .Pageable()
+    .Sortable()
+    .Groupable()
+    .Excel(excel => excel
+    .FileName("Branches.xlsx")
+    .Filterable(true)
+    .ProxyURL(Url.Action("Excel_Export_Save", "Branch"))    )
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(20)
+        .Events(events => events.Error("error_handler"))
+        .Model(model => model.Id(p => p.BranchId))
+        .Create(update => update.Action("EditingPopup_Create", "Branch"))
+        .Read(read => read.Action("EditingPopup_Read", "Branch"))
+        .Update(update => update.Action("EditingPopup_Update", "Branch"))
+        .Destroy(update => update.Action("EditingPopup_Destroy", "Branch"))
+    )
+) *@
+<script type="text/javascript">
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "Errors:\n";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function () {
+                        message += this + "\n";
+                    });
+                }
+            });
+            alert(message);
+        }
+    }
+</script>

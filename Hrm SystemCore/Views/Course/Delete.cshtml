@@ -1,0 +1,56 @@
+﻿@model Hrm_SystemCore.Models.tblCours
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>tblCours</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.course_nm)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.course_nm)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.course_dur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.course_dur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.course_descr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.course_descr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblCourseType.type_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblCourseType.type_name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

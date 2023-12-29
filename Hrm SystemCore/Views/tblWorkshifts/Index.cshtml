@@ -1,0 +1,89 @@
+﻿@model IEnumerable<Hrm_SystemCore.Models.tblWorkshift>
+
+    @{
+        ViewBag.Title = "Workshifts";
+    }
+
+    <h2>Work Shifts</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table table-striped table-hover table-bordered table-condensed " id="table1">
+        <thead>
+            <tr>
+                <th>
+                    Title
+                </th>
+                <th>
+                   No. of Hours
+                </th>
+                <th>
+                   Shift From
+                </th>
+                <th>
+                   Shift To
+                </th>
+                <th>
+                    Lunch From
+                </th>
+                <th>
+                    Lunch To
+                </th>
+                <th>
+                    Break From
+                </th>
+                <th>
+                    Break To
+                </th>
+                <th>
+                    Extra Break From
+                </th>
+                <th>
+                    Extra Break To
+                </th>
+                <th>
+                   Notes
+                </th>
+            </tr>
+</thead>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.wkshft_title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.wkshft_hrs)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.wkshft_from)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.wkshft_to)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.wkshft_lunch_from)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.wkshft_lunch_to)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.wkshft_brk_from)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.wkshft_brk_to)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.wkshft_xtrabrk_from)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.wkshft_xtrabrk_to)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.wkshft_notes)
+                    </td>
+                </tr>
+            }
+
+    </table>

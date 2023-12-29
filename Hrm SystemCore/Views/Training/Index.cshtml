@@ -1,0 +1,490 @@
+﻿@model IEnumerable<Hrm_SystemCore.Models.tblTraining>
+
+    @{
+        ViewBag.Title = "Training Management";
+    }
+
+    <h2>Training</h2>
+    <ul class="nav nav-pills pills-secondary">
+        <li class="active"><a data-toggle="tab" href="#home"><b>Dashboard</b></a></li>
+        <li><a data-toggle="tab" href="#menu1"><b>Training Sessions</b></a></li>
+        <li><a data-toggle="tab" href="#menu2"><b>Trainings</b></a></li>
+        <li><a data-toggle="tab" href="#menu3"><b>Courses</b></a></li>
+        <li><a data-toggle="tab" href="#menu4"><b>Course Types</b></a></li>
+    </ul>
+    <hr />
+    <div class="tab-content">
+        <div id="home" class="tab-pane fade in active">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="thumbnail">
+                        <div class="caption">
+                            <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;">@ViewBag.Active</div>
+                            <h4 style="text-align:center;">Employees</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="thumbnail">
+                        <img class="img-responsive" src="~/images/employees.png" width="150" height="150" />
+                        <div class="caption">
+                            <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;"></div>
+                            <h4 style="text-align:center;">Departments</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="thumbnail">
+                        <div class="caption">
+                            <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;"></div>
+                            <h4 style="text-align:center;">Positions</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="thumbnail">
+                        <div class="caption">
+                            <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;">@ViewBag.AverageAge</div>
+                            <h4 style="text-align:center;">Average Age</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="thumbnail">
+                        <div class="caption">
+                            <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;">@ViewBag.AverageWork</div>
+                            <h4 style="text-align:center;">Average Work</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="thumbnail">
+                        <div class="caption">
+                            <div style="width:100%;padding:5px;text-align:center;line-height:60px;color:#081e70;font-size:2.75em;">80%</div>
+                            <h4 style="text-align:center;">Employee Productivity</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="menu1" class="tab-pane fade">
+            <div class="btn-group btn-group-xs">
+            <a class="btn btn-default" href="#addSession" data-toggle="modal"><div style="color:#2facc2">Schedule Training</div></a>
+        </div>
+            <p></p>
+            <table class="table table-striped table-hover table-bordered table-condensed" id="table1">
+                <thead>
+                    <tr>
+                        <th>
+                            Session Name
+                        </th>
+                        <th>
+                            Course
+                        </th>
+                        <th>
+                            Start Date
+                        </th>
+                        <th>
+                           End Date
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                    </tr>
+                </thead>
+                @{ if (ViewBag.TrainingSessions != null)
+                    {
+
+                        foreach (var item in ViewBag.TrainingSessions)
+                        {
+                            <tr>
+                                <td>
+                                    <span data-placement="left" data-toggle="tooltip" title="Edit">
+                                        <a href="#editContract" class="editContract" data-toggle="modal" data-id=''> <span class="glyphicon glyphicon-pencil"></span></a>
+                                    </span>
+                                    <span data-placement="left" data-toggle="tooltip" title="View">
+                                        <a class="viewCourse" data-id='' data-toggle="modal" href="#viewCourse"> <span class="glyphicon glyphicon-check"> </span></a>
+                                    </span>
+                                    <span data-placement="left" data-toggle="tooltip" title="Delete">
+                                        <a href="#deleteContract" class="deleteContract" data-toggle="modal" data-id=''> <span class="glyphicon glyphicon-trash"></span> </a>
+                                    </span>
+                                    @item.tr_sess_name
+                                </td>
+                                <td>
+                                    @item.tblCours.course_nm
+                                </td>
+                                <td>
+                                    @item.tr_sdate.ToString("dd-MMM-yyyy")
+                                </td>
+                                <td>
+                                    @item.tr_edate.ToString("dd-MMM-yyyy")
+                                </td>
+                                <td>
+                                    @item.tr_sess_status
+                                    <span data-placement="left" data-toggle="tooltip" title="Add Users" class="pull-right">
+                                        <a class="enroll" href="#EnrollCourse" data-toggle="modal" data-id='["@item.tr_sess_id","@item.course_id","@item.tblCours.course_nm","@item.tr_sess_name"]'><span class="glyphicon glyphicon-user"></span><span class="glyphicon glyphicon-user"></span><span class="glyphicon glyphicon-user"></span></a>
+                                    </span>
+                                </td>
+                            </tr>
+
+                        }
+
+                    }
+                }
+            </table>
+        </div>
+        <div id="menu2" class="tab-pane fade">
+
+            <table class="table table-striped table-hover table-bordered table-condensed " id="table1">
+                <thead>
+                    <tr>
+                        <th>
+                            Employee Name
+                        </th>
+                        <th>
+                            Course Name
+                        </th>
+                        <th>
+                            Start Date
+                        </th>
+                        <th>
+                            End Date
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                        <th>
+                            Score
+                        </th>
+                    </tr>
+                </thead>
+                @foreach (var item in Model)
+                                      {
+                                <tr>
+                                    <td>
+                                        <span data-placement="left" data-toggle="tooltip" title="Edit">
+                                            <a href="#editContract" class="editContract" data-toggle="modal" data-id=''> <span class="glyphicon glyphicon-pencil"></span></a>
+                                        </span>
+                                        <span data-placement="left" data-toggle="tooltip" title="View">
+                                            <a class="viewCourse" data-id='' data-toggle="modal" href="#viewCourse"> <span class="glyphicon glyphicon-check"> </span></a>
+                                        </span>
+                                        <span data-placement="left" data-toggle="tooltip" title="Delete">
+                                            <a href="#deleteContract" class="deleteContract" data-toggle="modal" data-id=''> <span class="glyphicon glyphicon-trash"></span> </a>
+                                        </span>
+                                        @Html.DisplayFor(modelItem => item.tblEmployee.emp_name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.tblCours.course_nm)
+                                    </td>
+                                    <td>
+                                        @item.tr_sdate.Value.ToString("dd-MMM-yyyy")
+                                    </td>
+                                    <td>
+                                        @item.tr_edate.Value.ToString("dd-MMM-yyyy")
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.tr_status)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.tr_score)
+                                    </td>
+                                </tr>
+                                      }
+
+            </table>
+
+
+        </div>
+        <div id="menu3" class="tab-pane fade">
+            <table class="table table-striped table-hover table-bordered table-condensed" id="table1">
+                <thead>
+                    <tr>
+                        <th>
+                            Course Name
+                        </th>
+                        <th>
+                            Duration
+                        </th>
+                        <th>
+                            Type
+                        </th>
+
+                    </tr>
+                </thead>
+                @{ if (ViewBag.Courses != null)
+                    {
+
+                        foreach (var item in ViewBag.Courses)
+                        {
+                            <tr>
+                                <td>
+                                    <span data-placement="left" data-toggle="tooltip" title="Edit">
+                                        <a href="#editContract" class="editContract" data-toggle="modal" data-id=''> <span class="glyphicon glyphicon-pencil"></span></a>
+                                    </span>
+                                    <span data-placement="left" data-toggle="tooltip" title="View">
+                                        <a class="viewCourse" data-id='["@item.course_nm","@item.tblCourseType.type_name","@item.course_dur","@item.course_descr"]' data-toggle="modal" href="#viewCourse"> <span class="glyphicon glyphicon-check"> </span></a>
+                                    </span>
+                                    <span data-placement="left" data-toggle="tooltip" title="Delete">
+                                        <a href="#deleteContract" class="deleteContract" data-toggle="modal" data-id=''> <span class="glyphicon glyphicon-trash"></span> </a>
+                                    </span>
+                                    @item.course_nm
+                                </td>
+                                <td>
+                                    @item.course_dur
+                                </td>
+                                <td>
+                                    @item.tblCourseType.type_name
+                                </td>
+                            </tr>
+
+                        }
+
+                    }
+                }
+            </table>
+        </div>
+        <div id="menu4" class="tab-pane fade">
+            <table class="table table-striped table-hover table-bordered table-condensed" id="table1">
+                <thead>
+                    <tr>
+                        <th>
+                             Name
+                        </th>
+                        <th>
+                            Description
+                        </th>
+                    </tr>
+                </thead>
+                @{ if (ViewBag.CourseTypes != null)
+                    {
+
+                        foreach (var item in ViewBag.CourseTypes)
+                        {
+                            <tr>
+                                <td>
+                                    <span data-placement="left" data-toggle="tooltip" title="Edit">
+                                        <a href="#editContract" class="editContract" data-toggle="modal" data-id=''> <span class="glyphicon glyphicon-pencil"></span></a>
+                                    </span>
+                                    <span data-placement="left" data-toggle="tooltip" title="View">
+                                        <a class="viewCourse" data-id='' data-toggle="modal" href="#viewCourse"> <span class="glyphicon glyphicon-check"> </span></a>
+                                    </span>
+                                    <span data-placement="left" data-toggle="tooltip" title="Delete">
+                                        <a href="#deleteContract" class="deleteContract" data-toggle="modal" data-id=''> <span class="glyphicon glyphicon-trash"></span> </a>
+                                    </span>
+                                    @item.type_name
+                                </td>
+                                <td>
+                                    @item.typ_descr
+                                </td>
+                            </tr>
+
+                        }
+
+                    }
+                }
+            </table>
+ 
+        </div>
+        <hr />
+    </div>
+    <hr class="featurette-divider" />
+    <div id="addSession" class="modal fade" role="dialog">
+                         <div class="modal-dialog">
+                             <!-- Modal content-->
+                             <div class="modal-content">
+                                 <div class="modal-header">
+                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                     <h4 class="modal-title">Schedule Training Session</h4>
+                                 </div>
+                                 <div class="modal-body">
+                                     @using (Html.BeginForm("AddSession", "Training", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                     {
+                                         @Html.AntiForgeryToken()
+                                         @Html.ValidationSummary(true)
+                                         <div class="form-group form-group-sm">
+                                             <div class="row">
+                                                 <div class="col-sm-12 col-md-12">
+                                                     <label for="kinaddress">Session Name:</label>
+                                                     <input type="text" class="form-control" id="session_name" name="session_name">
+                                                 </div>
+                                             </div>
+                                             <div class="row">
+                                                 <div class="col-sm-12 col-md-12">
+                                                     <label for="contract">Course Name</label>
+                                                     <select class="form-control" id="course" name="course">
+                                                         @{ if (ViewBag.Courses != null)
+                                                             {
+                                                                 foreach (var i in ViewBag.Courses)
+                                                                 {
+                                                                     <option value="@i.course_id">@i.course_nm</option>
+                                                                 }
+                                                             }
+                                                         }
+                                                     </select>
+                                                 </div>
+                                             </div>
+                                         </div>
+                                         <div class="form-group form-group-sm">
+                             
+                                             <div class="row">
+                                                 <div class="col-sm-12 col-md-12">
+                                                     <label for="kin_rel">Start Date:</label>
+                                                     <input type="date" class="form-control" id="sdate" name="sdate">
+
+                                                 </div>
+                                             </div>
+                                             <div class="row">
+                                                 <div class="col-sm-12 col-md-12">
+                                                     <label for="kin_rel">End Date:</label>
+                                                     <input type="date" class="form-control" id="edate" name="edate">
+
+                                                 </div>
+                                             </div>
+                                             <div class="row">
+                                                 <div class="col-sm-12 col-md-12">
+                                                     <label for="kin_rel">Comments:</label>
+                                                     <textarea type="text" class="form-control" id="comments" rows="5" name="comments"></textarea>
+
+                                                 </div>
+                                             </div>
+                                         </div>
+                                         <div class="row">
+                                             <div class="col-sm-12 col-md-12">
+                                                 <br />
+                                                 <input type="submit" class="btn btn-success btn-sm form-control" value="Save">
+                                             </div>
+                                         </div>
+                                                             }
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+    <div id="EnrollCourse" class="modal fade" role="dialog">
+       <div class="modal-dialog">
+                             <!-- Modal content-->
+         <div class="modal-content">
+                                 <div class="modal-header">
+                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                     <h4 class="modal-title">Enroll Course</h4>
+                                 </div>
+                                 <div class="modal-body">
+                                     @using (Html.BeginForm("EnrollUsers", "Training", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                     {
+                                         @Html.AntiForgeryToken()
+                                         @Html.ValidationSummary(true)
+                                        <div class="form-group form-group-sm">
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-12">
+                                                    <label for="kinaddress">Session Name:</label>
+                                                    <input type="text" class="form-control" id="session_name" name="session_name">
+                                                    <input type="text" class="form-control hidden" id="session" name="session" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group form-group-sm">
+                                             <div class="row">
+                                                 <div class="col-sm-12 col-md-12">
+                                                     <label for="kinaddress">Course Name:</label>
+                                                     <input type="text" class="form-control" id="cs_name" name="cs_name">
+                                                     <input type="text" class="form-control hidden" id="course" name="course" />
+                                                 </div>
+                                             </div>
+                                        </div>
+                                        <div class="form-group form-group-sm">
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-12">
+                                                    <ul class="nav nav-tabs">
+                                                        <li class="active"><a data-toggle="tab" href="#modal1"><b>All Employees</b></a></li>
+                                                        <li><a data-toggle="tab" href="#modal2"><b>Departments</b></a></li>
+                                                        <li><a data-toggle="tab" href="#modal3"><b>Branches</b></a></li>
+                                                        <li><a data-toggle="tab" href="#modal4"><b>Positions</b></a></li>
+                                                    </ul>
+                                                    <br />
+                                                    <div class="tab-content">
+                                                        <div id="modal1" class="tab-pane fade in active">
+                                                            <input type="checkbox" name="select-all" id="select-all" /> Select All<br />
+                                                            @{if (ViewBag.Employees != null)
+                                                                 {
+                                                                     foreach (var item in ViewBag.Employees)
+                                                                     {
+                                                            <input type="checkbox" name="emp_id" id ="emp_id" value="@item.emp_id">@item.emp_name @item.emp_lname <br />
+                                                                         }
+                                                                     }
+                                                                     else { }
+                                                            }
+                                                        </div>
+                                                        <div id="modal2" class="tab-pane fade">
+                                                            @{if (ViewBag.Departments != null)
+                                                                {
+                                                                    foreach (var item in ViewBag.Departments)
+                                                                    {
+                                                                        <input type="checkbox" name="dpt_id" value="@item.dpt_id">@item.dpt_name<br />
+                                                                    }
+                                                                }
+                                                                else { }
+                                                            }
+                                                        </div>
+                                                        <div id="modal3" class="tab-pane fade">
+                                                            @{if (ViewBag.Branches != null)
+                                                                {
+                                                                    foreach (var item in ViewBag.Branches)
+                                                                    {
+                                                                        <input type="checkbox" name="br_id" value="@item.br_id">@item.br_name<br />
+                                                                    }
+                                                                }
+                                                                else { }
+                                                            }
+                                                        </div>
+                                                        <div id="modal4" class="tab-pane fade">
+                                                            @{if (ViewBag.Positions != null)
+                                                                {
+                                                                    foreach (var item in ViewBag.Positions)
+                                                                    {
+                                                                        <input type="checkbox" name="pos_id" value="@item.pos_id">@item.pos_title<br />
+                                                                    }
+                                                                }
+                                                                else { }
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-12">
+                                                <br />
+                                                <input type="submit" class="btn btn-success btn-sm form-control" value="Save">
+                                            </div>
+                                        </div>
+
+                                                                }
+                                 </div>
+                             </div>
+      </div>
+    </div>
+
+<script>
+    // Listen for click on toggle checkbox
+    $('#select-all').click(function (event) {
+        if (this.checked) {
+            // Iterate each checkbox
+            $('input[name=emp_id]').each(function () {
+                this.checked = true;
+            });
+        }
+        else {
+            $('input[name=emp_id]').each(function () {
+                this.checked = false;
+            });
+        }
+    });
+    $(function () {
+        $(".enroll").click(function () {
+            var my_id_value = $(this).data('id');
+            $("#EnrollCourse").find('input[name="session_name"]').val(my_id_value[3]);
+            $("#EnrollCourse").find('input[name="session"]').val(my_id_value[0]);
+            $("#EnrollCourse").find('input[name="cs_name"]').val(my_id_value[2]);
+            $("#EnrollCourse").find('input[name="course"]').val(my_id_value[1]);
+        })
+    });
+</script>

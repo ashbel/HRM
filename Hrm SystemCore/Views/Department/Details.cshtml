@@ -1,0 +1,36 @@
+﻿@model Hrm_SystemCore.Models.tblDepartment
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>tblDepartment</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.dpt_id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.dpt_id)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.dpt_name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.dpt_name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.dpt_desc)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.dpt_desc)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

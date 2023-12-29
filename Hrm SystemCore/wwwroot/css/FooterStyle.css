@@ -1,0 +1,11 @@
+﻿body {
+    font-size:12px;
+}
+.footercontainer {
+    text-align: center;
+    position: relative;
+    bottom: 0px;
+    font-size: .80em;
+    padding-left: 0px;
+    width: 90%;
+}

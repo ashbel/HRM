@@ -1,0 +1,68 @@
+@model Hrm_SystemCore.Models.tblUser
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>tblUser</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.user_id)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.user_id)
+            @Html.ValidationMessageFor(model => model.user_id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.user_name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.user_name)
+            @Html.ValidationMessageFor(model => model.user_name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.user_password)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.user_password)
+            @Html.ValidationMessageFor(model => model.user_password)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.user_role)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.user_role)
+            @Html.ValidationMessageFor(model => model.user_role)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.emp_id, "tblEmployee")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("emp_id", String.Empty)
+            @Html.ValidationMessageFor(model => model.emp_id)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @*@Scripts.Render("~/bundles/jqueryval")*@
+}

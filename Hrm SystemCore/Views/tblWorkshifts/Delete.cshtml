@@ -1,0 +1,128 @@
+﻿@model Hrm_SystemCore.Models.tblWorkshift
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>tblWorkshift</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.wkshft_title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.wkshft_title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.wkshft_hrs)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.wkshft_hrs)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.wkshft_from)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.wkshft_from)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.wkshft_to)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.wkshft_to)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.wkshft_lunch_from)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.wkshft_lunch_from)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.wkshft_lunch_to)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.wkshft_lunch_to)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.wkshft_brk_from)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.wkshft_brk_from)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.wkshft_brk_to)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.wkshft_brk_to)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.wkshft_xtrabrk_from)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.wkshft_xtrabrk_from)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.wkshft_xtrabrk_to)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.wkshft_xtrabrk_to)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.wkshft_notes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.wkshft_notes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.inputter)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.inputter)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.create_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.create_date)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

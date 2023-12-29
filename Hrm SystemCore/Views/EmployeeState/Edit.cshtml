@@ -1,0 +1,52 @@
+@model Hrm_SystemCore.Models.tblEmplStatu
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>tblEmplStatu</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.stat_id)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.stat_id)
+            @Html.ValidationMessageFor(model => model.stat_id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.stat_name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.stat_name)
+            @Html.ValidationMessageFor(model => model.stat_name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.stat_desc)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.stat_desc)
+            @Html.ValidationMessageFor(model => model.stat_desc)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @*@Scripts.Render("~/bundles/jqueryval")*@
+}

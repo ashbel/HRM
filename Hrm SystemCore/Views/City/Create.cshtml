@@ -1,0 +1,44 @@
+@model Hrm_SystemCore.Models.tblCity
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create City</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend></legend>
+
+        <div class="editor-label">
+            Name
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.cty_name)
+            @Html.ValidationMessageFor(model => model.cty_name)
+        </div>
+
+        <div class="editor-label">
+           Province
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("prov_id", String.Empty)
+            @Html.ValidationMessageFor(model => model.prov_id)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @*@Scripts.Render("~/bundles/jqueryval")*@
+}

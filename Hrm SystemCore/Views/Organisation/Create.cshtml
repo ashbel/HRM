@@ -1,0 +1,76 @@
+@model Hrm_SystemCore.Models.tblOrganisation
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>tblOrganisation</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.org_id)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.org_id)
+            @Html.ValidationMessageFor(model => model.org_id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.org_name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.org_name)
+            @Html.ValidationMessageFor(model => model.org_name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.org_logo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.org_logo)
+            @Html.ValidationMessageFor(model => model.org_logo)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.org_address)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.org_address)
+            @Html.ValidationMessageFor(model => model.org_address)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.org_descr)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.org_descr)
+            @Html.ValidationMessageFor(model => model.org_descr)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.org_phone)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.org_phone)
+            @Html.ValidationMessageFor(model => model.org_phone)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @*@Scripts.Render("~/bundles/jqueryval")*@
+}

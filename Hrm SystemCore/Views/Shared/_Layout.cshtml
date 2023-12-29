@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>PPC- HRM @ViewBag.Title</title>
+    <link href="~/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <script src="~/js/bootstrap.js"></script>
+    <script src="~/js/jquery-3.1.1.js"></script>
+    <script src="~/js/knockout-3.4.2.js"></script>
+    <script src="~/js/modernizr-2.8.3.js"></script>
+    <link href="~/css/FooterStyle.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/NavBar.css" rel="stylesheet" type="text/css" />
+    <script src="~/js/Chart.js"></script>
+    <script src="~/js/Common.js"></script>
+	<script src="~/js/kendo.modernizr.custom.js"></script>
+</head>
+<body>
+      <div  class="row" style="background-color:#EEEEEe;">        
+          <div style="padding-top:5px; padding-bottom:5px;">
+              <div class="col-md-6">
+                  <h4 style="padding-left:20px">Your Company Name Here</h4>
+              </div>
+              <div class="col-md-6 text-right ">
+                  <h4 style="padding-right:20px">
+                          <span data-placement="left" data-toggle="tooltip" title="Notifications">
+                          <span class="glyphicon glyphicon-inbox fa-lg" aria-hidden="true"></span>
+                          </span>
+                          <span data-placement="left" data-toggle="tooltip" title="Settings">
+                              <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                          </span>
+                          <span data-placement="left" data-toggle="tooltip" title="Help Docs">
+                              <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                          </span>
+                          <span data-placement="left" data-toggle="tooltip" title="LogOut">
+                              <a href="@Url.Action("Logoff","Home")"><span class="glyphicon glyphicon-off" aria-hidden="true"></span></a>
+                          </span>
+</h4>
+              </div>
+          </div>          
+      </div>
+    <div class="topnav" id="myTopnav">
+        <a href="@Url.Action("Home", "Home")">Home</a>
+        <a href="@Url.Action("Index", "Employee")">Employees</a>
+        <a href="@Url.Action("Index", "Contracts")">Contracts</a>
+        <a href="@Url.Action("Index", "Leaves")">Leave</a>
+        <a href="@Url.Action("Index", "Training")">Training</a>
+        <a href="@Url.Action("Index", "Perfomance")">Perfomance</a>
+        <a href="@Url.Action("Index", "Payroll")">Payroll</a>       
+        <a href="@Url.Action("Index", "Leave")">Configurations</a>
+    </div>
+    <div class="subnav" id="mySubnav">
+        <div class="row">
+                <div class="col-md-6">
+                    
+                </div>
+                <div class="col-md-6 text-right ">
+                    <h4 style="padding-right:20px">
+                        @* @HttpContext.Current.Session["Name"]    *@                     
+                    </h4>
+                </div>
+            </div>
+        </div>
+        <p><br /></p>
+<div class="content">
+    <div style="padding-left:10px;padding-right:10px;">
+        @RenderBody()
+    </div>
+</div> 
+    <script src="~/js/jquery-3.1.1.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

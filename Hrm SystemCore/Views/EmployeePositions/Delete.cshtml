@@ -1,0 +1,75 @@
+﻿@model Hrm_SystemCore.Models.tblPositionHistory
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>tblPositionHistory</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ph_id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ph_id)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.tblEmployee.emp_name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.tblEmployee.emp_name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.tblPosition.pos_title)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.tblPosition.pos_title)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.tblDepartment.dpt_name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.tblDepartment.dpt_name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ph_sal)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ph_sal)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.tblBranch.br_name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.tblBranch.br_name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ph_sDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ph_sDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ph_eDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ph_eDate)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

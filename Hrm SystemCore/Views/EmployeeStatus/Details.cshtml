@@ -1,0 +1,36 @@
+﻿@model Hrm_SystemCore.Models.tblEmployeeStatu
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>tblEmployeeStatu</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.empst_id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.empst_id)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.empst_title)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.empst_title)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.empst_descr)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.empst_descr)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

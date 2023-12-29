@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @*@Styles.Render("~/Content/css")*@
+    @*@Scripts.Render("~/bundles/modernizr")*@
+    @*@Styles.Render("~/Content/themes/base/css")*@
+    @*@Scripts.Render("~/bundles/jquery")*@
+    <link href="@Url.Content("~/Content/font-awesome.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/js/bootstrap.js")"></script>
+    <link href="@Url.Content("~/Content/font-awesome.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/LoginStyle.css")" rel="stylesheet" type="text/css" />
+</head>
+<body style="background-image: url(../Content/cssimages/bkg3.jpg);  background-size:cover;">
+
+        @RenderBody()
+
+@RenderSection("scripts", required: false)
+</body>
+</html>

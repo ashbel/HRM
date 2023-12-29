@@ -1,0 +1,44 @@
+@model Hrm_SystemCore.Models.tblJobLevel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>tblJobLevel</legend>
+
+        <div class="editor-label">
+           Job Level
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.lvl_title)
+            @Html.ValidationMessageFor(model => model.lvl_title)
+        </div>
+
+        <div class="editor-label">
+            Description
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.lvl_desc)
+            @Html.ValidationMessageFor(model => model.lvl_desc)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @*@Scripts.Render("~/bundles/jqueryval")*@
+}
